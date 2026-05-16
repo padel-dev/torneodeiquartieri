@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torneo dei Quartieri – V Edizione · Benevento Padel 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #2db866;
+    --green-light: #3fd97a;
+    --green-dim: #0f2a1a;
+    --green-mid: #1a4d2e;
+    --gold: #f5c842;
+    --bg: #080c09;
+    --bg2: #0d1210;
+    --card: #111714;
+    --border: #1e2b22;
+    --muted: #5a7060;
+    --text: #e8f0ea;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── COURT PATTERN ─── */
+  .court-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image:
+      linear-gradient(90deg, #2db866 1px, transparent 1px),
+      linear-gradient(0deg, #2db866 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--green);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 14vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+  .hero h1 .accent { color: var(--green-light); }
+  .hero-edition {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    letter-spacing: 6px;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-tagline {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .hstat-n {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    letter-spacing: 2px;
+    color: var(--green-light);
+    line-height: 1;
+  }
+  .hstat-l {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .hero-social { display: flex; gap: 10px; }
+  .btn-social {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 9px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-social:hover { border-color: var(--green); color: var(--green-light); }
+  .hero-ball {
+    position: absolute;
+    right: -80px; top: 50%;
+    transform: translateY(-60%);
+    font-size: 28rem;
+    opacity: 0.03;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(8,12,9,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: var(--green-light);
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 16px;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--green-light);
+    border-bottom-color: var(--green-light);
+  }
+
+  /* ─── SECTIONS ─── */
+  .section { position: relative; z-index: 1; padding: 5rem 2rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .sec-head {
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+  }
+  .sec-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .section:nth-child(even) { background: var(--bg2); }
+
+  /* ─── TABS ─── */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .tab {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab.active, .tab:hover {
+    background: var(--green-dim);
+    border-color: var(--green-mid);
+    color: var(--green-light);
+  }
+
+  /* ─── CLASSIFICA ─── */
+  .class-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .class-table thead tr {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+  }
+  .class-table th {
+    padding: 10px 14px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 500;
+  }
+  .class-table th:nth-child(2) { text-align: left; }
+  .class-table td {
+    padding: 11px 14px;
+    text-align: center;
+    color: #8aaa90;
+    border-bottom: 1px solid var(--border);
+  }
+  .class-table td:nth-child(2) { text-align: left; }
+  .class-table tr:hover td { background: rgba(45,184,102,0.04); }
+  .pos {
+    display: inline-flex;
+    width: 26px; height: 26px;
+    align-items: center; justify-content: center;
+    border-radius: 50%;
+    font-size: 12px; font-weight: 600;
+  }
+  .pos-1 { background: var(--gold); color: #000; }
+  .pos-2 { background: #9eaaa0; color: #000; }
+  .pos-3 { background: #7a5235; color: #fff; }
+  .pos-n { background: var(--border); color: var(--muted); }
+  .tname { font-weight: 500; color: var(--text); }
+  .tpts { font-weight: 600; color: var(--green-light); }
+  .girone-tag {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--border);
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-left: 6px;
+  }
+  .live-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: var(--green-light);
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* ─── GIRONI GRID ─── */
+  .gironi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .girone-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .girone-card:hover { border-color: var(--green-mid); }
+  .girone-head {
+    background: var(--green-dim);
+    border-bottom: 1px solid var(--green-mid);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .girone-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: var(--green-light);
+  }
+  .girone-n {
+    font-size: 11px;
+    color: var(--green);
+    background: rgba(45,184,102,0.1);
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+  .girone-team {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(30,43,34,0.6);
+    font-size: 13px;
+    color: #8aaa90;
+    transition: background 0.15s;
+  }
+  .girone-team:last-child { border-bottom: none; }
+  .girone-team:hover { background: rgba(45,184,102,0.04); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+  .cap-name { color: var(--text); font-weight: 500; }
+  .cap-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  /* ─── PROGRAMMA ─── */
+  .match-list { display: flex; flex-direction: column; gap: 8px; }
+  .match-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .match-card:hover { border-color: var(--green-mid); }
+  .match-dt {
+    text-align: center;
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+  .match-day {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1;
+  }
+  .match-mon {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .match-divider { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+  .match-body { flex: 1; min-width: 0; }
+  .match-teams {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .match-teams span { color: var(--muted); font-weight: 300; }
+  .match-meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .match-right { text-align: right; flex-shrink: 0; }
+  .match-ora {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--green-light);
+    line-height: 1;
+  }
+  .match-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+  }
+  .badge-upcoming { background: rgba(45,80,200,0.15); color: #8899ff; }
+  .badge-played { background: rgba(45,184,102,0.12); color: var(--green); }
+  .badge-today { background: rgba(245,200,66,0.15); color: var(--gold); }
+
+  /* ─── WOMEN ─── */
+  .women-banner {
+    background: linear-gradient(120deg, #1a0e22 0%, #0d0d1a 100%);
+    border: 1px solid #2e1a40;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .women-icon { font-size: 3rem; }
+  .women-banner h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: #e0a0f0;
+  }
+  .women-banner p { font-size: 13px; color: #7a5a8a; margin-top: 4px; }
+  .women-table { border-color: #2e1a40; }
+  .women-table .tpts { color: #e08fe0; }
+
+  /* ─── STORIA ─── */
+  .storia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .storia-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.4rem 1.2rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .storia-card:hover { border-color: var(--green-mid); }
+  .storia-card.current {
+    border-color: var(--green);
+    background: var(--green-dim);
+  }
+  .storia-ed {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .storia-trophy { font-size: 1.8rem; margin-bottom: 8px; }
+  .storia-winner {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+  }
+  .storia-card.current .storia-winner { color: var(--green-light); }
+  .storia-venue { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+  /* ─── MAPPA ─── */
+  .venue-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .venue-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
+  .venue-info h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .venue-info p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .venue-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    background: var(--green-dim);
+    border: 1px solid var(--green-mid);
+    color: var(--green-light);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .venue-link:hover { background: var(--green-mid); }
+  .venue-map {
+    width: 100%;
+    height: 260px;
+    border: 0;
+    border-top: 1px solid var(--border);
+    display: block;
+    filter: grayscale(0.3) invert(0.85) hue-rotate(120deg);
+  }
+  .venue-map-placeholder {
+    height: 260px;
+    background: #0d1a10;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .venue-map-placeholder svg { opacity: 0.3; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  footer .foot-logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    color: #1a3d24;
+    margin-bottom: 1rem;
+  }
+
+  /* ─── LIVE UPDATE BAR ─── */
+  .live-bar {
+    background: var(--green-dim);
+    border-bottom: 1px solid var(--green-mid);
+    text-align: center;
+    padding: 9px;
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 1px;
+  }
+
+  /* ─── HIDDEN ─── */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
+    .hero h1 { font-size: 4.5rem; }
+    .hero-ball { display: none; }
+    nav { padding: 0 1rem; }
+    .nav-logo { font-size: 1rem; }
+    .section { padding: 3.5rem 1.2rem; }
+    .match-card { flex-wrap: wrap; gap: 10px; }
+    .venue-info { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="court-bg"></div>
+
+<div class="live-bar">
+  <span class="live-dot"></span>
+  Classifiche aggiornate in tempo reale dai Google Sheets ufficiali del torneo
+</div>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Benevento · Padel Amatoriale · 2025</div>
+    <h1>TORNEO DEI<br><span class="accent">QUARTIERI</span></h1>
+    <div class="hero-edition">V EDIZIONE</div>
+    <p class="hero-tagline">Il torneo amatoriale di padel che accende la passione sportiva nei rioni della città di Benevento. Terzo anno al Mood Club.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hstat-n">13</div>
+        <div class="hstat-l">Squadre</div>
+      </div>
+      <div>
+        <div class="hstat-n">3</div>
+        <div class="hstat-l">Gironi</div>
+      </div>
+      <div>
+        <div class="hstat-n">100+</div>
+        <div class="hstat-l">Giocatori</div>
+      </div>
+      <div>
+        <div class="hstat-n" style="color:var(--gold)">1ª</div>
+        <div class="hstat-l">Edizione Women</div>
+      </div>
+    </div>
+    <div class="hero-social">
+      <a class="btn-social" href="https://www.facebook.com/groups/400903518309647" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a class="btn-social" href="https://www.instagram.com/torneo_dei_rioni_padel_bn/" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+  <div class="hero-ball">🎾</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TDQ · V</div>
+  <div class="nav-links">
+    <a href="#classifica" class="active" onclick="setActive(this)">Classifica</a>
+    <a href="#gironi" onclick="setActive(this)">Gironi</a>
+    <a href="#programma" onclick="setActive(this)">Programma</a>
+    <a href="#women" onclick="setActive(this)">Women</a>
+    <a href="#storia" onclick="setActive(this)">La storia</a>
+    <a href="#dove" onclick="setActive(this)">Dove giochiamo</a>
+  </div>
+</nav>
+
+<!-- CLASSIFICA -->
+<div class="section" id="classifica">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Fase a gironi</div>
+      <div class="sec-title">CLASSIFICA</div>
+      <div class="sec-sub"><span class="live-dot"></span>Aggiornamento automatico · collegata al tuo Google Sheet</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('class', 'gen', this)">Generale</button>
+      <button class="tab" onclick="switchTab('class', 'orsini', this)">Girone Orsini</button>
+      <button class="tab" onclick="switchTab('class', 'svevi', this)">Girone Svevi</button>
+      <button class="tab" onclick="switchTab('class', 'longobardi', this)">Girone Longobardi</button>
+    </div>
+    <div id="class-gen" class="tab-content active">
+      <table class="class-table">
+        <thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>P</th><th>Set</th><th>Pt</th></tr></thead>
+        <tbody id="tbody-gen"></tbody>
+      </table>
+    </div>
+    <div id="class-orsini" class="tab-content">
+      <table class="class-table">
+        <thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>P</th><th>Set</th><th>Pt</th></tr></thead>
+        <tbody id="tbody-orsini"></tbody>
+      </table>
+    </div>
+    <div id="class-svevi" class="tab-content">
+      <table class="class-table">
+        <thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>P</th><th>Set</th><th>Pt</th></tr></thead>
+        <tbody id="tbody-svevi"></tbody>
+      </table>
+    </div>
+    <div id="class-longobardi" class="tab-content">
+      <table class="class-table">
+        <thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>P</th><th>Set</th><th>Pt</th></tr></thead>
+        <tbody id="tbody-longobardi"></tbody>
+      </table>
+    </div>
+    <p style="font-size:11px; color:#333; margin-top:12px; text-align:center; letter-spacing:1px;">
+      PER COLLEGARE IL GOOGLE SHEET REALE: SOSTITUISCI L'ID SHEET NEL JS CON IL TUO
+    </p>
+  </div>
+</div>
+
+<!-- GIRONI -->
+<div class="section" id="gironi">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">V Edizione 2025</div>
+      <div class="sec-title">GIRONI</div>
+      <div class="sec-sub">13 squadre in 3 gironi · Le prime 2 accedono ai tabelloni</div>
+    </div>
+    <div class="gironi-grid" id="gironi-container"></div>
+  </div>
+</div>
+
+<!-- PROGRAMMA -->
+<div class="section" id="programma">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Calendario</div>
+      <div class="sec-title">PROGRAMMA</div>
+      <div class="sec-sub">Tutte le partite della fase a gironi — Mood Club, Benevento</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('prog', 'all', this)">Tutte</button>
+      <button class="tab" onclick="switchTab('prog', 'orsini', this)">Girone Orsini</button>
+      <button class="tab" onclick="switchTab('prog', 'svevi', this)">Girone Svevi</button>
+      <button class="tab" onclick="switchTab('prog', 'longobardi', this)">Girone Longobardi</button>
+    </div>
+    <div id="prog-all" class="tab-content active match-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+    <div id="prog-orsini" class="tab-content match-list" style="flex-direction:column; gap:8px;"></div>
+    <div id="prog-svevi" class="tab-content match-list" style="flex-direction:column; gap:8px;"></div>
+    <div id="prog-longobardi" class="tab-content match-list" style="flex-direction:column; gap:8px;"></div>
+  </div>
+</div>
+
+<!-- WOMEN -->
+<div class="section" id="women">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Novità 2025</div>
+      <div class="sec-title">WOMEN</div>
+      <div class="sec-sub">Prima edizione del torneo femminile</div>
+    </div>
+    <div class="women-banner">
+      <div class="women-icon">🏆</div>
+      <div>
+        <h3>1° TORNEO WOMEN</h3>
+        <p>Quest'anno debutta il torneo femminile — stessa passione, stesso campo, stessa intensità.</p>
+      </div>
+    </div>
+    <table class="class-table women-table">
+      <thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>P</th><th>Set</th><th>Pt</th></tr></thead>
+      <tbody>
+        <tr><td colspan="7" style="text-align:center; color:#5a4a6a; font-size:13px; padding:2rem; letter-spacing:1px;">SQUADRE IN DEFINIZIONE · A BREVE I DETTAGLI</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- STORIA -->
+<div class="section" id="storia">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Dal 2022</div>
+      <div class="sec-title">LA STORIA</div>
+      <div class="sec-sub">Cinque anni di quartieri, rioni e passione per il padel a Benevento</div>
+    </div>
+    <div class="storia-grid">
+      <div class="storia-card">
+        <div class="storia-ed">I Edizione · 2022</div>
+        <div class="storia-trophy">🥇</div>
+        <div class="storia-winner">— · —</div>
+        <div class="storia-venue">Prima edizione</div>
+      </div>
+      <div class="storia-card">
+        <div class="storia-ed">II Edizione · 2022</div>
+        <div class="storia-trophy">🥇</div>
+        <div class="storia-winner">— · —</div>
+        <div class="storia-venue">Il torneo cresce</div>
+      </div>
+      <div class="storia-card">
+        <div class="storia-ed">III Edizione · 2023</div>
+        <div class="storia-trophy">🥇</div>
+        <div class="storia-winner">— · —</div>
+        <div class="storia-venue">Mood Club</div>
+      </div>
+      <div class="storia-card">
+        <div class="storia-ed">IV Edizione · 2024</div>
+        <div class="storia-trophy">🥇</div>
+        <div class="storia-winner">— · —</div>
+        <div class="storia-venue">Mood Club</div>
+      </div>
+      <div class="storia-card current">
+        <div class="storia-ed" style="color:var(--green)">V Edizione · 2025</div>
+        <div class="storia-trophy">⚡</div>
+        <div class="storia-winner">In corso</div>
+        <div class="storia-venue">Mood Club · +Women</div>
+      </div>
+    </div>
+    <p style="font-size:11px; color:#333; margin-top:1.5rem; text-align:center; letter-spacing:1px;">AGGIUNGI I NOMI DEI CAMPIONI DELLE EDIZIONI PRECEDENTI NELL'HTML</p>
+  </div>
+</div>
+
+<!-- DOVE GIOCHIAMO -->
+<div class="section" id="dove">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Campo ufficiale</div>
+      <div class="sec-title">DOVE GIOCHIAMO</div>
+      <div class="sec-sub">Tutte le partite si svolgono al Mood Club di Benevento</div>
+    </div>
+    <div class="venue-card">
+      <div class="venue-info">
+        <div>
+          <h3>MOOD CLUB</h3>
+          <p>
+            Via dei Mulini<br>
+            82100 Benevento (BN)<br>
+            Campania, Italia
+          </p>
+          <a class="venue-link" href="https://playtomic.io/tenant/362372fa-8ece-439e-8a3b-42de92c3f824" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Prenota su Playtomic
+          </a>
+        </div>
+        <div>
+          <h3>ORARI</h3>
+          <p>
+            Venerdì · 19:00 – 23:00<br>
+            Sabato · 10:00 – 23:00<br>
+            Domenica · 10:00 – 20:00
+          </p>
+          <p style="margin-top:1rem;">Aggiorna l'indirizzo esatto con quello reale del Mood Club per avere la mappa corretta.</p>
+        </div>
+      </div>
+      <!-- GOOGLE MAPS EMBED: sostituisci src con il link embed del Mood Club -->
+      <div class="venue-map-placeholder">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2db866" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Incolla qui l'iframe embed di Google Maps del Mood Club
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">TORNEO DEI QUARTIERI</div>
+  <div>V Edizione · Benevento 2025 · Padel Amatoriale</div>
+  <div style="margin-top:6px; color:#1a2e1e;">Fatto con passione per i rioni di Benevento ·
+    <a href="https://www.facebook.com/groups/400903518309647" target="_blank" style="color:inherit; text-decoration:none;">Facebook</a> ·
+    <a href="https://www.instagram.com/torneo_dei_rioni_padel_bn/" target="_blank" style="color:inherit; text-decoration:none;">Instagram</a>
+  </div>
+</footer>
+
+<script>
+/* ── DATI SQUADRE ── */
+const gironi = {
+  orsini: {
+    nome: 'Girone Orsini',
+    squadre: [
+      { nome: 'Mellusi', cap: 'Angeloni F.' },
+      { nome: 'Pacevecchia', cap: 'De Vivo D.' },
+      { nome: 'Cocchia', cap: 'Giorgione A.' },
+      { nome: 'Avellino', cap: 'Argenziano S.' },
+    ]
+  },
+  svevi: {
+    nome: 'Girone Svevi',
+    squadre: [
+      { nome: 'Centro Storico', cap: 'Lauro V.' },
+      { nome: 'Triggio', cap: 'Bufis M.' },
+      { nome: 'Atlantici', cap: 'Barone M.' },
+      { nome: 'San Nicola', cap: 'Campana P.' },
+      { nome: 'Avellola', cap: 'Mauro C.' },
+    ]
+  },
+  longobardi: {
+    nome: 'Girone Longobardi',
+    squadre: [
+      { nome: 'Addolorata', cap: 'Bovio A.' },
+      { nome: 'Valle Caudina', cap: 'Tirino S.' },
+      { nome: 'Risorgimento', cap: 'Lombardi G.' },
+      { nome: 'Capodimonte', cap: 'Politi A.' },
+      { nome: 'Ponte', cap: 'Meola G.' },
+    ]
+  }
+};
+
+/* ── CLASSIFICA PLACEHOLDER (sostituire con Google Sheets API) ── */
+/* Per collegare il tuo Google Sheet:
+   1. Rendi il foglio pubblico: File > Condividi > Chiunque abbia il link
+   2. Ottieni l'ID dal link (la stringa lunga nell'URL)
+   3. Sostituisci SHEET_ID qui sotto e imposta il nome del foglio
+   4. Decommentare il blocco fetchClassifica() */
+
+const SHEET_ID = 'IL_TUO_SHEET_ID_QUI';
+const SHEET_NAME = 'Classifica';
+
+/* ── RENDER CLASSIFICA LOCALE ── */
+const allSquadre = [
+  ...gironi.orsini.squadre.map(s => ({...s, girone:'Orsini'})),
+  ...gironi.svevi.squadre.map(s => ({...s, girone:'Svevi'})),
+  ...gironi.longobardi.squadre.map(s => ({...s, girone:'Longobardi'})),
+];
+
+function posClass(i) {
+  return ['pos-1','pos-2','pos-3'][i] || 'pos-n';
+}
+
+function buildRows(squadre, showGirone) {
+  return squadre.map((s, i) => `
+    <tr>
+      <td><span class="pos ${posClass(i)}">${i+1}</span></td>
+      <td><span class="tname">${s.nome}</span>${showGirone ? `<span class="girone-tag">${s.girone}</span>` : ''}</td>
+      <td>0</td><td>0</td><td>0</td><td>0</td>
+      <td class="tpts">0</td>
+    </tr>
+  `).join('');
+}
+
+document.getElementById('tbody-gen').innerHTML = buildRows(allSquadre, true);
+document.getElementById('tbody-orsini').innerHTML = buildRows(gironi.orsini.squadre, false);
+document.getElementById('tbody-svevi').innerHTML = buildRows(gironi.svevi.squadre, false);
+document.getElementById('tbody-longobardi').innerHTML = buildRows(gironi.longobardi.squadre, false);
+
+/* ── GIRONI GRID ── */
+const gc = document.getElementById('gironi-container');
+Object.values(gironi).forEach(g => {
+  const el = document.createElement('div');
+  el.className = 'girone-card';
+  el.innerHTML = `
+    <div class="girone-head">
+      <h3>${g.nome.replace('Girone ','')}</h3>
+      <span class="girone-n">${g.squadre.length} squadre</span>
+    </div>
+    <div>
+      ${g.squadre.map(s => `
+        <div class="girone-team">
+          <span class="dot"></span>
+          <span class="cap-name">${s.nome}</span>
+          <span class="cap-label">cap. ${s.cap}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  gc.appendChild(el);
+});
+
+/* ── PROGRAMMA ── */
+const mesi = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+const partite = [
+  { data:'2025-06-06', ora:'19:30', h1:'Mellusi', h2:'Pacevecchia', girone:'orsini', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-06', ora:'21:00', h1:'Centro Storico', h2:'Triggio', girone:'svevi', campo:'Campo 2', stato:'upcoming' },
+  { data:'2025-06-07', ora:'10:00', h1:'Addolorata', h2:'Valle Caudina', girone:'longobardi', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-07', ora:'11:30', h1:'Cocchia', h2:'Avellino', girone:'orsini', campo:'Campo 2', stato:'upcoming' },
+  { data:'2025-06-13', ora:'19:30', h1:'Atlantici', h2:'San Nicola', girone:'svevi', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-13', ora:'21:00', h1:'Risorgimento', h2:'Capodimonte', girone:'longobardi', campo:'Campo 2', stato:'upcoming' },
+  { data:'2025-06-14', ora:'10:00', h1:'Avellola', h2:'Triggio', girone:'svevi', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-14', ora:'11:30', h1:'Ponte', h2:'Addolorata', girone:'longobardi', campo:'Campo 2', stato:'upcoming' },
+  { data:'2025-06-20', ora:'19:30', h1:'Pacevecchia', h2:'Cocchia', girone:'orsini', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-20', ora:'21:00', h1:'Centro Storico', h2:'Atlantici', girone:'svevi', campo:'Campo 2', stato:'upcoming' },
+  { data:'2025-06-21', ora:'10:00', h1:'Mellusi', h2:'Avellino', girone:'orsini', campo:'Campo 1', stato:'upcoming' },
+  { data:'2025-06-21', ora:'11:30', h1:'Valle Caudina', h2:'Risorgimento', girone:'longobardi', campo:'Campo 2', stato:'upcoming' },
+];
+
+const badgeLbl = { upcoming:'In programma', played:'Giocata', today:'Oggi' };
+
+function matchCardHTML(p) {
+  const d = new Date(p.data);
+  return `
+    <div class="match-card">
+      <div class="match-dt">
+        <div class="match-day">${d.getDate()}</div>
+        <div class="match-mon">${mesi[d.getMonth()]}</div>
+      </div>
+      <div class="match-divider"></div>
+      <div class="match-body">
+        <div class="match-teams">${p.h1} <span>vs</span> ${p.h2}</div>
+        <div class="match-meta">Girone ${p.girone.charAt(0).toUpperCase()+p.girone.slice(1)} · ${p.campo}</div>
+      </div>
+      <div class="match-right">
+        <div class="match-ora">${p.ora}</div>
+        <span class="match-badge badge-${p.stato}">${badgeLbl[p.stato]}</span>
+      </div>
+    </div>
+  `;
+}
+
+const allList = document.getElementById('prog-all');
+['orsini','svevi','longobardi'].forEach(g => {
+  document.getElementById('prog-'+g).style.display = 'flex';
+});
+
+partite.forEach(p => {
+  allList.innerHTML += matchCardHTML(p);
+  const gEl = document.getElementById('prog-'+p.girone);
+  if (gEl) gEl.innerHTML += matchCardHTML(p);
+});
+
+/* ── TABS ── */
+function switchTab(group, id, btn) {
+  document.querySelectorAll(`#${group}-all, #${group}-orsini, #${group}-svevi, #${group}-longobardi`).forEach(el => {
+    el.classList.remove('active');
+    el.style.display = 'none';
+  });
+  const target = document.getElementById(group + '-' + id);
+  if (target) {
+    target.classList.add('active');
+    target.style.display = group === 'prog' ? 'flex' : 'block';
+  }
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+/* ── NAV ACTIVE ── */
+function setActive(el) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ── FADE IN ON SCROLL ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* ── GOOGLE SHEETS LIVE (ATTIVARE QUANDO PRONTO) ──
+async function fetchClassifica() {
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${SHEET_NAME}&tqx=out:json`;
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);/)[1]);
+    const rows = json.table.rows;
+    // rows[i].c = array di celle, adatta agli indici del tuo sheet
+    const tbody = document.getElementById('tbody-gen');
+    tbody.innerHTML = rows.map((r, i) => {
+      const nome = r.c[0]?.v || '';
+      const g = r.c[1]?.v || 0;
+      const v = r.c[2]?.v || 0;
+      const p = r.c[3]?.v || 0;
+      const set = r.c[4]?.v || 0;
+      const pt = r.c[5]?.v || 0;
+      return `<tr>
+        <td><span class="pos ${posClass(i)}">${i+1}</span></td>
+        <td><span class="tname">${nome}</span></td>
+        <td>${g}</td><td>${v}</td><td>${p}</td><td>${set}</td>
+        <td class="tpts">${pt}</td>
+      </tr>`;
+    }).join('');
+  } catch(e) { console.warn('Sheet non raggiungibile', e); }
+}
+fetchClassifica();
+setInterval(fetchClassifica, 60000); // aggiorna ogni minuto
+── */
+</script>
+</body>
+</html>
