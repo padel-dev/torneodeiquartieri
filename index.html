@@ -61,14 +61,14 @@
   .section:nth-child(even) { background: var(--bg2); }
 
   /* LEGENDA LIVELLI */
-  .legenda { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
+  .legenda { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
   .legenda-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
-  .lev-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 3px; letter-spacing: 1px; }
-  .lev-white  { color: #ccc;    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
-  .lev-yellow { color: #f5c842; background: rgba(245,200,66,0.12);  border: 1px solid rgba(245,200,66,0.25); }
-  .lev-green  { color: #4fd988; background: rgba(79,217,136,0.12);  border: 1px solid rgba(79,217,136,0.25); }
-  .lev-orange { color: #e8802a; background: rgba(232,128,42,0.12);  border: 1px solid rgba(232,128,42,0.25); }
-  .lev-red    { color: #d94f4f; background: rgba(217,79,79,0.12);   border: 1px solid rgba(217,79,79,0.25); }
+  .lev-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; letter-spacing: 1px; }
+  .lev-white  { color: #111; background: #e8e8e8; }
+  .lev-yellow { color: #111; background: #f5c842; }
+  .lev-green  { color: #111; background: #4fd988; }
+  .lev-orange { color: #111; background: #e8802a; }
+  .lev-red    { color: #fff; background: #d94f4f; }
 
   /* CALENDARIO */
   .calendario-list { display: flex; flex-direction: column; gap: 10px; }
@@ -220,11 +220,11 @@
     </div>
     <div class="legenda">
       <span class="legenda-label">Livello →</span>
-      <span class="lev-badge lev-white">Base</span>
-      <span class="lev-badge lev-yellow">Intermedio</span>
-      <span class="lev-badge lev-green">Avanzato</span>
-      <span class="lev-badge lev-orange">Esperto</span>
-      <span class="lev-badge lev-red">Agonista</span>
+      <span class="lev-badge lev-white">Bianco</span>
+      <span class="lev-badge lev-yellow">Giallo</span>
+      <span class="lev-badge lev-green">Verde</span>
+      <span class="lev-badge lev-orange">Arancione</span>
+      <span class="lev-badge lev-red">Rosso</span>
     </div>
     <div class="squadre-search">
       <input type="text" id="search-input" placeholder="Cerca squadra o giocatore…" oninput="filterSquadre(this.value)">
@@ -463,21 +463,22 @@ function buildSquadre(squadre) {
     const totCard = (s.capitano ? 1 : 0) + s.giocatori.length;
     totGiocatori += totCard;
 
+    const levColor = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
     const playersHTML = s.giocatori.map(({ nome, level }) => {
-      const lev = levStyle[level] || levStyle.white;
+      const col = levColor[level] || levColor.white;
       return `<div class="player-row">
         <div class="dot" style="background:${c.t};opacity:0.5"></div>
-        <span class="player-name">${nome}</span>
-        ${level !== 'white' ? `<span class="player-lev ${lev.cls}">${lev.label}</span>` : ''}
+        <span class="player-name" style="color:${col};">${nome}</span>
       </div>`;
     }).join('');
 
+    const capLevLabels = { white:'Bianco', yellow:'Giallo', green:'Verde', orange:'Arancione', red:'Rosso' };
     const capLev  = levStyle[s.capitanoLev] || levStyle.white;
     const capHTML = s.capitano
       ? `<div class="squadra-cap" style="background:${c.dim};">
            <span class="cap-icon" style="color:${c.t};background:${c.dim};">CAP</span>
            <span class="cap-name">${s.capitano}</span>
-           ${s.capitanoLev !== 'white' ? `<span class="player-lev ${capLev.cls}" style="margin-left:auto;">${capLev.label}</span>` : ''}
+           <span class="player-lev ${capLev.cls}" style="margin-left:auto;">${capLevLabels[s.capitanoLev] || 'Bianco'}</span>
          </div>`
       : '';
 
