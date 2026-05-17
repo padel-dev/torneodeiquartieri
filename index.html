@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Torneo dei Quartieri Women – II Edizione · Benevento Padel 2026</title>
+<title>Torneo dei Quartieri – V Edizione · Benevento Padel 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --pink: #e8408a;
-    --pink-light: #f06faa;
-    --pink-dim: #2a0d1a;
-    --pink-mid: #4d1a32;
+    --green: #2db866;
+    --green-light: #3fd97a;
+    --green-dim: #0f2a1a;
+    --green-mid: #1a4d2e;
     --gold: #f5c842;
-    --bg: #0c080a;
-    --bg2: #120d0f;
-    --card: #171114;
-    --border: #2b1e24;
-    --muted: #70505e;
-    --text: #f0e8ec;
+    --bg: #080c09;
+    --bg2: #0d1210;
+    --card: #111714;
+    --border: #1e2b22;
+    --muted: #5a7060;
+    --text: #e8f0ea;
     --font-display: 'Bebas Neue', sans-serif;
     --font-body: 'DM Sans', sans-serif;
   }
@@ -26,82 +26,90 @@
   body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
   .court-bg {
     position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
-    background-image: linear-gradient(90deg, #e8408a 1px, transparent 1px), linear-gradient(0deg, #e8408a 1px, transparent 1px);
+    background-image: linear-gradient(90deg, #2db866 1px, transparent 1px), linear-gradient(0deg, #2db866 1px, transparent 1px);
     background-size: 48px 48px;
   }
   .hero { position: relative; z-index: 1; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 4rem; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 30%, rgba(232,64,138,0.18) 0%, transparent 65%); pointer-events: none; }
+  .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%); pointer-events: none; }
   .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
-  .hero-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--pink); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; }
-  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--pink); }
-  .hero h1 { font-family: var(--font-display); font-size: clamp(3.8rem, 12vw, 9rem); line-height: 0.88; letter-spacing: 2px; color: #fff; margin-bottom: 0.6rem; }
-  .hero h1 .accent { color: var(--pink-light); }
+  .hero-eyebrow { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--green); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--green); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(4.5rem, 14vw, 10rem); line-height: 0.88; letter-spacing: 2px; color: #fff; margin-bottom: 0.6rem; }
+  .hero h1 .accent { color: var(--green-light); }
   .hero-edition { font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2.4rem); letter-spacing: 6px; color: var(--muted); margin-bottom: 2rem; }
   .hero-tagline { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 3rem; }
   .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-  .hstat-n { font-family: var(--font-display); font-size: 3rem; letter-spacing: 2px; color: var(--pink-light); line-height: 1; }
+  .hstat-n { font-family: var(--font-display); font-size: 3rem; letter-spacing: 2px; color: var(--green-light); line-height: 1; }
   .hstat-l { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
   .hero-social { display: flex; gap: 10px; }
   .btn-social { display: inline-flex; align-items: center; gap: 7px; background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: var(--font-body); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 18px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
-  .btn-social:hover { border-color: var(--pink); color: var(--pink-light); }
+  .btn-social:hover { border-color: var(--green); color: var(--green-light); }
   .hero-ball { position: absolute; right: -80px; top: 50%; transform: translateY(-60%); font-size: 28rem; opacity: 0.03; pointer-events: none; user-select: none; line-height: 1; }
-
-  nav { position: sticky; top: 0; z-index: 200; background: rgba(12,8,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0 2rem; }
+  nav { position: sticky; top: 0; z-index: 200; background: rgba(8,12,9,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0 2rem; }
   .nav-links { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-links a { text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 16px; border-bottom: 2px solid transparent; white-space: nowrap; transition: opacity 0.2s; }
-  .nav-links a.s1 { color: #e8408a; border-bottom-color: #e8408a; }
-  .nav-links a.s2 { color: #f0a0c8; border-bottom-color: #f0a0c8; }
+  .nav-links a.s1 { color: #2db866; border-bottom-color: #2db866; }
+  .nav-links a.s2 { color: #85e8a8; border-bottom-color: #85e8a8; }
   .nav-links a:hover { opacity: 0.7; }
-
   .section { position: relative; z-index: 1; padding: 5rem 2rem; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
   .sec-head { margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
-  .sec-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink); margin-bottom: 0.5rem; }
+  .sec-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
   .sec-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 2px; color: #fff; line-height: 1; }
   .sec-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
   .section:nth-child(even) { background: var(--bg2); }
 
+  /* LEGENDA LIVELLI */
+  .legenda { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
+  .legenda-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+  .lev-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; letter-spacing: 1px; }
+  .lev-white  { color: #111; background: #e8e8e8; }
+  .lev-yellow { color: #111; background: #f5c842; }
+  .lev-green  { color: #111; background: #4fd988; }
+  .lev-orange { color: #111; background: #e8802a; }
+  .lev-red    { color: #fff; background: #d94f4f; }
+
   /* CALENDARIO */
   .calendario-list { display: flex; flex-direction: column; gap: 10px; }
   .cal-item { background: var(--card); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.5rem; transition: border-color 0.2s; }
-  .cal-item:hover { border-color: var(--pink-mid); }
-  .cal-highlight { border-color: var(--pink); background: var(--pink-dim); }
+  .cal-item:hover { border-color: var(--green-mid); }
+  .cal-highlight { border-color: var(--green); background: var(--green-dim); }
   .cal-date { text-align: center; min-width: 52px; flex-shrink: 0; }
-  .cal-day { font-family: var(--font-display); font-size: 2.8rem; letter-spacing: 1px; color: var(--pink-light); line-height: 1; }
-  .cal-month { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--pink); margin-top: 2px; }
+  .cal-day { font-family: var(--font-display); font-size: 2.8rem; letter-spacing: 1px; color: var(--green-light); line-height: 1; }
+  .cal-month { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-top: 2px; }
   .cal-body { flex: 1; }
-  .cal-ora { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 3px; }
+  .cal-ora { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 3px; }
   .cal-titolo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 2px; color: #fff; line-height: 1.1; }
   .cal-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
-  .cal-status { font-size: 12px; color: var(--pink-light); background: rgba(232,64,138,0.1); border: 1px solid var(--pink-mid); padding: 5px 12px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+  .cal-status { font-size: 12px; color: var(--green-light); background: rgba(45,184,102,0.1); border: 1px solid var(--green-mid); padding: 5px 12px; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
   @media (max-width: 500px) { .cal-item { flex-wrap: wrap; gap: 0.8rem; } .cal-status { font-size: 11px; } }
 
   /* SQUADRE */
   .squadre-search { margin-bottom: 2rem; }
   .squadre-search input { background: var(--card); border: 1px solid var(--border); color: var(--text); font-family: var(--font-body); font-size: 13px; padding: 10px 16px; border-radius: 3px; width: 100%; max-width: 360px; outline: none; transition: border-color 0.2s; }
   .squadre-search input::placeholder { color: var(--muted); }
-  .squadre-search input:focus { border-color: var(--pink); }
+  .squadre-search input:focus { border-color: var(--green); }
   .squadre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
   .squadra-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
-  .squadra-card:hover { border-color: var(--pink-mid); }
+  .squadra-card:hover { border-color: var(--green-mid); }
   .squadra-card.hidden { display: none; }
   .squadra-head { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
   .squadra-head h3 { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 2px; }
   .squadra-badge { font-size: 10px; padding: 3px 9px; border-radius: 2px; flex-shrink: 0; margin-left: 8px; }
-  /* Riga capitana */
-  .squadra-cap { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .squadra-cap { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(45,184,102,0.05); border-bottom: 1px solid var(--border); font-size: 13px; }
   .cap-icon { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); background: rgba(245,200,66,0.1); padding: 2px 7px; border-radius: 2px; flex-shrink: 0; }
   .cap-name { color: var(--text); font-weight: 500; }
   .squadra-players { padding: 4px 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .squadra-players.open { max-height: 1200px; }
-  .player-row { display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-bottom: 1px solid rgba(43,30,36,0.5); font-size: 12px; transition: background 0.15s; }
+  .player-row { display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-bottom: 1px solid rgba(30,43,34,0.5); font-size: 12px; transition: background 0.15s; }
   .player-row:last-child { border-bottom: none; }
-  .player-row:hover { background: rgba(232,64,138,0.04); }
+  .player-row:hover { background: rgba(45,184,102,0.04); }
   .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
   .player-name { flex: 1; color: #fff; }
+  .player-lev { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.5px; flex-shrink: 0; }
   .squadra-toggle { font-size: 11px; color: var(--muted); letter-spacing: 1px; padding: 7px 16px; cursor: pointer; text-align: center; border-top: 1px solid var(--border); transition: color 0.2s; }
-  .squadra-toggle:hover { color: var(--pink-light); }
+  .squadra-toggle:hover { color: var(--green-light); }
 
   /* LOADING */
   .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
@@ -113,12 +121,12 @@
   /* STORICO */
   .storia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
   .storia-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; transition: border-color 0.2s; }
-  .storia-card:hover { border-color: var(--pink-mid); }
-  .storia-card.current { border-color: var(--pink); background: var(--pink-dim); }
+  .storia-card:hover { border-color: var(--green-mid); }
+  .storia-card.current { border-color: var(--green); background: var(--green-dim); }
   .storia-ed { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .storia-trophy { font-size: 1.8rem; margin-bottom: 8px; }
   .storia-winner { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); }
-  .storia-card.current .storia-winner { color: var(--pink-light); }
+  .storia-card.current .storia-winner { color: var(--green-light); }
 
   /* VENUE */
   .venue-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
@@ -126,17 +134,17 @@
   @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
   .venue-info h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 3px; color: #fff; margin-bottom: 8px; }
   .venue-info p { font-size: 13px; color: var(--muted); line-height: 1.8; }
-  .venue-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; background: var(--pink-dim); border: 1px solid var(--pink-mid); color: var(--pink-light); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
-  .venue-link:hover { background: var(--pink-mid); }
+  .venue-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; background: var(--green-dim); border: 1px solid var(--green-mid); color: var(--green-light); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
+  .venue-link:hover { background: var(--green-mid); }
 
   footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--border); text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 12px; letter-spacing: 1px; }
-  footer .foot-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 6px; color: #2e1a22; margin-bottom: 1rem; }
+  footer .foot-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 6px; color: #1a3d24; margin-bottom: 1rem; }
   .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
 
   @media (max-width: 640px) {
     .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
-    .hero h1 { font-size: 3.8rem; }
+    .hero h1 { font-size: 4.5rem; }
     .hero-ball { display: none; }
     nav { padding: 0 1rem; }
     .section { padding: 3.5rem 1.2rem; }
@@ -150,12 +158,12 @@
 <div class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-eyebrow">Benevento · Padel Amatoriale · 2026</div>
-    <h1>TORNEO DEI<br><span class="accent">QUARTIERI</span><br>WOMEN</h1>
-    <div class="hero-edition">II EDIZIONE</div>
-    <p class="hero-tagline">Il torneo amatoriale di padel femminile che accende la passione sportiva nei rioni della città di Benevento.</p>
+    <h1>TORNEO DEI<br><span class="accent">QUARTIERI</span></h1>
+    <div class="hero-edition">V EDIZIONE</div>
+    <p class="hero-tagline">Il torneo amatoriale di padel che accende la passione sportiva nei rioni della città di Benevento.</p>
     <div class="hero-stats">
       <div><div class="hstat-n" id="stat-squadre">—</div><div class="hstat-l">Squadre</div></div>
-      <div><div class="hstat-n" id="stat-giocatori">—</div><div class="hstat-l">Giocatrici</div></div>
+      <div><div class="hstat-n" id="stat-giocatori">—</div><div class="hstat-l">Giocatori</div></div>
     </div>
     <div class="hero-social">
       <a class="btn-social" href="https://www.facebook.com/groups/400903518309647" target="_blank">
@@ -184,7 +192,7 @@
 <div class="section" id="calendario">
   <div class="section-inner">
     <div class="sec-head fade-in">
-      <div class="sec-label">II Edizione 2026</div>
+      <div class="sec-label">V Edizione 2026</div>
       <div class="sec-title">CALENDARIO</div>
       <div class="sec-sub">Date ed eventi ufficiali del torneo</div>
     </div>
@@ -194,7 +202,7 @@
         <div class="cal-body">
           <div class="cal-ora">ore 18:00</div>
           <div class="cal-titolo">Sorteggio Gironi</div>
-          <div class="cal-desc">Sorteggio ufficiale dei gironi della II Edizione Women</div>
+          <div class="cal-desc">Sorteggio ufficiale dei gironi della V Edizione</div>
         </div>
         <div class="cal-status">Prossimo</div>
       </div>
@@ -206,12 +214,20 @@
 <div class="section" id="squadre">
   <div class="section-inner">
     <div class="sec-head fade-in">
-      <div class="sec-label">II Edizione 2026</div>
+      <div class="sec-label">V Edizione 2026</div>
       <div class="sec-title">SQUADRE</div>
       <div class="sec-sub" id="squadre-sub">Caricamento in corso…</div>
     </div>
+    <div class="legenda">
+      <span class="legenda-label">Livello →</span>
+      <span class="lev-badge lev-white">Bianco</span>
+      <span class="lev-badge lev-yellow">Giallo</span>
+      <span class="lev-badge lev-green">Verde</span>
+      <span class="lev-badge lev-orange">Arancione</span>
+      <span class="lev-badge lev-red">Rosso</span>
+    </div>
     <div class="squadre-search">
-      <input type="text" id="search-input" placeholder="Cerca squadra o giocatrice…" oninput="filterSquadre(this.value)">
+      <input type="text" id="search-input" placeholder="Cerca squadra o giocatore…" oninput="filterSquadre(this.value)">
     </div>
     <div id="squadre-container">
       <div class="loading-msg">
@@ -228,21 +244,16 @@
 <div class="section" id="storia">
   <div class="section-inner">
     <div class="sec-head fade-in">
-      <div class="sec-label">Dal 2025</div>
+      <div class="sec-label">Dal 2022</div>
       <div class="sec-title">STORICO</div>
-      <div class="sec-sub">La storia del torneo femminile dei quartieri di Benevento</div>
+      <div class="sec-sub">Cinque anni di quartieri, rioni e passione per il padel a Benevento</div>
     </div>
     <div class="storia-grid">
-      <div class="storia-card">
-        <div class="storia-ed">I Edizione · 2025</div>
-        <div class="storia-trophy">🥇</div>
-        <div class="storia-winner">MEDINA</div>
-      </div>
-      <div class="storia-card current">
-        <div class="storia-ed" style="color:var(--pink)">II Edizione · 2026</div>
-        <div class="storia-trophy">⚡</div>
-        <div class="storia-winner">In corso</div>
-      </div>
+      <div class="storia-card"><div class="storia-ed">I Edizione · 2022</div><div class="storia-trophy">🥇</div><div class="storia-winner">ARCO E DINTORNI</div></div>
+      <div class="storia-card"><div class="storia-ed">II Edizione · 2023</div><div class="storia-trophy">🥇</div><div class="storia-winner">CENTRO STORICO</div></div>
+      <div class="storia-card"><div class="storia-ed">III Edizione · 2024</div><div class="storia-trophy">🥇</div><div class="storia-winner">VALLE CAUDINA</div></div>
+      <div class="storia-card"><div class="storia-ed">IV Edizione · 2025</div><div class="storia-trophy">🥇</div><div class="storia-winner">COCCHIA</div></div>
+      <div class="storia-card current"><div class="storia-ed" style="color:var(--green)">V Edizione · 2026</div><div class="storia-trophy">⚡</div><div class="storia-winner">In corso</div></div>
     </div>
   </div>
 </div>
@@ -258,9 +269,9 @@
     <div class="venue-card">
       <div style="position:relative;height:260px;overflow:hidden;">
         <img src="https://res.cloudinary.com/playtomic/image/upload/c_scale,w_1200,q_80,f_auto/pro/tenants/362372fa-8ece-439e-8a3b-42de92c3f824/1708523265153" alt="Mood Sport Village" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" />
-        <div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(12,8,10,0.95));">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(8,12,9,0.95));">
           <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:4px;color:#fff;">MOOD SPORT VILLAGE</div>
-          <div style="font-size:12px;color:var(--pink);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">3 campi da padel · Coperti · Panoramici</div>
+          <div style="font-size:12px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">3 campi da padel · Coperti · Panoramici</div>
         </div>
       </div>
       <div class="venue-info">
@@ -283,15 +294,15 @@
           <p>🅿️ Parcheggio gratuito<br>🚿 Spogliatoi<br>🍹 Bar & snack<br>📶 WiFi<br>🎾 Noleggio attrezzatura</p>
         </div>
       </div>
-      <iframe src="https://maps.google.com/maps?q=41.09364247,14.81436365&z=15&output=embed" width="100%" height="280" style="border:0;border-top:1px solid var(--border);display:block;filter:grayscale(0.2) invert(0.88) hue-rotate(300deg);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://maps.google.com/maps?q=41.09364247,14.81436365&z=15&output=embed" width="100%" height="280" style="border:0;border-top:1px solid var(--border);display:block;filter:grayscale(0.2) invert(0.88) hue-rotate(120deg);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="foot-logo">TORNEO DEI QUARTIERI WOMEN</div>
-  <div>II Edizione · Benevento 2026 · Padel Amatoriale Femminile</div>
-  <div style="margin-top:6px;color:#2e1a22;">Fatto con passione per i rioni di Benevento ·
+  <div class="foot-logo">TORNEO DEI QUARTIERI</div>
+  <div>V Edizione · Benevento 2026 · Padel Amatoriale</div>
+  <div style="margin-top:6px;color:#1a2e1e;">Fatto con passione per i rioni di Benevento ·
     <a href="https://www.facebook.com/groups/400903518309647" target="_blank" style="color:inherit;text-decoration:none;">Facebook</a> ·
     <a href="https://www.instagram.com/torneo_dei_rioni_padel_bn/" target="_blank" style="color:inherit;text-decoration:none;">Instagram</a>
   </div>
@@ -299,27 +310,63 @@
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const SPREADSHEET_ID = '14aBgW2ReFiRQNOEPJFG2rgApzQL9QOQvrx0eVfsmuYc';
+const SPREADSHEET_ID = '1mT1OIclqD3ClJHaBlB00YoW2lB_JiiHERFCz6stPZys';
 const SHEET_NAME     = 'Rose';
 const API_KEY        = 'AIzaSyBVXYZt6Q-JgWHqOD5Uxw2yBz7nQvrI_Xg';
 
-// ─── COLORI CARD SQUADRE (tonalità rosa/viola) ────────────────────────────────
+// ─── COLORI CARD SQUADRE ─────────────────────────────────────────────────────
 const colori = [
-  { h: '#7a1a4a', b: '#3d0d24', t: '#f06faa', dim: 'rgba(240,111,170,0.12)' },
-  { h: '#6b1a5a', b: '#3d0d32', t: '#e870d0', dim: 'rgba(232,112,208,0.12)' },
-  { h: '#7a1a2e', b: '#3d0d17', t: '#f07090', dim: 'rgba(240,112,144,0.12)' },
-  { h: '#5a1a6b', b: '#320d3d', t: '#c06fe8', dim: 'rgba(192,111,232,0.12)' },
-  { h: '#7a3a1a', b: '#3d1e0d', t: '#e8904f', dim: 'rgba(232,144,79,0.12)' },
-  { h: '#1a1a7a', b: '#0d0d3d', t: '#6f70f0', dim: 'rgba(111,112,240,0.12)' },
-  { h: '#6b1a1a', b: '#3d0d0d', t: '#e87070', dim: 'rgba(232,112,112,0.12)' },
-  { h: '#7a1a6b', b: '#3d0d38', t: '#f06fe0', dim: 'rgba(240,111,224,0.12)' },
-  { h: '#4a1a7a', b: '#250d3d', t: '#a06fe8', dim: 'rgba(160,111,232,0.12)' },
-  { h: '#7a4a1a', b: '#3d250d', t: '#e8b06f', dim: 'rgba(232,176,111,0.12)' },
-  { h: '#1a4a7a', b: '#0d253d', t: '#6fb0e8', dim: 'rgba(111,176,232,0.12)' },
-  { h: '#7a1a3a', b: '#3d0d1e', t: '#f06f90', dim: 'rgba(240,111,144,0.12)' },
-  { h: '#3a1a7a', b: '#1e0d3d', t: '#906fe8', dim: 'rgba(144,111,232,0.12)' },
-  { h: '#1a6b3a', b: '#0d3d1e', t: '#6fe8a0', dim: 'rgba(111,232,160,0.12)' },
+  { h: '#1a6b3a', b: '#0d3d20', t: '#4fd988', dim: 'rgba(79,217,136,0.12)' },
+  { h: '#1a3d6b', b: '#0d2040', t: '#4fa8d9', dim: 'rgba(79,168,217,0.12)' },
+  { h: '#6b1a1a', b: '#3d0d0d', t: '#d94f4f', dim: 'rgba(217,79,79,0.12)' },
+  { h: '#5a3a0a', b: '#321f05', t: '#e8a030', dim: 'rgba(232,160,48,0.12)' },
+  { h: '#3a1a6b', b: '#200d3d', t: '#9b6fd9', dim: 'rgba(155,111,217,0.12)' },
+  { h: '#1a5a5a', b: '#0d3232', t: '#3fd9d9', dim: 'rgba(63,217,217,0.12)' },
+  { h: '#6b4a1a', b: '#3d2a0d', t: '#d9a04f', dim: 'rgba(217,160,79,0.12)' },
+  { h: '#1a6b5a', b: '#0d3d32', t: '#4fd9b8', dim: 'rgba(79,217,184,0.12)' },
+  { h: '#6b1a4a', b: '#3d0d2a', t: '#d94fa8', dim: 'rgba(217,79,168,0.12)' },
+  { h: '#2e5a1a', b: '#1a3209', t: '#82d94f', dim: 'rgba(130,217,79,0.12)' },
+  { h: '#1a2e6b', b: '#0d1a3d', t: '#4f6fd9', dim: 'rgba(79,111,217,0.12)' },
+  { h: '#6b2e1a', b: '#3d1a0d', t: '#d96f4f', dim: 'rgba(217,111,79,0.12)' },
+  { h: '#4a6b1a', b: '#2a3d0d', t: '#b8d94f', dim: 'rgba(184,217,79,0.12)' },
+  { h: '#1a4a6b', b: '#0d2a3d', t: '#4fb8d9', dim: 'rgba(79,184,217,0.12)' },
 ];
+
+// ─── MAPPATURA COLORE SFONDO → LIVELLO ───────────────────────────────────────
+// Google Sheets API restituisce r,g,b come float 0-1
+// Convertiamo in 0-255 e classifichiamo per colore dominante
+function classifyColor(bg) {
+  if (!bg) return 'white';
+  const r = Math.round((bg.red   || 0) * 255);
+  const g = Math.round((bg.green || 0) * 255);
+  const b = Math.round((bg.blue  || 0) * 255);
+
+  // bianco = tutte le componenti alte (sfondo default)
+  if (r > 230 && g > 230 && b > 230) return 'white';
+
+  // giallo: r alto, g alto, b basso
+  if (r > 200 && g > 180 && b < 100) return 'yellow';
+
+  // verde: g dominante
+  if (g > 150 && g > r + 30 && g > b + 30) return 'green';
+
+  // arancio: r alto, g medio, b basso
+  if (r > 200 && g > 80 && g < 180 && b < 80) return 'orange';
+
+  // rosso: r dominante
+  if (r > 150 && r > g + 50 && r > b + 50) return 'red';
+
+  return 'white';
+}
+
+// Stile badge livello
+const levStyle = {
+  white:  { cls: 'lev-white',  label: 'Base' },
+  yellow: { cls: 'lev-yellow', label: 'Intermedio' },
+  green:  { cls: 'lev-green',  label: 'Avanzato' },
+  orange: { cls: 'lev-orange', label: 'Esperto' },
+  red:    { cls: 'lev-red',    label: 'Agonista' },
+};
 
 // ─── STATO ────────────────────────────────────────────────────────────────────
 let squadreData = [];
@@ -327,7 +374,7 @@ let squadreData = [];
 // ─── FETCH SHEETS API v4 ──────────────────────────────────────────────────────
 async function loadSquadre() {
   try {
-    const fields = 'sheets.data.rowData.values(userEnteredValue)';
+    const fields = 'sheets.data.rowData.values(userEnteredValue,userEnteredFormat.backgroundColor)';
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}`
       + `?ranges=${encodeURIComponent(SHEET_NAME)}`
       + `&fields=${encodeURIComponent(fields)}`
@@ -350,7 +397,7 @@ async function loadSquadre() {
   }
 }
 
-// ─── PARSING RIGHE API (con capitane via marker (K)) ──────────────────────────
+// ─── PARSING RIGHE API ────────────────────────────────────────────────────────
 const KRegex = /\s*\(\s*[Kk]\s*\)/g;
 
 function parseRows(rows) {
@@ -364,12 +411,12 @@ function parseRows(rows) {
   headerRow.forEach((cell, i) => {
     const nome = (cell.userEnteredValue?.stringValue || '').trim();
     if (nome) {
-      squadre.push({ nome, capitana: '', giocatrici: [] });
+      squadre.push({ nome, capitano: '', capitanoLev: 'white', giocatori: [] });
       colIndices.push(i);
     }
   });
 
-  // righe 1+ = giocatrici
+  // righe 1+ = giocatori
   for (let r = 1; r < rows.length; r++) {
     const cells = rows[r].values || [];
     colIndices.forEach((ci, si) => {
@@ -379,15 +426,19 @@ function parseRows(rows) {
       const raw = (cell.userEnteredValue?.stringValue || '').trim();
       if (!raw) return;
 
-      const isCapitana = KRegex.test(raw);
+      const bg    = cell.userEnteredFormat?.backgroundColor;
+      const level = classifyColor(bg);
+
+      const isCapitano = KRegex.test(raw);
       KRegex.lastIndex = 0;
       const nome = raw.replace(/\s*\(\s*[Kk]\s*\)/g, '').trim();
       if (!nome) return;
 
-      if (isCapitana && !squadre[si].capitana) {
-        squadre[si].capitana = nome;
+      if (isCapitano && !squadre[si].capitano) {
+        squadre[si].capitano    = nome;
+        squadre[si].capitanoLev = level;
       } else {
-        squadre[si].giocatrici.push(nome);
+        squadre[si].giocatori.push({ nome, level });
       }
     });
   }
@@ -405,24 +456,28 @@ function buildSquadre(squadre) {
   container.innerHTML = '';
   container.appendChild(grid);
 
-  let totGiocatrici = 0;
+  let totGiocatori = 0;
 
   squadre.forEach((s, idx) => {
     const c = colori[idx % colori.length];
-    const totCard = (s.capitana ? 1 : 0) + s.giocatrici.length;
-    totGiocatrici += totCard;
+    const totCard = (s.capitano ? 1 : 0) + s.giocatori.length;
+    totGiocatori += totCard;
 
-    const playersHTML = s.giocatrici.map(nome => `
-      <div class="player-row">
+    const levColor = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
+    const playersHTML = s.giocatori.map(({ nome, level }) => {
+      const col = levColor[level] || levColor.white;
+      return `<div class="player-row">
         <div class="dot" style="background:${c.t};opacity:0.5"></div>
-        <span class="player-name">${nome}</span>
-      </div>
-    `).join('');
+        <span class="player-name" style="color:${col};">${nome}</span>
+      </div>`;
+    }).join('');
 
-    const capHTML = s.capitana
-      ? `<div class="squadra-cap" style="background:${c.dim};border-bottom:1px solid ${c.h}20;">
-           <span class="cap-icon">CAP</span>
-           <span class="cap-name">${s.capitana}</span>
+    const levColor2 = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
+    const capTextColor = levColor2[s.capitanoLev] || levColor2.white;
+    const capHTML = s.capitano
+      ? `<div class="squadra-cap" style="background:${c.dim};">
+           <span class="cap-icon" style="color:${c.t};background:${c.dim};">CAP</span>
+           <span class="cap-name" style="color:${capTextColor};">${s.capitano}</span>
          </div>`
       : '';
 
@@ -437,13 +492,13 @@ function buildSquadre(squadre) {
       </div>
       ${capHTML}
       <div class="squadra-players" id="players-${idx}">${playersHTML}</div>
-      <div class="squadra-toggle" onclick="togglePlayers(${idx})" id="toggle-${idx}" style="border-top-color:${c.h};color:${c.t};opacity:0.6;">▼ Vedi tutte le giocatrici</div>
+      <div class="squadra-toggle" onclick="togglePlayers(${idx})" id="toggle-${idx}" style="border-top-color:${c.h};color:${c.t};opacity:0.6;">▼ Vedi tutti i giocatori</div>
     `;
     grid.appendChild(card);
   });
 
-  document.getElementById('stat-squadre').textContent   = squadre.length;
-  document.getElementById('stat-giocatori').textContent = totGiocatrici + '+';
+  document.getElementById('stat-squadre').textContent  = squadre.length;
+  document.getElementById('stat-giocatori').textContent = totGiocatori + '+';
   document.getElementById('squadre-sub').textContent    =
     `${squadre.length} squadre iscritte · I gironi verranno definiti al sorteggio`;
 }
@@ -455,8 +510,8 @@ function filterSquadre(q) {
     const s = squadreData[i];
     if (!s) return;
     const matchTeam   = s.nome.toLowerCase().includes(q);
-    const matchCap    = s.capitana.toLowerCase().includes(q);
-    const matchPlayer = s.giocatrici.some(n => n.toLowerCase().includes(q));
+    const matchCap    = s.capitano.toLowerCase().includes(q);
+    const matchPlayer = s.giocatori.some(p => p.nome.toLowerCase().includes(q));
     const match = !q || matchTeam || matchCap || matchPlayer;
     card.classList.toggle('hidden', !match);
     if (q && (matchPlayer || matchCap) && !matchTeam) {
@@ -473,7 +528,7 @@ function togglePlayers(idx) {
   const tog = document.getElementById(`toggle-${idx}`);
   const isOpen = el.classList.contains('open');
   el.classList.toggle('open', !isOpen);
-  tog.textContent = isOpen ? '▼ Vedi tutte le giocatrici' : '▲ Chiudi';
+  tog.textContent = isOpen ? '▼ Vedi tutti i giocatori' : '▲ Chiudi';
 }
 
 // ─── NAV ──────────────────────────────────────────────────────────────────────
