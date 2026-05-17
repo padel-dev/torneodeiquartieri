@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torneo dei Quartieri – V Edizione · Benevento Padel 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #2db866;
+    --green-light: #3fd97a;
+    --green-dim: #0f2a1a;
+    --green-mid: #1a4d2e;
+    --gold: #f5c842;
+    --bg: #080c09;
+    --bg2: #0d1210;
+    --card: #111714;
+    --border: #1e2b22;
+    --muted: #5a7060;
+    --text: #e8f0ea;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .court-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+    background-image: linear-gradient(90deg, #2db866 1px, transparent 1px), linear-gradient(0deg, #2db866 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .hero {
+    position: relative; z-index: 1; min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 2rem 4rem; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow {
+    font-family: var(--font-body); font-size: 11px; font-weight: 500;
+    letter-spacing: 4px; text-transform: uppercase; color: var(--green);
+    margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--green); }
+  .hero h1 {
+    font-family: var(--font-display); font-size: clamp(4.5rem, 14vw, 10rem);
+    line-height: 0.88; letter-spacing: 2px; color: #fff; margin-bottom: 0.6rem;
+  }
+  .hero h1 .accent { color: var(--green-light); }
+  .hero-edition { font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2.4rem); letter-spacing: 6px; color: var(--muted); margin-bottom: 2rem; }
+  .hero-tagline { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 3rem; }
+  .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .hstat-n { font-family: var(--font-display); font-size: 3rem; letter-spacing: 2px; color: var(--green-light); line-height: 1; }
+  .hstat-l { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .hero-social { display: flex; gap: 10px; }
+  .btn-social {
+    display: inline-flex; align-items: center; gap: 7px; background: transparent;
+    border: 1px solid var(--border); color: var(--muted); font-family: var(--font-body);
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 18px;
+    border-radius: 3px; text-decoration: none; transition: all 0.2s;
+  }
+  .btn-social:hover { border-color: var(--green); color: var(--green-light); }
+  .hero-ball { position: absolute; right: -80px; top: 50%; transform: translateY(-60%); font-size: 28rem; opacity: 0.03; pointer-events: none; user-select: none; line-height: 1; }
+  nav {
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(8,12,9,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center; padding: 0 2rem;
+  }
+  .nav-links { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 18px 16px; border-bottom: 2px solid transparent; white-space: nowrap; transition: opacity 0.2s;
+  }
+  .nav-links a.s1 { color: #2db866; border-bottom-color: #2db866; }
+  .nav-links a.s2 { color: #85e8a8; border-bottom-color: #85e8a8; }
+  .nav-links a:hover { opacity: 0.7; }
+  .section { position: relative; z-index: 1; padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-head { margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .sec-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem; }
+  .sec-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 2px; color: #fff; line-height: 1; }
+  .sec-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
+  .section:nth-child(even) { background: var(--bg2); }
+
+  /* CALENDARIO */
+  .calendario-list { display: flex; flex-direction: column; gap: 10px; }
+  .cal-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+    display: flex; align-items: center; gap: 1.5rem; padding: 1.2rem 1.5rem; transition: border-color 0.2s;
+  }
+  .cal-item:hover { border-color: var(--green-mid); }
+  .cal-highlight { border-color: var(--green); background: var(--green-dim); }
+  .cal-date { text-align: center; min-width: 52px; flex-shrink: 0; }
+  .cal-day { font-family: var(--font-display); font-size: 2.8rem; letter-spacing: 1px; color: var(--green-light); line-height: 1; }
+  .cal-month { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-top: 2px; }
+  .cal-body { flex: 1; }
+  .cal-ora { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 3px; }
+  .cal-titolo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 2px; color: #fff; line-height: 1.1; }
+  .cal-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .cal-status {
+    font-size: 12px; color: var(--green-light);
+    background: rgba(45,184,102,0.1); border: 1px solid var(--green-mid);
+    padding: 5px 12px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+  }
+  @media (max-width: 500px) { .cal-item { flex-wrap: wrap; gap: 0.8rem; } .cal-status { font-size: 11px; } }
+
+  /* SQUADRE */
+  .squadre-search { margin-bottom: 2rem; }
+  .squadre-search input {
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--text); font-family: var(--font-body); font-size: 13px;
+    padding: 10px 16px; border-radius: 3px; width: 100%; max-width: 360px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .squadre-search input::placeholder { color: var(--muted); }
+  .squadre-search input:focus { border-color: var(--green); }
+  .squadre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .squadra-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
+  .squadra-card:hover { border-color: var(--green-mid); }
+  .squadra-card.hidden { display: none; }
+  .squadra-head { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+  .squadra-head h3 { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 2px; }
+  .squadra-badge { font-size: 10px; padding: 3px 9px; border-radius: 2px; flex-shrink: 0; margin-left: 8px; }
+  .squadra-cap { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(45,184,102,0.05); border-bottom: 1px solid var(--border); font-size: 13px; }
+  .cap-icon { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); background: rgba(245,200,66,0.1); padding: 2px 7px; border-radius: 2px; flex-shrink: 0; }
+  .cap-name { color: var(--text); font-weight: 500; }
+  .squadra-players { padding: 4px 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .squadra-players.open { max-height: 1200px; }
+  .player-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 16px; border-bottom: 1px solid rgba(30,43,34,0.5);
+    font-size: 12px; color: #ffffff; transition: background 0.15s;
+  }
+  .player-row:last-child { border-bottom: none; }
+  .player-row:hover { background: rgba(45,184,102,0.04); }
+  .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .squadra-toggle { font-size: 11px; color: var(--muted); letter-spacing: 1px; padding: 7px 16px; cursor: pointer; text-align: center; border-top: 1px solid var(--border); transition: color 0.2s; }
+  .squadra-toggle:hover { color: var(--green-light); }
+
+  /* LOADING */
+  .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+  .loading-dot { display: inline-block; animation: blink 1.2s infinite; }
+  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
+
+  /* STORICO */
+  .storia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+  .storia-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; transition: border-color 0.2s; }
+  .storia-card:hover { border-color: var(--green-mid); }
+  .storia-card.current { border-color: var(--green); background: var(--green-dim); }
+  .storia-ed { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .storia-trophy { font-size: 1.8rem; margin-bottom: 8px; }
+  .storia-winner { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); }
+  .storia-card.current .storia-winner { color: var(--green-light); }
+
+  /* VENUE */
+  .venue-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .venue-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; }
+  @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
+  .venue-info h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 3px; color: #fff; margin-bottom: 8px; }
+  .venue-info p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .venue-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 14px;
+    background: var(--green-dim); border: 1px solid var(--green-mid); color: var(--green-light);
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px;
+    border-radius: 3px; text-decoration: none; transition: all 0.2s;
+  }
+  .venue-link:hover { background: var(--green-mid); }
+
+  footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--border); text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 12px; letter-spacing: 1px; }
+  footer .foot-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 6px; color: #1a3d24; margin-bottom: 1rem; }
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
+    .hero h1 { font-size: 4.5rem; }
+    .hero-ball { display: none; }
+    nav { padding: 0 1rem; }
+    .section { padding: 3.5rem 1.2rem; }
+    .squadre-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="court-bg"></div>
+
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Benevento · Padel Amatoriale · 2026</div>
+    <h1>TORNEO DEI<br><span class="accent">QUARTIERI</span></h1>
+    <div class="hero-edition">V EDIZIONE</div>
+    <p class="hero-tagline">Il torneo amatoriale di padel che accende la passione sportiva nei rioni della città di Benevento.</p>
+    <div class="hero-stats">
+      <div><div class="hstat-n" id="stat-squadre">—</div><div class="hstat-l">Squadre</div></div>
+      <div><div class="hstat-n" id="stat-giocatori">—</div><div class="hstat-l">Giocatori</div></div>
+    </div>
+    <div class="hero-social">
+      <a class="btn-social" href="https://www.facebook.com/groups/400903518309647" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a class="btn-social" href="https://www.instagram.com/torneo_dei_rioni_padel_bn/" target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+  <div class="hero-ball">🎾</div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <a href="#calendario" class="s1" onclick="setActive(this)">Calendario</a>
+    <a href="#squadre" class="s2" onclick="setActive(this)">Squadre</a>
+    <a href="#storia" class="s1" onclick="setActive(this)">Storico</a>
+    <a href="#dove" class="s2" onclick="setActive(this)">Dove giochiamo</a>
+  </div>
+</nav>
+
+<!-- CALENDARIO -->
+<div class="section" id="calendario">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">V Edizione 2026</div>
+      <div class="sec-title">CALENDARIO</div>
+      <div class="sec-sub">Date ed eventi ufficiali del torneo</div>
+    </div>
+    <div class="calendario-list">
+      <div class="cal-item cal-highlight">
+        <div class="cal-date">
+          <div class="cal-day">18</div>
+          <div class="cal-month">MAG · LUN</div>
+        </div>
+        <div class="cal-body">
+          <div class="cal-ora">ore 18:00</div>
+          <div class="cal-titolo">Sorteggio Gironi</div>
+          <div class="cal-desc">Sorteggio ufficiale dei gironi della V Edizione</div>
+        </div>
+        <div class="cal-status">Prossimo</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SQUADRE -->
+<div class="section" id="squadre">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">V Edizione 2026</div>
+      <div class="sec-title">SQUADRE</div>
+      <div class="sec-sub" id="squadre-sub">Caricamento in corso…</div>
+    </div>
+    <div class="squadre-search">
+      <input type="text" id="search-input" placeholder="Cerca squadra o giocatore…" oninput="filterSquadre(this.value)">
+    </div>
+    <div id="squadre-container">
+      <div class="loading-msg">
+        Caricamento squadre
+        <span class="loading-dot">.</span>
+        <span class="loading-dot">.</span>
+        <span class="loading-dot">.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORICO -->
+<div class="section" id="storia">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Dal 2022</div>
+      <div class="sec-title">STORICO</div>
+      <div class="sec-sub">Cinque anni di quartieri, rioni e passione per il padel a Benevento</div>
+    </div>
+    <div class="storia-grid">
+      <div class="storia-card"><div class="storia-ed">I Edizione · 2022</div><div class="storia-trophy">🥇</div><div class="storia-winner">ARCO E DINTORNI</div></div>
+      <div class="storia-card"><div class="storia-ed">II Edizione · 2023</div><div class="storia-trophy">🥇</div><div class="storia-winner">CENTRO STORICO</div></div>
+      <div class="storia-card"><div class="storia-ed">III Edizione · 2024</div><div class="storia-trophy">🥇</div><div class="storia-winner">VALLE CAUDINA</div></div>
+      <div class="storia-card"><div class="storia-ed">IV Edizione · 2025</div><div class="storia-trophy">🥇</div><div class="storia-winner">COCCHIA</div></div>
+      <div class="storia-card current"><div class="storia-ed" style="color:var(--green)">V Edizione · 2026</div><div class="storia-trophy">⚡</div><div class="storia-winner">In corso</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DOVE GIOCHIAMO -->
+<div class="section" id="dove">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Campo ufficiale</div>
+      <div class="sec-title">DOVE GIOCHIAMO</div>
+      <div class="sec-sub">Tutte le partite si svolgono al Mood Sport Village · Sant'Angelo a Cupolo</div>
+    </div>
+    <div class="venue-card">
+      <div style="position:relative;height:260px;overflow:hidden;">
+        <img
+          src="https://res.cloudinary.com/playtomic/image/upload/c_scale,w_1200,q_80,f_auto/pro/tenants/362372fa-8ece-439e-8a3b-42de92c3f824/1708523265153"
+          alt="Mood Sport Village"
+          style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);"
+        />
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(8,12,9,0.95));">
+          <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:4px;color:#fff;">MOOD SPORT VILLAGE</div>
+          <div style="font-size:12px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">3 campi da padel · Coperti · Panoramici</div>
+        </div>
+      </div>
+      <div class="venue-info">
+        <div>
+          <h3>INDIRIZZO</h3>
+          <p>
+            Strada Provinciale 17<br>
+            82010 Sant'Angelo a Cupolo (BN)<br>
+            Campania, Italia
+          </p>
+          <a class="venue-link" href="https://playtomic.io/tenant/362372fa-8ece-439e-8a3b-42de92c3f824" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Prenota su Playtomic
+          </a>
+          <a class="venue-link" style="margin-left:8px;" href="https://www.google.com/maps?q=41.09364247,14.81436365" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Apri in Maps
+          </a>
+        </div>
+        <div>
+          <h3>ORARI</h3>
+          <p>Tutti i giorni · 08:30 – 00:00</p>
+          <h3 style="margin-top:1.2rem;">SERVIZI</h3>
+          <p>
+            🅿️ Parcheggio gratuito<br>
+            🚿 Spogliatoi<br>
+            🍹 Bar & snack<br>
+            📶 WiFi<br>
+            🎾 Noleggio attrezzatura
+          </p>
+        </div>
+      </div>
+      <iframe
+        src="https://maps.google.com/maps?q=41.09364247,14.81436365&z=15&output=embed"
+        width="100%"
+        height="280"
+        style="border:0;border-top:1px solid var(--border);display:block;filter:grayscale(0.2) invert(0.88) hue-rotate(120deg);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">TORNEO DEI QUARTIERI</div>
+  <div>V Edizione · Benevento 2026 · Padel Amatoriale</div>
+  <div style="margin-top:6px;color:#1a2e1e;">Fatto con passione per i rioni di Benevento ·
+    <a href="https://www.facebook.com/groups/400903518309647" target="_blank" style="color:inherit;text-decoration:none;">Facebook</a> ·
+    <a href="https://www.instagram.com/torneo_dei_rioni_padel_bn/" target="_blank" style="color:inherit;text-decoration:none;">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRC1pjsJl-Tw9CYeYLe1Lj2LRcfbBAd96IZ77hRb6vrYAa8TJdU-NTNk4i8YdDWYmOxWEKXzXy-axRs/pub?output=csv';
+
+// ─── COLORI SQUADRE ───────────────────────────────────────────────────────────
+const colori = [
+  { h: '#1a6b3a', b: '#0d3d20', t: '#4fd988', dim: 'rgba(79,217,136,0.12)' },
+  { h: '#1a3d6b', b: '#0d2040', t: '#4fa8d9', dim: 'rgba(79,168,217,0.12)' },
+  { h: '#6b1a1a', b: '#3d0d0d', t: '#d94f4f', dim: 'rgba(217,79,79,0.12)' },
+  { h: '#5a3a0a', b: '#321f05', t: '#e8a030', dim: 'rgba(232,160,48,0.12)' },
+  { h: '#3a1a6b', b: '#200d3d', t: '#9b6fd9', dim: 'rgba(155,111,217,0.12)' },
+  { h: '#1a5a5a', b: '#0d3232', t: '#3fd9d9', dim: 'rgba(63,217,217,0.12)' },
+  { h: '#6b4a1a', b: '#3d2a0d', t: '#d9a04f', dim: 'rgba(217,160,79,0.12)' },
+  { h: '#1a6b5a', b: '#0d3d32', t: '#4fd9b8', dim: 'rgba(79,217,184,0.12)' },
+  { h: '#6b1a4a', b: '#3d0d2a', t: '#d94fa8', dim: 'rgba(217,79,168,0.12)' },
+  { h: '#2e5a1a', b: '#1a3209', t: '#82d94f', dim: 'rgba(130,217,79,0.12)' },
+  { h: '#1a2e6b', b: '#0d1a3d', t: '#4f6fd9', dim: 'rgba(79,111,217,0.12)' },
+  { h: '#6b2e1a', b: '#3d1a0d', t: '#d96f4f', dim: 'rgba(217,111,79,0.12)' },
+  { h: '#4a6b1a', b: '#2a3d0d', t: '#b8d94f', dim: 'rgba(184,217,79,0.12)' },
+  { h: '#1a4a6b', b: '#0d2a3d', t: '#4fb8d9', dim: 'rgba(79,184,217,0.12)' },
+];
+
+// ─── STATO ────────────────────────────────────────────────────────────────────
+let squadreData = [];
+
+// ─── PARSING CSV ──────────────────────────────────────────────────────────────
+// Struttura:
+//   Riga 0 : nomi delle squadre (intestazioni colonne)
+//   Riga 1+: giocatori; chi ha (K) o (k) nel nome è il capitano
+//
+// Logica:
+//   - cerca (K)/(k) con regex case-insensitive in ogni cella
+//   - rimuove il tag dal nome visualizzato
+//   - assegna il primo trovato per colonna come capitano; gli altri come giocatori
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+
+  function parseLine(line) {
+    const result = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inQ = !inQ;
+      } else if ((ch === ',' || ch === '\t') && !inQ) {
+        result.push(cur.trim());
+        cur = '';
+      } else {
+        cur += ch;
+      }
+    }
+    result.push(cur.trim());
+    return result;
+  }
+
+  const rows = lines.map(parseLine);
+  if (rows.length < 1) return [];
+
+  const headers = rows[0];
+  const squadre = [];
+  const colIndices = [];
+
+  headers.forEach((nome, i) => {
+    const n = nome.trim();
+    if (n) {
+      squadre.push({ nome: n, capitano: '', giocatori: [] });
+      colIndices.push(i);
+    }
+  });
+
+  const KRegex = /\s*\(\s*[Kk]\s*\)/g;
+
+  for (let r = 1; r < rows.length; r++) {
+    const row = rows[r];
+    colIndices.forEach((ci, si) => {
+      const raw = (row[ci] || '').trim();
+      if (!raw) return;
+
+      const isCapitano = KRegex.test(raw);
+      KRegex.lastIndex = 0; // reset dopo test()
+
+      const nome = raw.replace(KRegex, '').trim();
+      if (!nome) return;
+
+      if (isCapitano && !squadre[si].capitano) {
+        squadre[si].capitano = nome;
+      } else {
+        squadre[si].giocatori.push(nome);
+      }
+    });
+  }
+
+  return squadre;
+}
+
+// ─── BUILD UI ─────────────────────────────────────────────────────────────────
+function buildSquadre(squadre) {
+  const container = document.getElementById('squadre-container');
+  if (!container) return;
+
+  const grid = document.createElement('div');
+  grid.className = 'squadre-grid';
+  container.innerHTML = '';
+  container.appendChild(grid);
+
+  let totGiocatori = 0;
+
+  squadre.forEach((s, idx) => {
+    const c = colori[idx % colori.length];
+    const totCard = (s.capitano ? 1 : 0) + s.giocatori.length;
+    totGiocatori += totCard;
+
+    const playersHTML = s.giocatori.map(nome =>
+      `<div class="player-row">
+        <div class="dot" style="background:${c.t};opacity:0.5"></div>
+        <span>${nome}</span>
+      </div>`
+    ).join('');
+
+    const capHTML = s.capitano
+      ? `<div class="squadra-cap" style="background:${c.dim};">
+           <span class="cap-icon" style="color:${c.t};background:${c.dim};">CAP</span>
+           <span class="cap-name">${s.capitano}</span>
+         </div>`
+      : '';
+
+    const card = document.createElement('div');
+    card.className = 'squadra-card';
+    card.dataset.idx = idx;
+    card.style.borderColor = c.h;
+    card.innerHTML = `
+      <div class="squadra-head" onclick="togglePlayers(${idx})" style="background:${c.b};border-bottom:1px solid ${c.h};">
+        <h3 style="color:${c.t};">${s.nome}</h3>
+        <span class="squadra-badge" style="color:${c.t};background:${c.dim};">${totCard} gioc.</span>
+      </div>
+      ${capHTML}
+      <div class="squadra-players" id="players-${idx}">
+        ${playersHTML}
+      </div>
+      <div class="squadra-toggle" onclick="togglePlayers(${idx})" id="toggle-${idx}" style="border-top-color:${c.h};color:${c.t};opacity:0.6;">▼ Vedi tutti i giocatori</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  document.getElementById('stat-squadre').textContent = squadre.length;
+  document.getElementById('stat-giocatori').textContent = totGiocatori + '+';
+  document.getElementById('squadre-sub').textContent =
+    `${squadre.length} squadre iscritte · I gironi verranno definiti al sorteggio`;
+}
+
+// ─── FETCH DA GOOGLE SHEETS ───────────────────────────────────────────────────
+async function loadSquadre() {
+  try {
+    const url = SHEET_CSV_URL + '&t=' + Date.now();
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    squadreData = parseCSV(text);
+    buildSquadre(squadreData);
+  } catch (err) {
+    document.getElementById('squadre-container').innerHTML =
+      `<div class="loading-msg" style="color:#d94f4f;">
+        Errore nel caricamento dati.<br>
+        <span style="font-size:11px;">Verifica che il foglio sia pubblicato come CSV.</span>
+      </div>`;
+    console.error('Sheets fetch error:', err);
+  }
+}
+
+// ─── RICERCA ──────────────────────────────────────────────────────────────────
+function filterSquadre(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.squadra-card').forEach((card, i) => {
+    const s = squadreData[i];
+    if (!s) return;
+    const matchTeam   = s.nome.toLowerCase().includes(q);
+    const matchCap    = s.capitano.toLowerCase().includes(q);
+    const matchPlayer = s.giocatori.some(p => p.toLowerCase().includes(q));
+    const match = !q || matchTeam || matchCap || matchPlayer;
+    card.classList.toggle('hidden', !match);
+    if (q && (matchPlayer || matchCap) && !matchTeam) {
+      document.getElementById(`players-${i}`)?.classList.add('open');
+      const tog = document.getElementById(`toggle-${i}`);
+      if (tog) tog.textContent = '▲ Chiudi';
+    }
+  });
+}
+
+// ─── TOGGLE GIOCATORI ─────────────────────────────────────────────────────────
+function togglePlayers(idx) {
+  const el  = document.getElementById(`players-${idx}`);
+  const tog = document.getElementById(`toggle-${idx}`);
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open', !isOpen);
+  tog.textContent = isOpen ? '▼ Vedi tutti i giocatori' : '▲ Chiudi';
+}
+
+// ─── NAV ──────────────────────────────────────────────────────────────────────
+function setActive(el) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ─── FADE IN ──────────────────────────────────────────────────────────────────
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadSquadre();
+setInterval(loadSquadre, 5 * 60 * 1000);
+</script>
+</body>
+</html>
