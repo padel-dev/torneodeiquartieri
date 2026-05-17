@@ -472,13 +472,12 @@ function buildSquadre(squadre) {
       </div>`;
     }).join('');
 
-    const capLevLabels = { white:'Bianco', yellow:'Giallo', green:'Verde', orange:'Arancione', red:'Rosso' };
-    const capLev  = levStyle[s.capitanoLev] || levStyle.white;
+    const levColor2 = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
+    const capTextColor = levColor2[s.capitanoLev] || levColor2.white;
     const capHTML = s.capitano
       ? `<div class="squadra-cap" style="background:${c.dim};">
            <span class="cap-icon" style="color:${c.t};background:${c.dim};">CAP</span>
-           <span class="cap-name">${s.capitano}</span>
-           <span class="player-lev ${capLev.cls}" style="margin-left:auto;">${capLevLabels[s.capitanoLev] || 'Bianco'}</span>
+           <span class="cap-name" style="color:${capTextColor};">${s.capitano}</span>
          </div>`
       : '';
 
