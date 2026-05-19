@@ -75,6 +75,24 @@
   .sec-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
   .section:nth-child(even) { background: var(--bg2); }
 
+  /* ── FILTRI CALENDARIO ── */
+  .cal-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; align-items: center; }
+  .filter-group { display: flex; gap: 6px; align-items: center; }
+  .filter-sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
+  .fpill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); background: transparent; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+  .fpill:hover { border-color: var(--green-mid); color: var(--text); }
+  .fpill.active { border-color: var(--green); color: var(--green-light); background: var(--green-dim); }
+  .fpill.active.f-orsini { border-color: var(--orsini-mid); color: var(--orsini); background: var(--orsini-dim); }
+  .fpill.active.f-svevi  { border-color: var(--svevi-mid);  color: var(--svevi);  background: var(--svevi-dim); }
+  .fpill.active.f-longo  { border-color: var(--longo-mid);  color: var(--longo);  background: var(--longo-dim); }
+  .fsearch { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 6px 14px; border-radius: 99px; outline: none; transition: border-color 0.2s; width: 200px; }
+  .fsearch::placeholder { color: var(--muted); }
+  .fsearch:focus { border-color: var(--green); }
+  .cal-empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+  .btn-load-more { display: block; margin: 2rem auto 0; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 28px; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+  .btn-load-more:hover { border-color: var(--green); color: var(--green-light); }
+  .btn-load-more:disabled { opacity: 0.3; cursor: default; }
+
   /* ── CALENDARIO ── */
   .day-block { margin-bottom: 2.5rem; }
   .day-header { display: flex; align-items: center; gap: 14px; padding-bottom: 12px; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
@@ -302,9 +320,34 @@
       <div class="sec-title">CALENDARIO</div>
       <div class="sec-sub" id="cal-sub">Caricamento partite…</div>
     </div>
+
+    <!-- FILTRI -->
+    <div class="cal-filters">
+      <div class="filter-group">
+        <button class="fpill active" id="f-tutti" onclick="setFiltroGirone('tutti')">Tutti</button>
+        <button class="fpill f-orsini" id="f-orsini" onclick="setFiltroGirone('Orsini')">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--orsini);display:inline-block;flex-shrink:0"></span>
+          Orsini
+        </button>
+        <button class="fpill f-svevi" id="f-svevi" onclick="setFiltroGirone('Svevi')">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--svevi);display:inline-block;flex-shrink:0"></span>
+          Svevi
+        </button>
+        <button class="fpill f-longo" id="f-longo" onclick="setFiltroGirone('Longobardi')">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--longo);display:inline-block;flex-shrink:0"></span>
+          Longobardi
+        </button>
+      </div>
+      <div class="filter-sep"></div>
+      <input class="fsearch" id="f-squadra" type="text" placeholder="🔍 Cerca squadra…" oninput="applyFilters()">
+    </div>
+
     <div id="calendario-container">
       <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
     </div>
+    <button class="btn-load-more" id="btn-load-more" style="display:none" onclick="loadSuccessivi()">
+      ↓ Carica settimane successive
+    </button>
   </div>
 </div>
 
@@ -554,13 +597,33 @@ function parseGirone(rows) {
   return { partite, squadre };
 }
 
-// ── BUILD CALENDARIO (progressivo per data, tutti e 3 i gironi) ───────────────
+// ── STATO CALENDARIO ─────────────────────────────────────────────────────────
+let calGiorniMap    = new Map(); // uniqueKey → { info, gironiByName }
+let calSortedKeys   = [];        // chiavi ordinate
+let calSuccessiviCaricati = false;
+let calFiltroGirone = 'tutti';
 
-function buildCalendario() {
-  const container = document.getElementById('calendario-container');
-  container.innerHTML = '';
+// ── UTILS SETTIMANA ───────────────────────────────────────────────────────────
 
-  // 1. Raccogli tutte le partite da tutti i gironi, con riferimento al cfg
+function getDomenicaSettimana(oggi) {
+  // Restituisce la domenica della settimana corrente (fine settimana)
+  const d = new Date(oggi);
+  const giorno = d.getDay(); // 0=dom, 1=lun...
+  const diffADomenica = giorno === 0 ? 0 : 7 - giorno;
+  d.setDate(d.getDate() + diffADomenica);
+  d.setHours(23, 59, 59, 0);
+  return d;
+}
+
+function keyToDate(key) {
+  if (key === '__nodate__') return new Date(9999, 0, 1);
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+// ── BUILD GIORNIMAP (struttura dati dal raw) ──────────────────────────────────
+
+function buildGiorniMap() {
   const allPartite = [];
   GIRONE_CFG.forEach(cfg => {
     const data = gironiData[cfg.name];
@@ -568,114 +631,241 @@ function buildCalendario() {
     data.partite.forEach(p => allPartite.push({ ...p, cfg }));
   });
 
-  // 2. Raggruppa per uniqueKey (data cronologica), mantenendo info reale
-  //    Le partite senza data finiscono sotto '__nodate__'
-  const giorniMap = new Map(); // uniqueKey → { info, gironiMap }
+  calGiorniMap = new Map();
 
   allPartite.forEach(p => {
     const info = parseData(p.data);
     const key  = info ? info.uniqueKey : '__nodate__';
-
-    if (!giorniMap.has(key)) {
-      giorniMap.set(key, { info, gironiByName: new Map() });
+    if (!calGiorniMap.has(key)) {
+      calGiorniMap.set(key, { info, gironiByName: new Map() });
     }
-    const giorno = giorniMap.get(key);
+    const giorno = calGiorniMap.get(key);
     const gName  = p.cfg.name;
-
     if (!giorno.gironiByName.has(gName)) {
       giorno.gironiByName.set(gName, { cfg: p.cfg, partite: [] });
     }
     giorno.gironiByName.get(gName).partite.push(p);
   });
 
-  // 3. Ordina le chiavi cronologicamente (date reali prima, poi nodate)
-  const sortedKeys = [...giorniMap.keys()].sort((a, b) => {
+  calSortedKeys = [...calGiorniMap.keys()].sort((a, b) => {
     if (a === '__nodate__') return 1;
     if (b === '__nodate__') return -1;
-    // Le chiavi sono YYYY-MM-DD → ordinamento alfabetico = cronologico
     return a.localeCompare(b);
   });
+}
 
-  // 4. Render
-  sortedKeys.forEach(key => {
-    const giorno = giorniMap.get(key);
-    const info   = giorno.info;
+// ── RENDER UN SINGOLO BLOCCO GIORNO ──────────────────────────────────────────
 
-    const block = document.createElement('div');
-    block.className = 'day-block';
+function renderDayBlock(key) {
+  const giorno = calGiorniMap.get(key);
+  const info   = giorno.info;
 
-    // Header giorno
-    const header = document.createElement('div');
-    header.className = 'day-header';
-    if (info) {
-      header.innerHTML = `
-        <div class="day-date-box">
-          <div class="day-num">${info.day}</div>
-          <div class="day-month">${info.month}</div>
+  const block = document.createElement('div');
+  block.className = 'day-block';
+  block.dataset.key = key;
+
+  const header = document.createElement('div');
+  header.className = 'day-header';
+  if (info) {
+    header.innerHTML = `
+      <div class="day-date-box">
+        <div class="day-num">${info.day}</div>
+        <div class="day-month">${info.month}</div>
+      </div>
+      <div class="day-weekday">${info.weekday}</div>`;
+  } else {
+    header.innerHTML = `<div class="day-weekday" style="color:var(--muted)">Data da definire</div>`;
+  }
+  block.appendChild(header);
+
+  GIRONE_CFG.forEach(cfg => {
+    const gruppo = giorno.gironiByName.get(cfg.name);
+    if (!gruppo) return;
+
+    const gGroup = document.createElement('div');
+    gGroup.className = 'girone-group';
+    gGroup.dataset.girone = cfg.name;
+
+    const gHead = document.createElement('div');
+    gHead.className = `girone-group-header ${cfg.headerCls}`;
+    gHead.innerHTML = `
+      <div class="girone-dot ${cfg.dotCls}"></div>
+      ${cfg.label} · ${gironataShort(gruppo.partite[0]?.giornata)}`;
+    gGroup.appendChild(gHead);
+
+    gruppo.partite.forEach(p => {
+      const campoKey = p.campo;
+      let campoCls, dotCls, campoLbl;
+      if (campoKey === 'ROSSO') {
+        campoCls = 'campo-r'; dotCls = 'campo-dot-r'; campoLbl = 'Campo Rosso';
+      } else if (campoKey === 'BLU' || campoKey === 'BLUE') {
+        campoCls = 'campo-b'; dotCls = 'campo-dot-b'; campoLbl = 'Campo Blu';
+      } else {
+        campoCls = 'campo-g'; dotCls = 'campo-dot-g'; campoLbl = p.campo || 'Campo';
+      }
+
+      const midHTML = p.result
+        ? `<span class="score-chip">${p.result}</span>`
+        : `<span class="vs-chip">vs</span>`;
+
+      const row = document.createElement('div');
+      row.className = 'match-row';
+      row.dataset.sq1 = p.sq1.toLowerCase();
+      row.dataset.sq2 = p.sq2.toLowerCase();
+      row.innerHTML = `
+        <div>
+          <span class="campo-pill ${campoCls}">
+            <span class="campo-dot ${dotCls}"></span>
+            ${campoLbl}
+          </span>
         </div>
-        <div class="day-weekday">${info.weekday}</div>`;
-    } else {
-      header.innerHTML = `<div class="day-weekday" style="color:var(--muted)">Data da definire</div>`;
-    }
-    block.appendChild(header);
-
-    // Per ogni girone presente in questo giorno (nell'ordine di GIRONE_CFG)
-    GIRONE_CFG.forEach(cfg => {
-      const gruppo = giorno.gironiByName.get(cfg.name);
-      if (!gruppo) return;
-
-      const gGroup = document.createElement('div');
-      gGroup.className = 'girone-group';
-
-      const gHead = document.createElement('div');
-      gHead.className = `girone-group-header ${cfg.headerCls}`;
-      gHead.innerHTML = `
-        <div class="girone-dot ${cfg.dotCls}"></div>
-        ${cfg.label} · ${gironataShort(gruppo.partite[0]?.giornata)}`;
-      gGroup.appendChild(gHead);
-
-      gruppo.partite.forEach(p => {
-        const campoKey = p.campo;
-        let campoCls, dotCls, campoLbl;
-        if (campoKey === 'ROSSO') {
-          campoCls = 'campo-r'; dotCls = 'campo-dot-r'; campoLbl = 'Campo Rosso';
-        } else if (campoKey === 'BLU' || campoKey === 'BLUE') {
-          campoCls = 'campo-b'; dotCls = 'campo-dot-b'; campoLbl = 'Campo Blu';
-        } else {
-          campoCls = 'campo-g'; dotCls = 'campo-dot-g'; campoLbl = p.campo || 'Campo';
-        }
-
-        const midHTML = p.result
-          ? `<span class="score-chip">${p.result}</span>`
-          : `<span class="vs-chip">vs</span>`;
-
-        const row = document.createElement('div');
-        row.className = 'match-row';
-        row.innerHTML = `
-          <div>
-            <span class="campo-pill ${campoCls}">
-              <span class="campo-dot ${dotCls}"></span>
-              ${campoLbl}
-            </span>
-          </div>
-          <div class="teams-row">
-            <span class="team-name right">${p.sq1}</span>
-            ${midHTML}
-            <span class="team-name">${p.sq2}</span>
-          </div>
-          <div class="orario-lbl">${p.orario}</div>`;
-        gGroup.appendChild(row);
-      });
-
-      block.appendChild(gGroup);
+        <div class="teams-row">
+          <span class="team-name right">${p.sq1}</span>
+          ${midHTML}
+          <span class="team-name">${p.sq2}</span>
+        </div>
+        <div class="orario-lbl">${p.orario}</div>`;
+      gGroup.appendChild(row);
     });
 
-    container.appendChild(block);
+    block.appendChild(gGroup);
   });
+
+  return block;
+}
+
+// ── BUILD CALENDARIO ──────────────────────────────────────────────────────────
+
+function buildCalendario() {
+  buildGiorniMap();
+  calSuccessiviCaricati = false;
+
+  const container = document.getElementById('calendario-container');
+  container.innerHTML = '';
+
+  const oggi   = new Date();
+  oggi.setHours(0, 0, 0, 0);
+  const domSett = getDomenicaSettimana(oggi);
+
+  // Chiavi della settimana corrente (da oggi a domenica)
+  const keySett = calSortedKeys.filter(k => {
+    if (k === '__nodate__') return false;
+    const d = keyToDate(k);
+    return d >= oggi && d <= domSett;
+  });
+
+  // Chiavi successive (dopo domenica) + nodate
+  const keySucc = calSortedKeys.filter(k => {
+    if (k === '__nodate__') return true;
+    const d = keyToDate(k);
+    return d > domSett;
+  });
+
+  // Render settimana corrente
+  if (keySett.length === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'cal-empty';
+    msg.id = 'cal-empty-sett';
+    msg.textContent = 'Nessuna partita questa settimana.';
+    container.appendChild(msg);
+  } else {
+    keySett.forEach(key => container.appendChild(renderDayBlock(key)));
+  }
+
+  // Pulsante carica successivi
+  const btn = document.getElementById('btn-load-more');
+  if (keySucc.length > 0) {
+    btn.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = `↓ Carica settimane successive (${keySucc.length} giorni)`;
+  } else {
+    btn.style.display = 'none';
+  }
+
+  applyFilters();
 
   const tot = GIRONE_CFG.reduce((s,c) => s + (gironiData[c.name]?.partite.length||0), 0);
   document.getElementById('cal-sub').textContent =
     `${tot} partite · Girone Orsini, Svevi & Longobardi`;
+}
+
+// ── CARICA SUCCESSIVI ─────────────────────────────────────────────────────────
+
+function loadSuccessivi() {
+  const container = document.getElementById('calendario-container');
+  const oggi   = new Date(); oggi.setHours(0,0,0,0);
+  const domSett = getDomenicaSettimana(oggi);
+
+  const keySucc = calSortedKeys.filter(k => {
+    if (k === '__nodate__') return true;
+    return keyToDate(k) > domSett;
+  });
+
+  keySucc.forEach(key => container.appendChild(renderDayBlock(key)));
+  calSuccessiviCaricati = true;
+
+  const btn = document.getElementById('btn-load-more');
+  btn.style.display = 'none';
+
+  applyFilters();
+}
+
+// ── FILTRI ────────────────────────────────────────────────────────────────────
+
+function setFiltroGirone(girone) {
+  calFiltroGirone = girone;
+  // Aggiorna pillole
+  document.querySelectorAll('.fpill').forEach(b => b.classList.remove('active'));
+  const idMap = { tutti:'f-tutti', Orsini:'f-orsini', Svevi:'f-svevi', Longobardi:'f-longo' };
+  document.getElementById(idMap[girone])?.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const sq = (document.getElementById('f-squadra')?.value || '').toLowerCase().trim();
+
+  document.querySelectorAll('.day-block').forEach(block => {
+    let blockVisible = false;
+
+    block.querySelectorAll('.girone-group').forEach(grp => {
+      const gName = grp.dataset.girone;
+
+      // Filtro girone
+      const gironeOk = calFiltroGirone === 'tutti' || gName === calFiltroGirone;
+      if (!gironeOk) { grp.style.display = 'none'; return; }
+
+      // Filtro squadra — agisce sulle righe
+      let grpVisible = false;
+      grp.querySelectorAll('.match-row').forEach(row => {
+        const matchSq = !sq || row.dataset.sq1.includes(sq) || row.dataset.sq2.includes(sq);
+        row.style.display = matchSq ? '' : 'none';
+        if (matchSq) grpVisible = true;
+      });
+
+      grp.style.display = grpVisible ? '' : 'none';
+      if (grpVisible) blockVisible = true;
+    });
+
+    block.style.display = blockVisible ? '' : 'none';
+  });
+
+  // Messaggio vuoto se nulla visibile
+  const container = document.getElementById('calendario-container');
+  let existing = container.querySelector('.cal-filter-empty');
+  const hasVisible = [...container.querySelectorAll('.day-block')].some(b => b.style.display !== 'none');
+  if (!hasVisible) {
+    if (!existing) {
+      existing = document.createElement('div');
+      existing.className = 'cal-empty cal-filter-empty';
+      container.appendChild(existing);
+    }
+    existing.textContent = sq
+      ? `Nessuna partita trovata per "${sq}".`
+      : 'Nessuna partita per il girone selezionato.';
+    existing.style.display = '';
+  } else if (existing) {
+    existing.style.display = 'none';
+  }
 }
 
 // ── BUILD CLASSIFICHE ─────────────────────────────────────────────────────────
