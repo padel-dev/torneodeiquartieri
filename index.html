@@ -700,8 +700,10 @@ function renderDayBlock(key) {
         campoCls = 'campo-r'; dotCls = 'campo-dot-r'; campoLbl = 'Campo Rosso';
       } else if (campoKey === 'BLU' || campoKey === 'BLUE') {
         campoCls = 'campo-b'; dotCls = 'campo-dot-b'; campoLbl = 'Campo Blu';
+      } else if (campoKey === 'VERDE' || campoKey === 'GREEN') {
+        campoCls = 'campo-g'; dotCls = 'campo-dot-g'; campoLbl = 'Campo Verde';
       } else {
-        campoCls = 'campo-g'; dotCls = 'campo-dot-g'; campoLbl = p.campo || 'Campo';
+        campoCls = 'campo-g'; dotCls = 'campo-dot-g'; campoLbl = 'Campo Verde';
       }
 
       const midHTML = p.result
