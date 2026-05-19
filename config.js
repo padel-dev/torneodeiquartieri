@@ -7,7 +7,7 @@ const CONFIG = {
 
   // ── DATI GOOGLE SHEETS ────────────────────────────────────────────────────
   spreadsheetId: '1mT1OIclqD3ClJHaBlB00YoW2lB_JiiHERFCz6stPZys',
-  apiKey:        'AIzaSyBVXYZt6Q-JgWHqOD5Uxw2yBz7nQvrI_Xg',
+  apiKey:        'AIzaSyAdN7BX1xID-YDW2ZwAoivSbAPbqz_Tr50',
 
   // ── IDENTITÀ ──────────────────────────────────────────────────────────────
   title:       'TORNEO DEI QUARTIERI',
