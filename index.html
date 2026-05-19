@@ -21,20 +21,14 @@
     --text: #e8f0ea;
     --font-display: 'Bebas Neue', sans-serif;
     --font-body: 'DM Sans', sans-serif;
-
-    /* Girone Orsini — ambra/arancio */
     --orsini:      #e8922a;
     --orsini-dim:  #2a1a08;
     --orsini-mid:  #4d3010;
     --orsini-muted:#70502a;
-
-    /* Girone Svevi — viola/indaco */
     --svevi:       #9b6fd9;
     --svevi-dim:   #1a0f2a;
     --svevi-mid:   #32214d;
     --svevi-muted: #604070;
-
-    /* Girone Longobardi — teal/acqua */
     --longo:       #2dc4c4;
     --longo-dim:   #082a2a;
     --longo-mid:   #104d4d;
@@ -48,7 +42,6 @@
     background-size: 48px 48px;
   }
 
-  /* HERO */
   .hero { position: relative; z-index: 1; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 4rem; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%); pointer-events: none; }
   .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
@@ -66,7 +59,6 @@
   .btn-social:hover { border-color: var(--green); color: var(--green-light); }
   .hero-ball { position: absolute; right: -80px; top: 50%; transform: translateY(-60%); font-size: 28rem; opacity: 0.03; pointer-events: none; user-select: none; line-height: 1; }
 
-  /* NAV */
   nav { position: sticky; top: 0; z-index: 200; background: rgba(8,12,9,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0 2rem; }
   .nav-links { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }
@@ -75,7 +67,6 @@
   .nav-links a.s2 { color: #85e8a8; border-bottom-color: #85e8a8; }
   .nav-links a:hover { opacity: 0.7; }
 
-  /* SECTIONS */
   .section { position: relative; z-index: 1; padding: 5rem 2rem; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
   .sec-head { margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
@@ -123,7 +114,6 @@
   .score-chip { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--green-light); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 10px; flex-shrink: 0; }
   .orario-lbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
 
-  /* LOADING */
   .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
   .loading-dot { display: inline-block; animation: blink 1.2s infinite; }
   .loading-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -167,7 +157,6 @@
   .pts-svevi  { color: var(--svevi); }
   .pts-longo  { color: var(--longo); }
 
-  /* LEGENDA LIVELLI */
   .legenda { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
   .legenda-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
   .lev-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; letter-spacing: 1px; }
@@ -177,7 +166,6 @@
   .lev-orange { color: #fff; background: #e8802a; }
   .lev-red    { color: #fff; background: #d94f4f; }
 
-  /* SQUADRE */
   .squadre-search { margin-bottom: 2rem; }
   .squadre-search input { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 13px; padding: 10px 16px; border-radius: 3px; width: 100%; max-width: 360px; outline: none; transition: border-color 0.2s; }
   .squadre-search input::placeholder { color: var(--muted); }
@@ -202,7 +190,6 @@
   .squadra-toggle { font-size: 11px; color: var(--muted); letter-spacing: 1px; padding: 7px 16px; cursor: pointer; text-align: center; border-top: 1px solid var(--border); transition: color 0.2s; }
   .squadra-toggle:hover { color: var(--green-light); }
 
-  /* STORICO */
   .storia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
   .storia-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; transition: border-color 0.2s; }
   .storia-card:hover { border-color: var(--green-mid); }
@@ -212,7 +199,6 @@
   .storia-winner { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); }
   .storia-card.current .storia-winner { color: var(--green-light); }
 
-  /* VENUE */
   .venue-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
   .venue-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; }
   @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
@@ -241,54 +227,33 @@
 <body>
 <div class="court-bg"></div>
 
-<!-- SVG SYMBOLS -->
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
   <defs>
-    <!-- Torre medievale — Girone Orsini -->
     <symbol id="sym-orsini" viewBox="0 0 64 64">
-      <!-- merlature -->
       <rect x="4"  y="0"  width="10" height="12" rx="1" fill="currentColor"/>
       <rect x="18" y="0"  width="10" height="12" rx="1" fill="currentColor"/>
       <rect x="32" y="0"  width="10" height="12" rx="1" fill="currentColor"/>
       <rect x="46" y="0"  width="10" height="12" rx="1" fill="currentColor"/>
-      <!-- corpo torre -->
       <rect x="4"  y="10" width="52" height="46" rx="1" fill="currentColor"/>
-      <!-- finestra alta -->
       <rect x="24" y="16" width="16" height="12" rx="1" fill="black" opacity="0.35"/>
-      <!-- porta ad arco -->
       <rect x="22" y="38" width="20" height="18" rx="0" fill="black" opacity="0.35"/>
       <path d="M22 46 Q32 34 42 46" fill="black" opacity="0.35"/>
-      <!-- rinforzi laterali -->
       <rect x="4"  y="10" width="6"  height="46" rx="0" fill="currentColor" opacity="0.6"/>
       <rect x="50" y="10" width="6"  height="46" rx="0" fill="currentColor" opacity="0.6"/>
-      <!-- base -->
       <rect x="0"  y="56" width="64" height="8" rx="1" fill="currentColor"/>
     </symbol>
-
-    <!-- Scudo — Girone Svevi -->
     <symbol id="sym-svevi" viewBox="0 0 64 72">
-      <!-- scudo esterno -->
       <path d="M4 4 H60 V42 Q60 64 32 70 Q4 64 4 42 Z" fill="currentColor"/>
-      <!-- scudo interno (bordo) -->
       <path d="M10 10 H54 V42 Q54 60 32 65 Q10 60 10 42 Z" fill="currentColor" opacity="0.5"/>
-      <!-- croce decorativa -->
       <rect x="29" y="14" width="6" height="36" rx="1" fill="black" opacity="0.3"/>
       <rect x="14" y="28" width="36" height="6" rx="1" fill="black" opacity="0.3"/>
-      <!-- aquila stilizzata centrale -->
       <circle cx="32" cy="32" r="7" fill="black" opacity="0.2"/>
     </symbol>
-
-    <!-- Spada — Girone Longobardi -->
     <symbol id="sym-longo" viewBox="0 0 64 72">
-      <!-- lama -->
       <polygon points="30,4 34,4 38,52 26,52" fill="currentColor"/>
-      <!-- guardia -->
       <rect x="10" y="50" width="44" height="7" rx="2" fill="currentColor"/>
-      <!-- manico -->
       <rect x="28" y="57" width="8" height="10" rx="1" fill="currentColor" opacity="0.8"/>
-      <!-- pomolo -->
       <ellipse cx="32" cy="68" rx="7" ry="4" fill="currentColor"/>
-      <!-- riflesso lama -->
       <polygon points="32,6 33,6 35,50 31,50" fill="white" opacity="0.15"/>
     </symbol>
   </defs>
@@ -451,50 +416,20 @@
 </footer>
 
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
 const SPREADSHEET_ID = '1mT1OIclqD3ClJHaBlB00YoW2lB_JiiHERFCz6stPZys';
 const API_KEY        = 'AIzaSyBVXYZt6Q-JgWHqOD5Uxw2yBz7nQvrI_Xg';
 
-// ─── GIRONI CONFIG ────────────────────────────────────────────────────────────
 const GIRONE_CFG = [
-  {
-    name: 'Orsini',
-    label: 'GIRONE ORSINI',
-    symId: 'sym-orsini',
-    dotCls: 'girone-dot-o',
-    headerCls: 'gg-orsini',
-    ptsCls: 'pts-orsini',
-    color: '#e8922a',
-    headCls: 'girone-orsini',
-  },
-  {
-    name: 'Svevi',
-    label: 'GIRONE SVEVI',
-    symId: 'sym-svevi',
-    dotCls: 'girone-dot-s',
-    headerCls: 'gg-svevi',
-    ptsCls: 'pts-svevi',
-    color: '#9b6fd9',
-    headCls: 'girone-svevi',
-  },
-  {
-    name: 'Longobardi',
-    label: 'GIRONE LONGOBARDI',
-    symId: 'sym-longo',
-    dotCls: 'girone-dot-l',
-    headerCls: 'gg-longo',
-    ptsCls: 'pts-longo',
-    color: '#2dc4c4',
-    headCls: 'girone-longo',
-  },
+  { name:'Orsini',     label:'GIRONE ORSINI',     symId:'sym-orsini', dotCls:'girone-dot-o', headerCls:'gg-orsini', ptsCls:'pts-orsini', color:'#e8922a', headCls:'girone-orsini' },
+  { name:'Svevi',      label:'GIRONE SVEVI',      symId:'sym-svevi',  dotCls:'girone-dot-s', headerCls:'gg-svevi',  ptsCls:'pts-svevi',  color:'#9b6fd9', headCls:'girone-svevi'  },
+  { name:'Longobardi', label:'GIRONE LONGOBARDI', symId:'sym-longo',  dotCls:'girone-dot-l', headerCls:'gg-longo',  ptsCls:'pts-longo',  color:'#2dc4c4', headCls:'girone-longo'  },
 ];
 
 const GIORNATE_LABELS = ['I. Giornata','II. Giornata','III. Giornata','IV. Giornata','V. Giornata'];
 const GIORNATE_RNUM   = ['I','II','III','IV','V'];
-const MESI = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
-const GIORNI_SETTIMANA = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+const MESI     = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+const GIORNI_W = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 
-// ─── COLORI CARD SQUADRE ─────────────────────────────────────────────────────
 const colori = [
   { h:'#1a6b3a', b:'#0d3d20', t:'#4fd988', dim:'rgba(79,217,136,0.12)' },
   { h:'#1a3d6b', b:'#0d2040', t:'#4fa8d9', dim:'rgba(79,168,217,0.12)' },
@@ -512,25 +447,39 @@ const colori = [
   { h:'#1a4a6b', b:'#0d2a3d', t:'#4fb8d9', dim:'rgba(79,184,217,0.12)' },
 ];
 
-// ─── STATO ────────────────────────────────────────────────────────────────────
 let squadreData = [];
 let gironiData  = {};
 
-// ─── UTILS ────────────────────────────────────────────────────────────────────
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+
 function serialToDateStr(n) {
   const d = new Date(1899, 11, 30);
   d.setDate(d.getDate() + Math.floor(n));
   return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
 }
 
+/**
+ * Parsa una stringa data "d/m" o "d/m/yy" e restituisce un oggetto con:
+ *   { day, month (str), weekday (str), sortKey (Date) }
+ * Restituisce null se non parsabile.
+ */
 function parseData(raw) {
   if (!raw) return null;
   const p = raw.split('/');
   if (p.length < 2) return null;
-  const d = parseInt(p[0]), m = parseInt(p[1]) - 1;
-  if (isNaN(d) || isNaN(m)) return null;
-  const date = new Date(2026, m, d);
-  return { day: d, month: MESI[m], weekday: GIORNI_SETTIMANA[date.getDay()], key: `${d}-${m}` };
+  const d = parseInt(p[0]);
+  const m = parseInt(p[1]) - 1; // 0-based
+  if (isNaN(d) || isNaN(m) || m < 0 || m > 11) return null;
+  // Anno: se c'è lo usiamo, altrimenti 2026
+  const y = p[2] ? (parseInt(p[2]) < 100 ? 2000 + parseInt(p[2]) : parseInt(p[2])) : 2026;
+  const date = new Date(y, m, d);
+  return {
+    day: d,
+    month: MESI[m],
+    weekday: GIORNI_W[date.getDay()],
+    sortKey: date,               // Date reale per ordinamento
+    uniqueKey: `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}` // YYYY-MM-DD
+  };
 }
 
 function gironataShort(gStr) {
@@ -539,7 +488,8 @@ function gironataShort(gStr) {
   return idx >= 0 ? (GIORNATE_RNUM[idx] + ' Giornata') : gStr;
 }
 
-// ─── FETCH ────────────────────────────────────────────────────────────────────
+// ── FETCH ─────────────────────────────────────────────────────────────────────
+
 async function fetchSheet(sheetName) {
   const fields = 'sheets.data.rowData.values(userEnteredValue,formattedValue,userEnteredFormat.backgroundColor)';
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}`
@@ -552,7 +502,8 @@ async function fetchSheet(sheetName) {
   return json.sheets[0].data[0].rowData || [];
 }
 
-// ─── PARSE GIRONE (calendario + classifica) ───────────────────────────────────
+// ── PARSE GIRONE ──────────────────────────────────────────────────────────────
+
 function parseGirone(rows) {
   const partite = [];
   let giornata = '';
@@ -603,11 +554,13 @@ function parseGirone(rows) {
   return { partite, squadre };
 }
 
-// ─── BUILD CALENDARIO ─────────────────────────────────────────────────────────
+// ── BUILD CALENDARIO (progressivo per data, tutti e 3 i gironi) ───────────────
+
 function buildCalendario() {
   const container = document.getElementById('calendario-container');
   container.innerHTML = '';
 
+  // 1. Raccogli tutte le partite da tutti i gironi, con riferimento al cfg
   const allPartite = [];
   GIRONE_CFG.forEach(cfg => {
     const data = gironiData[cfg.name];
@@ -615,34 +568,43 @@ function buildCalendario() {
     data.partite.forEach(p => allPartite.push({ ...p, cfg }));
   });
 
-  // Raggruppa per data → per girone
-  const giorni = {};
-  const ordineGiorni = [];
+  // 2. Raggruppa per uniqueKey (data cronologica), mantenendo info reale
+  //    Le partite senza data finiscono sotto '__nodate__'
+  const giorniMap = new Map(); // uniqueKey → { info, gironiMap }
 
   allPartite.forEach(p => {
-    const d = parseData(p.data);
-    const dateKey = d ? d.key : '__nodate__';
-    if (!giorni[dateKey]) {
-      giorni[dateKey] = { info: d, gironi: {}, order: [] };
-      ordineGiorni.push(dateKey);
+    const info = parseData(p.data);
+    const key  = info ? info.uniqueKey : '__nodate__';
+
+    if (!giorniMap.has(key)) {
+      giorniMap.set(key, { info, gironiByName: new Map() });
     }
-    const gName = p.cfg.name;
-    if (!giorni[dateKey].gironi[gName]) {
-      giorni[dateKey].gironi[gName] = { cfg: p.cfg, partite: [] };
-      giorni[dateKey].order.push(gName);
+    const giorno = giorniMap.get(key);
+    const gName  = p.cfg.name;
+
+    if (!giorno.gironiByName.has(gName)) {
+      giorno.gironiByName.set(gName, { cfg: p.cfg, partite: [] });
     }
-    giorni[dateKey].gironi[gName].partite.push(p);
+    giorno.gironiByName.get(gName).partite.push(p);
   });
 
-  const keysUnique = [...new Set(ordineGiorni)];
+  // 3. Ordina le chiavi cronologicamente (date reali prima, poi nodate)
+  const sortedKeys = [...giorniMap.keys()].sort((a, b) => {
+    if (a === '__nodate__') return 1;
+    if (b === '__nodate__') return -1;
+    // Le chiavi sono YYYY-MM-DD → ordinamento alfabetico = cronologico
+    return a.localeCompare(b);
+  });
 
-  keysUnique.forEach(dateKey => {
-    const giorno = giorni[dateKey];
+  // 4. Render
+  sortedKeys.forEach(key => {
+    const giorno = giorniMap.get(key);
     const info   = giorno.info;
 
     const block = document.createElement('div');
     block.className = 'day-block';
 
+    // Header giorno
     const header = document.createElement('div');
     header.className = 'day-header';
     if (info) {
@@ -657,9 +619,10 @@ function buildCalendario() {
     }
     block.appendChild(header);
 
-    giorno.order.forEach(gName => {
-      const gruppo = giorno.gironi[gName];
-      const cfg    = gruppo.cfg;
+    // Per ogni girone presente in questo giorno (nell'ordine di GIRONE_CFG)
+    GIRONE_CFG.forEach(cfg => {
+      const gruppo = giorno.gironiByName.get(cfg.name);
+      if (!gruppo) return;
 
       const gGroup = document.createElement('div');
       gGroup.className = 'girone-group';
@@ -715,7 +678,8 @@ function buildCalendario() {
     `${tot} partite · Girone Orsini, Svevi & Longobardi`;
 }
 
-// ─── BUILD CLASSIFICHE ────────────────────────────────────────────────────────
+// ── BUILD CLASSIFICHE ─────────────────────────────────────────────────────────
+
 function buildClassifiche() {
   const container = document.getElementById('classifiche-container');
   container.innerHTML = '';
@@ -763,7 +727,8 @@ function buildClassifiche() {
     `${tot} squadre · Girone Orsini, Svevi & Longobardi`;
 }
 
-// ─── LOAD GIRONI ─────────────────────────────────────────────────────────────
+// ── LOAD GIRONI ───────────────────────────────────────────────────────────────
+
 async function loadGironi() {
   try {
     await Promise.all(GIRONE_CFG.map(async cfg => {
@@ -779,7 +744,8 @@ async function loadGironi() {
   }
 }
 
-// ─── PARSE ROSE ───────────────────────────────────────────────────────────────
+// ── PARSE ROSE ────────────────────────────────────────────────────────────────
+
 const KRegex = /\s*\(\s*[Kk]\s*\)/g;
 
 function classifyColor(bg) {
@@ -829,7 +795,8 @@ function parseRose(rows) {
   return squadre;
 }
 
-// ─── BUILD SQUADRE ───────────────────────────────────────────────────────────
+// ── BUILD SQUADRE ─────────────────────────────────────────────────────────────
+
 function buildSquadre(squadre) {
   const container = document.getElementById('squadre-container');
   const grid = document.createElement('div');
@@ -879,7 +846,8 @@ function buildSquadre(squadre) {
     `${squadre.length} squadre iscritte · Girone Orsini, Svevi & Longobardi`;
 }
 
-// ─── LOAD SQUADRE ────────────────────────────────────────────────────────────
+// ── LOAD SQUADRE ──────────────────────────────────────────────────────────────
+
 async function loadSquadre() {
   try {
     const rows = await fetchSheet('Rose');
@@ -891,7 +859,8 @@ async function loadSquadre() {
   }
 }
 
-// ─── RICERCA ─────────────────────────────────────────────────────────────────
+// ── RICERCA ───────────────────────────────────────────────────────────────────
+
 function filterSquadre(q) {
   q = q.toLowerCase().trim();
   document.querySelectorAll('.squadra-card').forEach((card, i) => {
@@ -909,7 +878,8 @@ function filterSquadre(q) {
   });
 }
 
-// ─── TOGGLE ──────────────────────────────────────────────────────────────────
+// ── TOGGLE ────────────────────────────────────────────────────────────────────
+
 function togglePlayers(idx) {
   const el  = document.getElementById(`players-${idx}`);
   const tog = document.getElementById(`toggle-${idx}`);
@@ -918,18 +888,21 @@ function togglePlayers(idx) {
   tog.textContent = isOpen ? '▼ Vedi tutti i giocatori' : '▲ Chiudi';
 }
 
-// ─── NAV ─────────────────────────────────────────────────────────────────────
+// ── NAV ───────────────────────────────────────────────────────────────────────
+
 function setActive(el) {
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   el.classList.add('active');
 }
 
-// ─── FADE IN ─────────────────────────────────────────────────────────────────
+// ── FADE IN ───────────────────────────────────────────────────────────────────
+
 document.querySelectorAll('.fade-in').forEach(el =>
   new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { threshold: 0.1 }).observe(el)
 );
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
 loadGironi();
 loadSquadre();
 setInterval(() => { loadGironi(); loadSquadre(); }, 5 * 60 * 1000);
