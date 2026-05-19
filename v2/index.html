@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title"></title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent:       #2db866;
+    --accent-light: #3fd97a;
+    --accent-dim:   #0f2a1a;
+    --accent-mid:   #1a4d2e;
+    --gold:         #f5c842;
+    --bg:           #080c09;
+    --bg2:          #0d1210;
+    --card:         #111714;
+    --border:       #1e2b22;
+    --muted:        #5a7060;
+    --text:         #e8f0ea;
+    --cal-month-color: #2db866;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+
+  .court-bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+    background-image: linear-gradient(90deg, var(--accent) 1px, transparent 1px), linear-gradient(0deg, var(--accent) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── HERO ── */
+  .hero { position: relative; z-index: 1; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 4rem; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%); pointer-events: none; }
+  .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 12px; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(4.5rem, 14vw, 10rem); line-height: 0.88; letter-spacing: 2px; color: #fff; margin-bottom: 0.6rem; }
+  .hero h1 .accent { color: var(--accent-light); }
+  .hero-edition { font-family: var(--font-display); font-size: clamp(1.4rem, 4vw, 2.4rem); letter-spacing: 6px; color: var(--muted); margin-bottom: 2rem; }
+  .hero-tagline { font-size: 15px; color: var(--muted); max-width: 480px; line-height: 1.7; margin-bottom: 3rem; }
+  .hero-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .hstat-n { font-family: var(--font-display); font-size: 3rem; letter-spacing: 2px; color: var(--accent-light); line-height: 1; }
+  .hstat-l { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .hero-social { display: flex; gap: 10px; }
+  .btn-social { display: inline-flex; align-items: center; gap: 7px; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 18px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
+  .btn-social:hover { border-color: var(--accent); color: var(--accent-light); }
+  .hero-ball { position: absolute; right: -80px; top: 50%; transform: translateY(-60%); font-size: 28rem; opacity: 0.03; pointer-events: none; user-select: none; line-height: 1; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 200; background: rgba(8,12,9,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0 2rem; }
+  .nav-links { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a { text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; padding: 18px 16px; border-bottom: 2px solid transparent; white-space: nowrap; transition: opacity 0.2s; }
+  .nav-links a.s1 { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-links a.s2 { color: var(--accent-light); border-bottom-color: var(--accent-light); }
+  .nav-links a:hover { opacity: 0.7; }
+
+  /* ── SECTIONS ── */
+  .section { position: relative; z-index: 1; padding: 5rem 2rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-head { margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .sec-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .sec-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 2px; color: #fff; line-height: 1; }
+  .sec-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
+  .section:nth-child(even) { background: var(--bg2); }
+
+  /* ── FILTRI CALENDARIO ── */
+  .cal-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; align-items: center; }
+  .filter-group { display: flex; gap: 6px; align-items: center; }
+  .filter-sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
+  .fpill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); background: transparent; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+  .fpill:hover { border-color: var(--accent-mid); color: var(--text); }
+  .fpill.active { border-color: var(--accent); color: var(--accent-light); background: var(--accent-dim); }
+  /* colori per girone — generati dinamicamente via JS */
+  .fsearch { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 6px 14px; border-radius: 99px; outline: none; transition: border-color 0.2s; width: 200px; }
+  .fsearch::placeholder { color: var(--muted); }
+  .fsearch:focus { border-color: var(--accent); }
+  .cal-empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+  .btn-load-more { display: block; margin: 2rem auto 0; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 28px; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+  .btn-load-more:hover { border-color: var(--accent); color: var(--accent-light); }
+  .btn-load-more:disabled { opacity: 0.3; cursor: default; }
+
+  /* ── CALENDARIO ── */
+  .day-block { margin-bottom: 2.5rem; }
+  .day-header { display: flex; align-items: center; gap: 14px; padding-bottom: 12px; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .day-date-box { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 6px 14px; display: flex; flex-direction: column; align-items: center; min-width: 58px; flex-shrink: 0; }
+  .day-num { font-family: var(--font-display); font-size: 2rem; line-height: 1; color: #fff; }
+  .day-month { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cal-month-color); margin-top: 1px; }
+  .day-weekday { font-size: 12px; letter-spacing: 1px; color: var(--muted); font-weight: 500; text-transform: uppercase; }
+
+  .girone-group { margin-bottom: 8px; }
+  .girone-group-header { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-bottom: none; }
+  .girone-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .match-row { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 0; background: var(--card); padding: 9px 14px; border: 1px solid var(--border); border-top: none; }
+  .match-row:last-child { border-radius: 0 0 4px 4px; }
+  .campo-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; letter-spacing: 1px; border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
+  .campo-r { background: rgba(232,64,138,0.1); color: #f06faa; border: 1px solid #4d1a32; }
+  .campo-b { background: rgba(111,144,232,0.1); color: #6fb0e8; border: 1px solid #1a2868; }
+  .campo-g { background: rgba(45,184,102,0.1); color: var(--accent-light); border: 1px solid var(--accent-mid); }
+  .campo-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .campo-dot-r { background: #e8408a; }
+  .campo-dot-b { background: #6f90e8; }
+  .campo-dot-g { background: var(--accent); }
+  .teams-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 14px; }
+  .team-name { font-size: 13px; font-weight: 500; color: #fff; flex: 1; }
+  .team-name.right { text-align: right; }
+  .vs-chip { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 8px; flex-shrink: 0; }
+  .score-chip { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--accent-light); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 10px; flex-shrink: 0; }
+  .orario-lbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
+
+  .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+  .loading-dot { display: inline-block; animation: blink 1.2s infinite; }
+  .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
+
+  /* ── CLASSIFICHE ── */
+  .gironi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  @media(max-width: 900px) { .gironi-grid { grid-template-columns: 1fr 1fr; } }
+  @media(max-width: 560px) { .gironi-grid { grid-template-columns: 1fr; } }
+  .girone-card { background: var(--card); border-radius: 4px; overflow: hidden; }
+  .girone-head { padding: 16px 18px; display: flex; align-items: center; gap: 12px; border-bottom: 2px solid; }
+  .girone-head-symbol { width: 36px; height: 36px; flex-shrink: 0; }
+  .girone-label { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 3px; }
+  .girone-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+  .cl-table { width: 100%; border-collapse: collapse; }
+  .cl-table th { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .cl-table th.c { text-align: center; }
+  .cl-table td { padding: 9px 12px; font-size: 13px; border-bottom: 1px solid rgba(30,43,34,0.4); }
+  .cl-table td.c { text-align: center; color: var(--muted); font-size: 12px; }
+  .cl-table tr:last-child td { border-bottom: none; }
+  .cl-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .pos-num { font-family: var(--font-display); font-size: 1.1rem; color: var(--muted); }
+  .pos-num.gold { color: var(--gold); }
+  .sq-nm { font-weight: 500; color: #fff; }
+  .pts-t { font-family: var(--font-display); font-size: 1.1rem; }
+
+  /* ── LEGENDA LIVELLI ── */
+  .legenda { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
+  .legenda-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+  .lev-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; letter-spacing: 1px; }
+  .lev-white  { color: #111; background: #e8e8e8; }
+  .lev-yellow { color: #111; background: #f5c842; }
+  .lev-green  { color: #111; background: #4fd988; }
+  .lev-orange { color: #fff; background: #e8802a; }
+  .lev-red    { color: #fff; background: #d94f4f; }
+
+  /* ── SQUADRE ── */
+  .squadre-search { margin-bottom: 2rem; }
+  .squadre-search input { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 13px; padding: 10px 16px; border-radius: 3px; width: 100%; max-width: 360px; outline: none; transition: border-color 0.2s; }
+  .squadre-search input::placeholder { color: var(--muted); }
+  .squadre-search input:focus { border-color: var(--accent); }
+  .squadre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .squadra-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.2s; }
+  .squadra-card.hidden { display: none; }
+  .squadra-head { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+  .squadra-head h3 { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 2px; }
+  .squadra-badge { font-size: 10px; padding: 3px 9px; border-radius: 2px; flex-shrink: 0; margin-left: 8px; }
+  .squadra-cap { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .cap-icon { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); background: rgba(245,200,66,0.1); padding: 2px 7px; border-radius: 2px; flex-shrink: 0; }
+  .cap-name { color: var(--text); font-weight: 500; }
+  .squadra-players { padding: 4px 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .squadra-players.open { max-height: 1200px; }
+  .player-row { display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-bottom: 1px solid rgba(30,43,34,0.5); font-size: 12px; transition: background 0.15s; }
+  .player-row:last-child { border-bottom: none; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .player-name { flex: 1; color: #fff; }
+  .squadra-toggle { font-size: 11px; color: var(--muted); letter-spacing: 1px; padding: 7px 16px; cursor: pointer; text-align: center; border-top: 1px solid var(--border); transition: color 0.2s; }
+  .squadra-toggle:hover { color: var(--accent-light); }
+
+  /* ── STORICO ── */
+  .storia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+  .storia-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; transition: border-color 0.2s; }
+  .storia-card:hover { border-color: var(--accent-mid); }
+  .storia-card.current { border-color: var(--accent); background: var(--accent-dim); }
+  .storia-ed { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .storia-trophy { font-size: 1.8rem; margin-bottom: 8px; }
+  .storia-winner { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); }
+  .storia-card.current .storia-winner { color: var(--accent-light); }
+
+  /* ── VENUE ── */
+  .venue-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .venue-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; }
+  @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
+  .venue-info h3 { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 3px; color: #fff; margin-bottom: 8px; }
+  .venue-info p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .venue-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; background: var(--accent-dim); border: 1px solid var(--accent-mid); color: var(--accent-light); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
+  .venue-link:hover { background: var(--accent-mid); }
+
+  footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--border); text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 12px; letter-spacing: 1px; }
+  footer .foot-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 6px; color: #1a3d24; margin-bottom: 1rem; }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
+    .hero h1 { font-size: 4.5rem; }
+    .hero-ball { display: none; }
+    nav { padding: 0 1rem; }
+    .section { padding: 3.5rem 1.2rem; }
+    .squadre-grid { grid-template-columns: 1fr; }
+    .match-row { grid-template-columns: 100px 1fr auto; }
+    .teams-row { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="court-bg"></div>
+
+<!-- SVG symbols — generati da JS -->
+<svg id="svg-symbols" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+  <defs id="svg-defs"></defs>
+</svg>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-eyebrow" id="hero-eyebrow"></div>
+    <h1 id="hero-title"></h1>
+    <div class="hero-edition" id="hero-edition"></div>
+    <p class="hero-tagline" id="hero-tagline"></p>
+    <div class="hero-stats">
+      <div><div class="hstat-n" id="stat-squadre">—</div><div class="hstat-l">Squadre</div></div>
+      <div><div class="hstat-n" id="stat-giocatori">—</div><div class="hstat-l">Giocatori</div></div>
+    </div>
+    <div class="hero-social" id="hero-social"></div>
+  </div>
+  <div class="hero-ball">🎾</div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <a href="#calendario" class="s1" onclick="setActive(this)">Calendario</a>
+    <a href="#classifiche" class="s2" onclick="setActive(this)">Classifiche</a>
+    <a href="#squadre"    class="s1" onclick="setActive(this)">Squadre</a>
+    <a href="#storia"     class="s2" onclick="setActive(this)">Storico</a>
+    <a href="#dove"       class="s1" onclick="setActive(this)">Dove giochiamo</a>
+  </div>
+</nav>
+
+<!-- CALENDARIO -->
+<div class="section" id="calendario">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label" id="cal-label"></div>
+      <div class="sec-title">CALENDARIO</div>
+      <div class="sec-sub" id="cal-sub">Caricamento partite…</div>
+    </div>
+    <div class="cal-filters" id="cal-filters" style="display:none">
+      <div class="filter-group" id="filter-group"></div>
+      <div class="filter-sep"></div>
+      <input class="fsearch" id="f-squadra" type="text" placeholder="🔍 Cerca squadra…" oninput="applyFilters()">
+    </div>
+    <div id="calendario-container">
+      <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
+    </div>
+    <button class="btn-load-more" id="btn-load-more" style="display:none" onclick="loadSuccessivi()">
+      ↓ Carica settimane successive
+    </button>
+  </div>
+</div>
+
+<!-- CLASSIFICHE -->
+<div class="section" id="classifiche">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label" id="cl-label"></div>
+      <div class="sec-title">CLASSIFICHE</div>
+      <div class="sec-sub" id="cl-sub">Caricamento…</div>
+    </div>
+    <div id="classifiche-container">
+      <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SQUADRE -->
+<div class="section" id="squadre">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label" id="squadre-label"></div>
+      <div class="sec-title">SQUADRE</div>
+      <div class="sec-sub" id="squadre-sub">Caricamento in corso…</div>
+    </div>
+    <div class="legenda" id="legenda" style="display:none"></div>
+    <div class="squadre-search">
+      <input type="text" id="search-input" placeholder="Cerca squadra o giocatore…" oninput="filterSquadre(this.value)">
+    </div>
+    <div id="squadre-container">
+      <div class="loading-msg">Caricamento squadre<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STORICO -->
+<div class="section" id="storia">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label" id="storia-label"></div>
+      <div class="sec-title">STORICO</div>
+      <div class="sec-sub" id="storia-sub"></div>
+    </div>
+    <div class="storia-grid" id="storia-grid"></div>
+  </div>
+</div>
+
+<!-- DOVE GIOCHIAMO -->
+<div class="section" id="dove">
+  <div class="section-inner">
+    <div class="sec-head fade-in">
+      <div class="sec-label">Campo ufficiale</div>
+      <div class="sec-title">DOVE GIOCHIAMO</div>
+      <div class="sec-sub" id="venue-sub"></div>
+    </div>
+    <div class="venue-card" id="venue-card"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo" id="footer-logo"></div>
+  <div id="footer-sub"></div>
+  <div id="footer-credit" style="margin-top:6px;color:#1a2e1e;"></div>
+</footer>
+
+<!-- ─── CONFIG (deve essere caricato prima di questo script) ─────────────── -->
+<script src="config.js"></script>
+
+<script>
+// ── COSTANTI GLOBALI ──────────────────────────────────────────────────────────
+const MESI     = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+const GIORNI_W = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+const KRegex   = /\s*\(\s*[Kk]\s*\)/g;
+
+// ── STATO ──────────────────────────────────────────────────────────────────────
+let squadreData  = [];
+let gironiData   = {};
+let calGiorniMap = new Map();
+let calSortedKeys = [];
+let calFiltroGirone = 'tutti';
+
+// ── INIT: inietta CSS vars e contenuto statico ────────────────────────────────
+function initFromConfig() {
+  // Palette → :root
+  const root = document.documentElement;
+  Object.entries(CONFIG.palette).forEach(([k, v]) => root.style.setProperty(k, v));
+
+  // Page title
+  document.getElementById('page-title').textContent = CONFIG.pageTitle;
+
+  // Hero
+  document.getElementById('hero-eyebrow').textContent = CONFIG.eyebrow;
+  // Titolo con accent
+  const titleLines = CONFIG.title.split(CONFIG.titleAccent);
+  document.getElementById('hero-title').innerHTML =
+    titleLines[0] + '<span class="accent">' + CONFIG.titleAccent + '</span>' + (titleLines[1] || '');
+  document.getElementById('hero-edition').textContent  = CONFIG.edition;
+  document.getElementById('hero-tagline').textContent  = CONFIG.tagline;
+
+  // Social
+  const social = document.getElementById('hero-social');
+  social.innerHTML = `
+    <a class="btn-social" href="${CONFIG.social.facebook}" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <a class="btn-social" href="${CONFIG.social.instagram}" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>`;
+
+  // Labels sezioni
+  document.getElementById('cal-label').textContent     = CONFIG.edition + ' ' + new Date().getFullYear();
+  document.getElementById('cl-label').textContent      = 'Fase a gironi · ' + CONFIG.edition + ' ' + new Date().getFullYear();
+  document.getElementById('squadre-label').textContent = CONFIG.edition + ' ' + new Date().getFullYear();
+  document.getElementById('storia-label').textContent  = 'Dal ' + CONFIG.storia[0].edition.match(/\d{4}/)[0];
+  document.getElementById('storia-sub').textContent    = CONFIG.edition.charAt(0).toLowerCase() + CONFIG.edition.slice(1) + ' anni di quartieri, rioni e passione per il padel a Benevento';
+
+  // SVG symbols
+  const defs = document.getElementById('svg-defs');
+  CONFIG.gironi.forEach(g => {
+    defs.innerHTML += `<symbol id="${g.svgId}" viewBox="${g.svgViewBox}">${g.svgPaths}</symbol>`;
+  });
+
+  // Filtri calendario
+  if (CONFIG.features.calendarFilters) {
+    document.getElementById('cal-filters').style.display = '';
+    const fg = document.getElementById('filter-group');
+    fg.innerHTML = `<button class="fpill active" id="f-tutti" onclick="setFiltroGirone('tutti')">Tutti</button>`;
+    CONFIG.gironi.forEach(g => {
+      const btn = document.createElement('button');
+      btn.className = `fpill`;
+      btn.id = `f-${g.name.toLowerCase()}`;
+      btn.onclick = () => setFiltroGirone(g.name);
+      btn.innerHTML = `<span style="width:7px;height:7px;border-radius:50%;background:${g.color};display:inline-block;flex-shrink:0"></span> ${g.name}`;
+      // Stile attivo dinamico per ogni girone
+      btn.dataset.color    = g.color;
+      btn.dataset.colorDim = g.cssVars['--g-dim'];
+      btn.dataset.colorMid = g.cssVars['--g-mid'];
+      fg.appendChild(btn);
+    });
+  }
+
+  // Legenda livelli
+  if (CONFIG.features.levelLegend) {
+    const leg = document.getElementById('legenda');
+    leg.style.display = '';
+    leg.innerHTML = `<span class="legenda-label">Livello →</span>` +
+      CONFIG.levelLegend.map(l => `<span class="lev-badge ${l.cls}">${l.label}</span>`).join('');
+  }
+
+  // Storico
+  const grid = document.getElementById('storia-grid');
+  grid.innerHTML = CONFIG.storia.map(s => `
+    <div class="storia-card ${s.current ? 'current' : ''}">
+      <div class="storia-ed" ${s.current ? `style="color:var(--accent)"` : ''}>${s.edition}</div>
+      <div class="storia-trophy">${s.current ? '⚡' : '🥇'}</div>
+      <div class="storia-winner">${s.winner}</div>
+    </div>`).join('');
+
+  // Venue
+  document.getElementById('venue-sub').textContent =
+    `Tutte le partite si svolgono al ${CONFIG.venue.name} · ${CONFIG.venue.address.split('\n')[1] || ''}`;
+
+  const vc = document.getElementById('venue-card');
+  const addressHtml = CONFIG.venue.address.split('\n').join('<br>');
+  const servicesHtml = CONFIG.venue.services.split('\n').join('<br>');
+  vc.innerHTML = `
+    <div style="position:relative;height:260px;overflow:hidden;">
+      <img src="${CONFIG.venue.imageUrl}" alt="${CONFIG.venue.name}" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" />
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(8,12,9,0.95));">
+        <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:4px;color:#fff;">${CONFIG.venue.name}</div>
+        <div style="font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">${CONFIG.venue.subtitle}</div>
+      </div>
+    </div>
+    <div class="venue-info">
+      <div>
+        <h3>INDIRIZZO</h3>
+        <p>${addressHtml}</p>
+        <a class="venue-link" href="${CONFIG.venue.playtomicUrl}" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Prenota su Playtomic
+        </a>
+        <a class="venue-link" style="margin-left:8px;" href="${CONFIG.venue.mapsUrl}" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Apri in Maps
+        </a>
+      </div>
+      <div>
+        <h3>ORARI</h3>
+        <p>${CONFIG.venue.hours}</p>
+        <h3 style="margin-top:1.2rem;">SERVIZI</h3>
+        <p>${servicesHtml}</p>
+      </div>
+    </div>
+    <iframe src="${CONFIG.venue.embedUrl}" width="100%" height="280"
+      style="border:0;border-top:1px solid var(--border);display:block;filter:${CONFIG.palette['--map-filter']};"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+
+  // Footer
+  document.getElementById('footer-logo').textContent = CONFIG.title;
+  document.getElementById('footer-sub').textContent  = CONFIG.footerSub;
+  document.getElementById('footer-credit').innerHTML =
+    `${CONFIG.footerCredit} · <a href="${CONFIG.social.facebook}" target="_blank" style="color:inherit;text-decoration:none;">Facebook</a> · <a href="${CONFIG.social.instagram}" target="_blank" style="color:inherit;text-decoration:none;">Instagram</a>`;
+}
+
+// ── UTILS ──────────────────────────────────────────────────────────────────────
+function serialToDateStr(n) {
+  const d = new Date(1899, 11, 30);
+  d.setDate(d.getDate() + Math.floor(n));
+  return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
+}
+
+function parseData(raw) {
+  if (!raw) return null;
+  const p = raw.split('/');
+  if (p.length < 2) return null;
+  const d = parseInt(p[0]), m = parseInt(p[1]) - 1;
+  if (isNaN(d) || isNaN(m) || m < 0 || m > 11) return null;
+  const y = p[2] ? (parseInt(p[2]) < 100 ? 2000 + parseInt(p[2]) : parseInt(p[2])) : 2026;
+  const date = new Date(y, m, d);
+  return { day: d, month: MESI[m], weekday: GIORNI_W[date.getDay()], sortKey: date,
+    uniqueKey: `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}` };
+}
+
+function gironataShort(gStr) {
+  if (!gStr) return '';
+  const labels = CONFIG.giornate.labels;
+  const roman  = CONFIG.giornate.roman;
+  const idx = labels.findIndex(l => l.toLowerCase() === gStr.toLowerCase());
+  return idx >= 0 ? (roman[idx] + ' Giornata') : gStr;
+}
+
+function getDomenicaSettimana(oggi) {
+  const d = new Date(oggi);
+  const g = d.getDay();
+  d.setDate(d.getDate() + (g === 0 ? 0 : 7 - g));
+  d.setHours(23, 59, 59, 0);
+  return d;
+}
+
+function keyToDate(key) {
+  if (key === '__nodate__') return new Date(9999, 0, 1);
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+// ── FETCH ──────────────────────────────────────────────────────────────────────
+async function fetchSheet(sheetName) {
+  const fields = 'sheets.data.rowData.values(userEnteredValue,formattedValue,userEnteredFormat.backgroundColor)';
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}`
+    + `?ranges=${encodeURIComponent(sheetName)}`
+    + `&fields=${encodeURIComponent(fields)}`
+    + `&key=${CONFIG.apiKey}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' · ' + sheetName);
+  const json = await res.json();
+  return json.sheets[0].data[0].rowData || [];
+}
+
+// ── PARSE GIRONE ──────────────────────────────────────────────────────────────
+function parseGirone(rows) {
+  const partite = [];
+  let giornata = '';
+  const val = (cells, i) => {
+    const c = cells[i]; if (!c) return '';
+    const fmt = (c.formattedValue || '').trim();
+    const v = c.userEnteredValue;
+    if (!v) return fmt;
+    if (v.numberValue !== undefined && v.stringValue === undefined) return serialToDateStr(v.numberValue);
+    return (v.stringValue ?? v.numberValue?.toString() ?? '').trim() || fmt;
+  };
+  for (let r = 0; r < rows.length; r++) {
+    const cells = rows[r].values || [];
+    const a = val(cells, 0); if (!a) continue;
+    if (/giornata/i.test(a)) { giornata = a; continue; }
+    if (/^data$/i.test(val(cells, 2))) continue;
+    const sq2 = val(cells, 1); if (!sq2) continue;
+    partite.push({ giornata, sq1: a, sq2, data: val(cells,2), campo: val(cells,3).toUpperCase(),
+      orario: val(cells,4), result: val(cells,5), p1: val(cells,6), p2: val(cells,7) });
+  }
+  const map = {};
+  const ensure = n => { if (!map[n]) map[n] = { nome:n, pt:0, g:0, v:0, p:0, par:0 }; };
+  partite.forEach(p => {
+    ensure(p.sq1); ensure(p.sq2);
+    if (p.p1 !== '' && p.p2 !== '') {
+      const pt1 = parseInt(p.p1)||0, pt2 = parseInt(p.p2)||0;
+      map[p.sq1].pt += pt1; map[p.sq2].pt += pt2;
+      map[p.sq1].g++;       map[p.sq2].g++;
+      if (pt1 > pt2)      { map[p.sq1].v++; map[p.sq2].p++; }
+      else if (pt2 > pt1) { map[p.sq2].v++; map[p.sq1].p++; }
+      else                { map[p.sq1].par++; map[p.sq2].par++; }
+    }
+  });
+  return { partite, squadre: Object.values(map).sort((a,b) => b.pt - a.pt || b.v - a.v) };
+}
+
+// ── BUILD GIORNIMAP ───────────────────────────────────────────────────────────
+function buildGiorniMap() {
+  const allPartite = [];
+  CONFIG.gironi.forEach(cfg => {
+    const data = gironiData[cfg.name]; if (!data) return;
+    data.partite.forEach(p => allPartite.push({ ...p, cfg }));
+  });
+  calGiorniMap = new Map();
+  allPartite.forEach(p => {
+    const info = parseData(p.data);
+    const key  = info ? info.uniqueKey : '__nodate__';
+    if (!calGiorniMap.has(key)) calGiorniMap.set(key, { info, gironiByName: new Map() });
+    const giorno = calGiorniMap.get(key);
+    const gName  = p.cfg.name;
+    if (!giorno.gironiByName.has(gName)) giorno.gironiByName.set(gName, { cfg: p.cfg, partite: [] });
+    giorno.gironiByName.get(gName).partite.push(p);
+  });
+  calSortedKeys = [...calGiorniMap.keys()].sort((a, b) => {
+    if (a === '__nodate__') return 1; if (b === '__nodate__') return -1;
+    return a.localeCompare(b);
+  });
+}
+
+// ── RENDER DAY BLOCK ──────────────────────────────────────────────────────────
+function renderDayBlock(key) {
+  const giorno = calGiorniMap.get(key);
+  const info   = giorno.info;
+  const block  = document.createElement('div');
+  block.className = 'day-block';
+  block.dataset.key = key;
+
+  const header = document.createElement('div');
+  header.className = 'day-header';
+  if (info) {
+    header.innerHTML = `
+      <div class="day-date-box">
+        <div class="day-num">${info.day}</div>
+        <div class="day-month">${info.month}</div>
+      </div>
+      <div class="day-weekday">${info.weekday}</div>`;
+  } else {
+    header.innerHTML = `<div class="day-weekday" style="color:var(--muted)">Data da definire</div>`;
+  }
+  block.appendChild(header);
+
+  CONFIG.gironi.forEach(cfg => {
+    const gruppo = giorno.gironiByName.get(cfg.name); if (!gruppo) return;
+    const gGroup = document.createElement('div');
+    gGroup.className = 'girone-group';
+    gGroup.dataset.girone = cfg.name;
+
+    const gHead = document.createElement('div');
+    gHead.className = 'girone-group-header';
+    gHead.style.cssText = `background:${cfg.cssVars['--g-dim']};border:1px solid ${cfg.cssVars['--g-mid']};color:${cfg.color};`;
+    gHead.innerHTML = `<div class="girone-dot" style="background:${cfg.color}"></div>${cfg.label} · ${gironataShort(gruppo.partite[0]?.giornata)}`;
+    gGroup.appendChild(gHead);
+
+    gruppo.partite.forEach(p => {
+      const campoKey = p.campo;
+      let campoCls, dotStyle, campoLbl;
+      if (campoKey === 'ROSSO')                     { campoCls='campo-r'; dotStyle='background:#e8408a'; campoLbl='Campo Rosso'; }
+      else if (campoKey === 'BLU' || campoKey === 'BLUE') { campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
+      else                                          { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
+
+      const midHTML = p.result
+        ? `<span class="score-chip">${p.result}</span>`
+        : `<span class="vs-chip">vs</span>`;
+
+      const row = document.createElement('div');
+      row.className = 'match-row';
+      row.dataset.sq1 = p.sq1.toLowerCase();
+      row.dataset.sq2 = p.sq2.toLowerCase();
+      row.innerHTML = `
+        <div><span class="campo-pill ${campoCls}"><span class="campo-dot" style="${dotStyle}"></span>${campoLbl}</span></div>
+        <div class="teams-row">
+          <span class="team-name right">${p.sq1}</span>
+          ${midHTML}
+          <span class="team-name">${p.sq2}</span>
+        </div>
+        <div class="orario-lbl">${p.orario}</div>`;
+      gGroup.appendChild(row);
+    });
+    block.appendChild(gGroup);
+  });
+  return block;
+}
+
+// ── BUILD CALENDARIO ──────────────────────────────────────────────────────────
+function buildCalendario() {
+  buildGiorniMap();
+  const container = document.getElementById('calendario-container');
+  container.innerHTML = '';
+  const oggi = new Date(); oggi.setHours(0,0,0,0);
+  const domSett = getDomenicaSettimana(oggi);
+
+  const keySett = calSortedKeys.filter(k => { if (k==='__nodate__') return false; const d=keyToDate(k); return d>=oggi && d<=domSett; });
+  const keySucc = calSortedKeys.filter(k => { if (k==='__nodate__') return true;  const d=keyToDate(k); return d>domSett; });
+
+  if (keySett.length === 0) {
+    const msg = document.createElement('div');
+    msg.className = 'cal-empty'; msg.id = 'cal-empty-sett';
+    msg.textContent = 'Nessuna partita questa settimana.';
+    container.appendChild(msg);
+  } else {
+    keySett.forEach(key => container.appendChild(renderDayBlock(key)));
+  }
+
+  const btn = document.getElementById('btn-load-more');
+  if (CONFIG.features.loadMoreButton && keySucc.length > 0) {
+    btn.style.display = 'block'; btn.disabled = false;
+    btn.textContent = `↓ Carica settimane successive (${keySucc.length} giorni)`;
+  } else { btn.style.display = 'none'; }
+
+  applyFilters();
+
+  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name]?.partite.length||0), 0);
+  const gironiNames = CONFIG.gironi.map(g => g.name).join(', ');
+  document.getElementById('cal-sub').textContent = `${tot} partite · Girone ${gironiNames}`;
+}
+
+// ── LOAD SUCCESSIVI ───────────────────────────────────────────────────────────
+function loadSuccessivi() {
+  const container = document.getElementById('calendario-container');
+  const oggi = new Date(); oggi.setHours(0,0,0,0);
+  const domSett = getDomenicaSettimana(oggi);
+  const keySucc = calSortedKeys.filter(k => k==='__nodate__' || keyToDate(k)>domSett);
+  keySucc.forEach(key => container.appendChild(renderDayBlock(key)));
+  document.getElementById('btn-load-more').style.display = 'none';
+  applyFilters();
+}
+
+// ── FILTRI ────────────────────────────────────────────────────────────────────
+function setFiltroGirone(girone) {
+  calFiltroGirone = girone;
+  document.querySelectorAll('.fpill').forEach(b => {
+    b.classList.remove('active');
+    b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
+  });
+  const idTutti = document.getElementById('f-tutti');
+  if (girone === 'tutti') {
+    idTutti?.classList.add('active');
+  } else {
+    const btn = document.getElementById(`f-${girone.toLowerCase()}`);
+    if (btn) {
+      btn.classList.add('active');
+      btn.style.borderColor = btn.dataset.colorMid;
+      btn.style.color       = btn.dataset.color;
+      btn.style.background  = btn.dataset.colorDim;
+    }
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const sq = (document.getElementById('f-squadra')?.value || '').toLowerCase().trim();
+  document.querySelectorAll('.day-block').forEach(block => {
+    let blockVisible = false;
+    block.querySelectorAll('.girone-group').forEach(grp => {
+      const gName = grp.dataset.girone;
+      const gironeOk = calFiltroGirone === 'tutti' || gName === calFiltroGirone;
+      if (!gironeOk) { grp.style.display = 'none'; return; }
+      let grpVisible = false;
+      grp.querySelectorAll('.match-row').forEach(row => {
+        const matchSq = !sq || row.dataset.sq1.includes(sq) || row.dataset.sq2.includes(sq);
+        row.style.display = matchSq ? '' : 'none';
+        if (matchSq) grpVisible = true;
+      });
+      grp.style.display = grpVisible ? '' : 'none';
+      if (grpVisible) blockVisible = true;
+    });
+    block.style.display = blockVisible ? '' : 'none';
+  });
+  const container = document.getElementById('calendario-container');
+  let existing = container.querySelector('.cal-filter-empty');
+  const hasVisible = [...container.querySelectorAll('.day-block')].some(b => b.style.display !== 'none');
+  if (!hasVisible) {
+    if (!existing) { existing = document.createElement('div'); existing.className = 'cal-empty cal-filter-empty'; container.appendChild(existing); }
+    existing.textContent = sq ? `Nessuna partita trovata per "${sq}".` : 'Nessuna partita per il girone selezionato.';
+    existing.style.display = '';
+  } else if (existing) { existing.style.display = 'none'; }
+}
+
+// ── BUILD CLASSIFICHE ─────────────────────────────────────────────────────────
+function buildClassifiche() {
+  const container = document.getElementById('classifiche-container');
+  container.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'gironi-grid';
+  container.appendChild(grid);
+
+  CONFIG.gironi.forEach(cfg => {
+    const data = gironiData[cfg.name]; if (!data) return;
+    const tbody = data.squadre.map((sq, i) => `
+      <tr>
+        <td><span class="pos-num ${i===0?'gold':''}">${i+1}</span></td>
+        <td class="sq-nm">${sq.nome}</td>
+        <td class="c">${sq.g}</td><td class="c">${sq.v}</td><td class="c">${sq.p}</td>
+        <td class="c"><span class="pts-t" style="color:${cfg.color}">${sq.pt}</span></td>
+      </tr>`).join('');
+
+    const card = document.createElement('div');
+    card.className = 'girone-card';
+    card.style.cssText = `border:1px solid ${cfg.cssVars['--g-mid']}`;
+    card.innerHTML = `
+      <div class="girone-head" style="background:${cfg.cssVars['--g-dim']}20;border-bottom-color:${cfg.color}">
+        <svg class="girone-head-symbol" style="color:${cfg.color}" aria-hidden="true"><use href="#${cfg.svgId}"/></svg>
+        <div>
+          <div class="girone-label" style="color:${cfg.color}">${cfg.label}</div>
+          <div class="girone-sub">${data.squadre.length} squadre</div>
+        </div>
+      </div>
+      <table class="cl-table">
+        <thead><tr>
+          <th style="width:28px">#</th><th>Squadra</th>
+          <th class="c">G</th><th class="c">V</th><th class="c">P</th><th class="c">Pt</th>
+        </tr></thead>
+        <tbody>${tbody}</tbody>
+      </table>`;
+    grid.appendChild(card);
+  });
+
+  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name]?.squadre.length||0), 0);
+  const gironiNames = CONFIG.gironi.map(g => g.label).join(' & ');
+  document.getElementById('cl-sub').textContent = `${tot} squadre · ${gironiNames}`;
+}
+
+// ── LOAD GIRONI ───────────────────────────────────────────────────────────────
+async function loadGironi() {
+  try {
+    await Promise.all(CONFIG.gironi.map(async cfg => {
+      const rows = await fetchSheet(cfg.name);
+      gironiData[cfg.name] = parseGirone(rows);
+    }));
+    buildCalendario();
+    buildClassifiche();
+  } catch(err) {
+    document.getElementById('calendario-container').innerHTML =
+      `<div class="loading-msg" style="color:#d94f4f;">Errore caricamento.<br><span style="font-size:11px;">${err.message}</span></div>`;
+    console.error(err);
+  }
+}
+
+// ── PARSE ROSE ────────────────────────────────────────────────────────────────
+function classifyColor(bg) {
+  if (!bg) return 'white';
+  const r = Math.round((bg.red||0)*255), g = Math.round((bg.green||0)*255), b = Math.round((bg.blue||0)*255);
+  if (r>230&&g>230&&b>230)                     return 'white';
+  if (r>200&&g>180&&b<100)                     return 'yellow';
+  if (g>150&&g>r+30&&g>b+30)                  return 'green';
+  if (r>200&&g>80&&g<180&&b<80)               return 'orange';
+  if (r>150&&r>g+50&&r>b+50)                  return 'red';
+  return 'white';
+}
+const levColor = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
+
+function parseRose(rows) {
+  if (!rows.length) return [];
+  const headerRow = rows[0].values || [];
+  const squadre = [], colIndices = [];
+  headerRow.forEach((cell, i) => {
+    const nome = (cell.userEnteredValue?.stringValue || cell.formattedValue || '').trim();
+    if (nome) { squadre.push({ nome, capitano:'', capitanoLev:'white', giocatori:[] }); colIndices.push(i); }
+  });
+  for (let r = 1; r < rows.length; r++) {
+    const cells = rows[r].values || [];
+    colIndices.forEach((ci, si) => {
+      const cell = cells[ci]; if (!cell) return;
+      const raw = (cell.userEnteredValue?.stringValue || cell.formattedValue || '').trim(); if (!raw) return;
+      const bg = cell.userEnteredFormat?.backgroundColor;
+      const level = classifyColor(bg);
+      const isCap = KRegex.test(raw); KRegex.lastIndex = 0;
+      const nome = raw.replace(/\s*\(\s*[Kk]\s*\)/g,'').trim(); if (!nome) return;
+      if (isCap && !squadre[si].capitano) { squadre[si].capitano = nome; squadre[si].capitanoLev = level; }
+      else squadre[si].giocatori.push({ nome, level });
+    });
+  }
+  return squadre;
+}
+
+// ── BUILD SQUADRE ─────────────────────────────────────────────────────────────
+function buildSquadre(squadre) {
+  const container = document.getElementById('squadre-container');
+  const grid = document.createElement('div');
+  grid.className = 'squadre-grid';
+  container.innerHTML = '';
+  container.appendChild(grid);
+  let tot = 0;
+  const colori = CONFIG.squadreColori;
+
+  squadre.forEach((s, idx) => {
+    const c = colori[idx % colori.length];
+    const totCard = (s.capitano?1:0) + s.giocatori.length;
+    tot += totCard;
+    const playersHTML = s.giocatori.map(({ nome, level }) => {
+      const col = levColor[level] || levColor.white;
+      return `<div class="player-row">
+        <div class="dot" style="background:${c.t};opacity:0.5"></div>
+        <span class="player-name" style="color:${col};">${nome}</span>
+      </div>`;
+    }).join('');
+    const capTextColor = levColor[s.capitanoLev] || levColor.white;
+    const capHTML = s.capitano ? `
+      <div class="squadra-cap" style="background:${c.dim};">
+        <span class="cap-icon">CAP</span>
+        <span class="cap-name" style="color:${capTextColor};">${s.capitano}</span>
+      </div>` : '';
+    const card = document.createElement('div');
+    card.className = 'squadra-card';
+    card.dataset.idx = idx;
+    card.style.borderColor = c.h;
+    card.innerHTML = `
+      <div class="squadra-head" onclick="togglePlayers(${idx})" style="background:${c.b};border-bottom:1px solid ${c.h};">
+        <h3 style="color:${c.t};">${s.nome}</h3>
+        <span class="squadra-badge" style="color:${c.t};background:${c.dim};">${totCard} gioc.</span>
+      </div>
+      ${capHTML}
+      <div class="squadra-players" id="players-${idx}">${playersHTML}</div>
+      <div class="squadra-toggle" onclick="togglePlayers(${idx})" id="toggle-${idx}" style="border-top-color:${c.h};color:${c.t};opacity:0.6;">▼ Vedi tutti i giocatori</div>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('stat-squadre').textContent   = squadre.length;
+  document.getElementById('stat-giocatori').textContent = tot + '+';
+  const gironiNames = CONFIG.gironi.map(g => g.label).join(', ');
+  document.getElementById('squadre-sub').textContent    = `${squadre.length} squadre iscritte · ${gironiNames}`;
+}
+
+// ── LOAD SQUADRE ──────────────────────────────────────────────────────────────
+async function loadSquadre() {
+  try {
+    const rows = await fetchSheet('Rose');
+    squadreData = parseRose(rows);
+    buildSquadre(squadreData);
+  } catch(err) {
+    document.getElementById('squadre-container').innerHTML =
+      `<div class="loading-msg" style="color:#d94f4f;">Errore caricamento squadre.<br><span style="font-size:11px;">${err.message}</span></div>`;
+  }
+}
+
+// ── RICERCA / TOGGLE ──────────────────────────────────────────────────────────
+function filterSquadre(q) {
+  q = q.toLowerCase().trim();
+  document.querySelectorAll('.squadra-card').forEach((card, i) => {
+    const s = squadreData[i]; if (!s) return;
+    const matchTeam   = s.nome.toLowerCase().includes(q);
+    const matchCap    = s.capitano.toLowerCase().includes(q);
+    const matchPlayer = s.giocatori.some(p => p.nome.toLowerCase().includes(q));
+    const match = !q || matchTeam || matchCap || matchPlayer;
+    card.classList.toggle('hidden', !match);
+    if (q && (matchPlayer || matchCap) && !matchTeam) {
+      document.getElementById(`players-${i}`)?.classList.add('open');
+      const tog = document.getElementById(`toggle-${i}`);
+      if (tog) tog.textContent = '▲ Chiudi';
+    }
+  });
+}
+
+function togglePlayers(idx) {
+  const el  = document.getElementById(`players-${idx}`);
+  const tog = document.getElementById(`toggle-${idx}`);
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open', !isOpen);
+  tog.textContent = isOpen ? '▼ Vedi tutti i giocatori' : '▲ Chiudi';
+}
+
+function setActive(el) {
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── FADE IN ───────────────────────────────────────────────────────────────────
+document.querySelectorAll('.fade-in').forEach(el =>
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { threshold: 0.1 }).observe(el)
+);
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+initFromConfig();
+loadGironi();
+loadSquadre();
+setInterval(() => { loadGironi(); loadSquadre(); }, 5 * 60 * 1000);
+</script>
+</body>
+</html>
