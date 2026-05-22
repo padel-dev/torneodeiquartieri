@@ -11,7 +11,7 @@ const CONFIG = {
 
   // ── IDENTITÀ ──────────────────────────────────────────────────────────────
   title:       'TORNEO DEI QUARTIERI',
-  titleAccent: 'QUARTIERI',           // parola colorata nel titolo h1
+  titleAccent: 'QUARTIERI',
   edition:     'V EDIZIONE',
   tagline:     'Il torneo amatoriale di padel che accende la passione sportiva nei rioni della città di Benevento.',
   eyebrow:     'Benevento · Padel Amatoriale · 2026',
@@ -26,7 +26,6 @@ const CONFIG = {
   },
 
   // ── PALETTE ───────────────────────────────────────────────────────────────
-  // Colori CSS (verranno iniettati come variabili :root)
   palette: {
     '--accent':       '#2db866',
     '--accent-light': '#3fd97a',
@@ -39,34 +38,27 @@ const CONFIG = {
     '--muted':        '#5a7060',
     '--text':         '#e8f0ea',
     '--gold':         '#f5c842',
-    // Colore mese nel calendario
     '--cal-month-color': '#2db866',
-    // Filtro mappa
     '--map-filter': 'grayscale(0.2) invert(0.88) hue-rotate(120deg)',
   },
 
   // ── GIRONI ────────────────────────────────────────────────────────────────
-  // Ogni girone ha: name (= nome foglio Google Sheet), label, colori CSS,
-  // classi CSS helper e il markup SVG del simbolo.
   gironi: [
     {
       name:      'Orsini',
       label:     'GIRONE ORSINI',
       color:     '#e8922a',
-      // Variabili CSS usate per pill/header/classifica
       cssVars: {
         '--g-color':  '#e8922a',
         '--g-dim':    '#2a1a08',
         '--g-mid':    '#4d3010',
         '--g-muted':  '#70502a',
       },
-      // Classi CSS (devono esistere nell'HTML)
       dotCls:    'girone-dot-o',
       headerCls: 'gg-orsini',
       ptsCls:    'pts-orsini',
       cardCls:   'girone-orsini',
       filterPillCls: 'f-orsini',
-      // SVG symbol inline (viewBox + paths)
       svgId:     'sym-orsini',
       svgViewBox:'0 0 64 64',
       svgPaths: `
@@ -140,13 +132,12 @@ const CONFIG = {
 
   // ── FEATURE FLAGS ─────────────────────────────────────────────────────────
   features: {
-    calendarFilters: true,   // pillole filtro girone nel calendario
-    levelLegend:     true,   // legenda livelli (Bianco/Giallo/Verde/Arancione/Rosso) nella sezione Squadre
-    loadMoreButton:  true,   // pulsante "Carica settimane successive"
+    calendarFilters: true,
+    levelLegend:     true,
+    loadMoreButton:  true,
   },
 
   // ── LEGENDA LIVELLI ───────────────────────────────────────────────────────
-  // Usata solo se features.levelLegend = true
   levelLegend: [
     { label: 'Bianco',    cls: 'lev-white'  },
     { label: 'Giallo',    cls: 'lev-yellow' },
@@ -177,8 +168,7 @@ const CONFIG = {
     embedUrl:   'https://maps.google.com/maps?q=41.09364247,14.81436365&z=15&output=embed',
   },
 
-  // ── COLORI SQUADRE (carte rosa) ───────────────────────────────────────────
-  // Palette ciclica per le card squadre
+  // ── COLORI SQUADRE ────────────────────────────────────────────────────────
   squadreColori: [
     { h:'#1a6b3a', b:'#0d3d20', t:'#4fd988', dim:'rgba(79,217,136,0.12)'  },
     { h:'#1a3d6b', b:'#0d2040', t:'#4fa8d9', dim:'rgba(79,168,217,0.12)'  },

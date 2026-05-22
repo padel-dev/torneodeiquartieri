@@ -75,14 +75,74 @@
   .fpill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 99px; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); background: transparent; cursor: pointer; transition: all 0.18s; white-space: nowrap; }
   .fpill:hover { border-color: var(--accent-mid); color: var(--text); }
   .fpill.active { border-color: var(--accent); color: var(--accent-light); background: var(--accent-dim); }
-  /* colori per girone — generati dinamicamente via JS */
   .fsearch { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 6px 14px; border-radius: 99px; outline: none; transition: border-color 0.2s; width: 200px; }
   .fsearch::placeholder { color: var(--muted); }
   .fsearch:focus { border-color: var(--accent); }
   .cal-empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
-  .btn-load-more { display: block; margin: 2rem auto 0; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 28px; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
-  .btn-load-more:hover { border-color: var(--accent); color: var(--accent-light); }
-  .btn-load-more:disabled { opacity: 0.3; cursor: default; }
+
+  /* ── SEPARATORI CALENDARIO ── */
+  .cal-section-bar {
+    display: flex; align-items: center; gap: 12px;
+    margin: 1.8rem 0 1rem;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  }
+  .cal-section-bar::before, .cal-section-bar::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+  .cal-section-bar.passati  { color: var(--muted); }
+  .cal-section-bar.prossimo { color: var(--accent); }
+  .cal-section-bar.futuri   { color: var(--muted); }
+
+  /* ── TOGGLE PASSATI ── */
+  .btn-toggle-passati {
+    display: flex; align-items: center; gap: 8px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 7px 18px; border-radius: 3px;
+    cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
+  }
+  .btn-toggle-passati:hover { border-color: var(--muted); color: var(--text); }
+  .btn-toggle-passati .arrow { transition: transform 0.25s; display: inline-block; }
+  .btn-toggle-passati.open .arrow { transform: rotate(180deg); }
+
+  /* ── PASSATI COLLASSABILI ── */
+  #cal-passati-wrapper {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  #cal-passati-wrapper.open { max-height: 9999px; }
+
+  /* ── PROSSIMO EVIDENZIATO ── */
+  .day-block.prossimo > .day-header {
+    border-bottom-color: var(--accent);
+  }
+  .day-block.prossimo .day-date-box {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .day-block.prossimo .day-num { color: var(--accent-light); }
+  .day-block.prossimo .day-month { color: var(--accent-light); }
+  .prossimo-badge {
+    display: inline-block; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-dim);
+    border: 1px solid var(--accent-mid); border-radius: 3px;
+    padding: 2px 8px; margin-left: 4px; vertical-align: middle;
+  }
+
+  /* ── PASSATI OPACHI ── */
+  .day-block.passato { opacity: 0.55; }
+  .day-block.passato .score-chip { color: var(--muted); }
+
+  /* ── PULSANTI CARICA ALTRI / NASCONDI ── */
+  .btn-cal-action {
+    display: block; margin: 2rem auto 0;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 10px 28px; border-radius: 3px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-cal-action:hover { border-color: var(--accent); color: var(--accent-light); }
+  .btn-cal-action:disabled { opacity: 0.3; cursor: default; }
 
   /* ── CALENDARIO ── */
   .day-block { margin-bottom: 2.5rem; }
@@ -96,22 +156,18 @@
   .girone-group-header { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-bottom: none; }
   .girone-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
-  .match-row { display: grid; grid-template-columns: 120px 1fr auto; align-items: center; gap: 0; background: var(--card); padding: 9px 14px; border: 1px solid var(--border); border-top: none; }
+  .match-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 0; background: var(--card); padding: 9px 14px; border: 1px solid var(--border); border-top: none; }
   .match-row:last-child { border-radius: 0 0 4px 4px; }
   .campo-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; letter-spacing: 1px; border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
   .campo-r { background: rgba(232,64,138,0.1); color: #f06faa; border: 1px solid #4d1a32; }
   .campo-b { background: rgba(111,144,232,0.1); color: #6fb0e8; border: 1px solid #1a2868; }
   .campo-g { background: rgba(45,184,102,0.1); color: var(--accent-light); border: 1px solid var(--accent-mid); }
   .campo-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-  .campo-dot-r { background: #e8408a; }
-  .campo-dot-b { background: #6f90e8; }
-  .campo-dot-g { background: var(--accent); }
   .teams-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 0 14px; }
   .team-name { font-size: 13px; font-weight: 500; color: #fff; flex: 1; }
   .team-name.right { text-align: right; }
   .vs-chip { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 8px; flex-shrink: 0; }
   .score-chip { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--accent-light); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 10px; flex-shrink: 0; }
-  .orario-lbl { font-size: 11px; color: var(--muted); letter-spacing: 1px; white-space: nowrap; flex-shrink: 0; }
 
   .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
   .loading-dot { display: inline-block; animation: blink 1.2s infinite; }
@@ -205,7 +261,7 @@
     nav { padding: 0 1rem; }
     .section { padding: 3.5rem 1.2rem; }
     .squadre-grid { grid-template-columns: 1fr; }
-    .match-row { grid-template-columns: 100px 1fr auto; }
+    .match-row { grid-template-columns: 100px 1fr; }
     .teams-row { padding: 0 8px; }
   }
 </style>
@@ -214,7 +270,6 @@
 
 <div class="court-bg"></div>
 
-<!-- SVG symbols — generati da JS -->
 <svg id="svg-symbols" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
   <defs id="svg-defs"></defs>
 </svg>
@@ -261,9 +316,6 @@
     <div id="calendario-container">
       <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
     </div>
-    <button class="btn-load-more" id="btn-load-more" style="display:none" onclick="loadSuccessivi()">
-      ↓ Carica settimane successive
-    </button>
   </div>
 </div>
 
@@ -329,7 +381,6 @@
   <div id="footer-credit" style="margin-top:6px;color:#1a2e1e;"></div>
 </footer>
 
-<!-- ─── CONFIG (deve essere caricato prima di questo script) ─────────────── -->
 <script src="config.js"></script>
 
 <script>
@@ -339,31 +390,28 @@ const GIORNI_W = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 const KRegex   = /\s*\(\s*[Kk]\s*\)/g;
 
 // ── STATO ──────────────────────────────────────────────────────────────────────
-let squadreData  = [];
-let gironiData   = {};
-let calGiorniMap = new Map();
-let calSortedKeys = [];
-let calFiltroGirone = 'tutti';
+let squadreData      = [];
+let gironiData       = {};
+let calGiorniMap     = new Map();
+let calSortedKeys    = [];
+let calFiltroGirone  = 'tutti';
+let calFuturiKeys    = [];   // chiavi future non ancora caricate
+let passatiVisible   = true; // stato toggle passati
 
-// ── INIT: inietta CSS vars e contenuto statico ────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────────────────────
 function initFromConfig() {
-  // Palette → :root
   const root = document.documentElement;
   Object.entries(CONFIG.palette).forEach(([k, v]) => root.style.setProperty(k, v));
 
-  // Page title
   document.getElementById('page-title').textContent = CONFIG.pageTitle;
-
-  // Hero
   document.getElementById('hero-eyebrow').textContent = CONFIG.eyebrow;
-  // Titolo con accent
+
   const titleLines = CONFIG.title.split(CONFIG.titleAccent);
   document.getElementById('hero-title').innerHTML =
     titleLines[0] + '<span class="accent">' + CONFIG.titleAccent + '</span>' + (titleLines[1] || '');
-  document.getElementById('hero-edition').textContent  = CONFIG.edition;
-  document.getElementById('hero-tagline').textContent  = CONFIG.tagline;
+  document.getElementById('hero-edition').textContent = CONFIG.edition;
+  document.getElementById('hero-tagline').textContent = CONFIG.tagline;
 
-  // Social
   const social = document.getElementById('hero-social');
   social.innerHTML = `
     <a class="btn-social" href="${CONFIG.social.facebook}" target="_blank">
@@ -375,31 +423,27 @@ function initFromConfig() {
       Instagram
     </a>`;
 
-  // Labels sezioni
   document.getElementById('cal-label').textContent     = CONFIG.edition + ' ' + new Date().getFullYear();
   document.getElementById('cl-label').textContent      = 'Fase a gironi · ' + CONFIG.edition + ' ' + new Date().getFullYear();
   document.getElementById('squadre-label').textContent = CONFIG.edition + ' ' + new Date().getFullYear();
   document.getElementById('storia-label').textContent  = 'Dal ' + CONFIG.storia[0].edition.match(/\d{4}/)[0];
   document.getElementById('storia-sub').textContent    = CONFIG.edition.charAt(0).toLowerCase() + CONFIG.edition.slice(1) + ' anni di quartieri, rioni e passione per il padel a Benevento';
 
-  // SVG symbols
   const defs = document.getElementById('svg-defs');
   CONFIG.gironi.forEach(g => {
     defs.innerHTML += `<symbol id="${g.svgId}" viewBox="${g.svgViewBox}">${g.svgPaths}</symbol>`;
   });
 
-  // Filtri calendario
   if (CONFIG.features.calendarFilters) {
     document.getElementById('cal-filters').style.display = '';
     const fg = document.getElementById('filter-group');
     fg.innerHTML = `<button class="fpill active" id="f-tutti" onclick="setFiltroGirone('tutti')">Tutti</button>`;
     CONFIG.gironi.forEach(g => {
       const btn = document.createElement('button');
-      btn.className = `fpill`;
+      btn.className = 'fpill';
       btn.id = `f-${g.name.toLowerCase()}`;
       btn.onclick = () => setFiltroGirone(g.name);
       btn.innerHTML = `<span style="width:7px;height:7px;border-radius:50%;background:${g.color};display:inline-block;flex-shrink:0"></span> ${g.name}`;
-      // Stile attivo dinamico per ogni girone
       btn.dataset.color    = g.color;
       btn.dataset.colorDim = g.cssVars['--g-dim'];
       btn.dataset.colorMid = g.cssVars['--g-mid'];
@@ -407,7 +451,6 @@ function initFromConfig() {
     });
   }
 
-  // Legenda livelli
   if (CONFIG.features.levelLegend) {
     const leg = document.getElementById('legenda');
     leg.style.display = '';
@@ -415,7 +458,6 @@ function initFromConfig() {
       CONFIG.levelLegend.map(l => `<span class="lev-badge ${l.cls}">${l.label}</span>`).join('');
   }
 
-  // Storico
   const grid = document.getElementById('storia-grid');
   grid.innerHTML = CONFIG.storia.map(s => `
     <div class="storia-card ${s.current ? 'current' : ''}">
@@ -424,12 +466,11 @@ function initFromConfig() {
       <div class="storia-winner">${s.winner}</div>
     </div>`).join('');
 
-  // Venue
   document.getElementById('venue-sub').textContent =
     `Tutte le partite si svolgono al ${CONFIG.venue.name} · ${CONFIG.venue.address.split('\n')[1] || ''}`;
 
   const vc = document.getElementById('venue-card');
-  const addressHtml = CONFIG.venue.address.split('\n').join('<br>');
+  const addressHtml  = CONFIG.venue.address.split('\n').join('<br>');
   const servicesHtml = CONFIG.venue.services.split('\n').join('<br>');
   vc.innerHTML = `
     <div style="position:relative;height:260px;overflow:hidden;">
@@ -463,7 +504,6 @@ function initFromConfig() {
       style="border:0;border-top:1px solid var(--border);display:block;filter:${CONFIG.palette['--map-filter']};"
       allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
 
-  // Footer
   document.getElementById('footer-logo').textContent = CONFIG.title;
   document.getElementById('footer-sub').textContent  = CONFIG.footerSub;
   document.getElementById('footer-credit').innerHTML =
@@ -495,14 +535,6 @@ function gironataShort(gStr) {
   const roman  = CONFIG.giornate.roman;
   const idx = labels.findIndex(l => l.toLowerCase() === gStr.toLowerCase());
   return idx >= 0 ? (roman[idx] + ' Giornata') : gStr;
-}
-
-function getDomenicaSettimana(oggi) {
-  const d = new Date(oggi);
-  const g = d.getDay();
-  d.setDate(d.getDate() + (g === 0 ? 0 : 7 - g));
-  d.setHours(23, 59, 59, 0);
-  return d;
 }
 
 function keyToDate(key) {
@@ -542,8 +574,13 @@ function parseGirone(rows) {
     if (/giornata/i.test(a)) { giornata = a; continue; }
     if (/^data$/i.test(val(cells, 2))) continue;
     const sq2 = val(cells, 1); if (!sq2) continue;
-    partite.push({ giornata, sq1: a, sq2, data: val(cells,2), campo: val(cells,3).toUpperCase(),
-      orario: val(cells,4), result: val(cells,5), p1: val(cells, 10),p2: val(cells, 11) });
+    partite.push({
+      giornata, sq1: a, sq2,
+      data:  val(cells, 2),
+      campo: val(cells, 3).toUpperCase(),
+      p1:    val(cells, 10),
+      p2:    val(cells, 11),
+    });
   }
   const map = {};
   const ensure = n => { if (!map[n]) map[n] = { nome:n, pt:0, g:0, v:0, p:0, par:0 }; };
@@ -585,22 +622,24 @@ function buildGiorniMap() {
 }
 
 // ── RENDER DAY BLOCK ──────────────────────────────────────────────────────────
-function renderDayBlock(key) {
+function renderDayBlock(key, tipo) {
+  // tipo: 'passato' | 'prossimo' | 'futuro'
   const giorno = calGiorniMap.get(key);
   const info   = giorno.info;
   const block  = document.createElement('div');
-  block.className = 'day-block';
+  block.className = 'day-block' + (tipo === 'passato' ? ' passato' : tipo === 'prossimo' ? ' prossimo' : '');
   block.dataset.key = key;
 
   const header = document.createElement('div');
   header.className = 'day-header';
   if (info) {
+    const badge = tipo === 'prossimo' ? `<span class="prossimo-badge">Prossimo</span>` : '';
     header.innerHTML = `
       <div class="day-date-box">
         <div class="day-num">${info.day}</div>
         <div class="day-month">${info.month}</div>
       </div>
-      <div class="day-weekday">${info.weekday}</div>`;
+      <div class="day-weekday">${info.weekday}${badge}</div>`;
   } else {
     header.innerHTML = `<div class="day-weekday" style="color:var(--muted)">Data da definire</div>`;
   }
@@ -621,13 +660,13 @@ function renderDayBlock(key) {
     gruppo.partite.forEach(p => {
       const campoKey = p.campo;
       let campoCls, dotStyle, campoLbl;
-      if (campoKey === 'ROSSO')                     { campoCls='campo-r'; dotStyle='background:#e8408a'; campoLbl='Campo Rosso'; }
-      else if (campoKey === 'BLU' || campoKey === 'BLUE') { campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
-      else                                          { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
+      if (campoKey === 'ROSSO')                          { campoCls='campo-r'; dotStyle='background:#e8408a'; campoLbl='Campo Rosso'; }
+      else if (campoKey === 'BLU' || campoKey === 'BLUE'){ campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
+      else                                               { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
 
       const midHTML = (p.p1 !== '' && p.p2 !== '')
-  ? `<span class="score-chip">${p.p1} – ${p.p2}</span>`
-  : `<span class="vs-chip">vs</span>`;
+        ? `<span class="score-chip">${p.p1} – ${p.p2}</span>`
+        : `<span class="vs-chip">vs</span>`;
 
       const row = document.createElement('div');
       row.className = 'match-row';
@@ -639,8 +678,7 @@ function renderDayBlock(key) {
           <span class="team-name right">${p.sq1}</span>
           ${midHTML}
           <span class="team-name">${p.sq2}</span>
-        </div>
-        <div class="orario-lbl">${p.orario}</div>`;
+        </div>`;
       gGroup.appendChild(row);
     });
     block.appendChild(gGroup);
@@ -653,26 +691,67 @@ function buildCalendario() {
   buildGiorniMap();
   const container = document.getElementById('calendario-container');
   container.innerHTML = '';
-  const oggi = new Date(); oggi.setHours(0,0,0,0);
-  const domSett = getDomenicaSettimana(oggi);
 
-  const keySett = calSortedKeys.filter(k => { if (k==='__nodate__') return false; const d=keyToDate(k); return d>=oggi && d<=domSett; });
-  const keySucc = calSortedKeys.filter(k => { if (k==='__nodate__') return true;  const d=keyToDate(k); return d>domSett; });
+  const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
 
-  if (keySett.length === 0) {
-    const msg = document.createElement('div');
-    msg.className = 'cal-empty'; msg.id = 'cal-empty-sett';
-    msg.textContent = 'Nessuna partita questa settimana.';
-    container.appendChild(msg);
-  } else {
-    keySett.forEach(key => container.appendChild(renderDayBlock(key)));
+  // Classifica chiavi per tipo
+  const keyPassati  = calSortedKeys.filter(k => k !== '__nodate__' && keyToDate(k) < oggi);
+  const keyFuturi   = calSortedKeys.filter(k => k === '__nodate__' || keyToDate(k) >= oggi);
+  const keyProssimo = keyFuturi.length > 0 ? keyFuturi[0] : null;
+  calFuturiKeys     = keyFuturi.slice(1); // tutto tranne il prossimo
+
+  // ── SEZIONE PASSATI ──
+  if (keyPassati.length > 0) {
+    const bar = document.createElement('div');
+    bar.className = 'cal-section-bar passati';
+    bar.textContent = `Partite disputate (${keyPassati.length})`;
+    container.appendChild(bar);
+
+    const btnToggle = document.createElement('button');
+    btnToggle.className = 'btn-toggle-passati open';
+    btnToggle.id = 'btn-toggle-passati';
+    btnToggle.innerHTML = `<span class="arrow">▲</span> Nascondi partite passate`;
+    btnToggle.onclick = togglePassati;
+    container.appendChild(btnToggle);
+
+    const wrapper = document.createElement('div');
+    wrapper.id = 'cal-passati-wrapper';
+    wrapper.className = 'open';
+    keyPassati.forEach(key => wrapper.appendChild(renderDayBlock(key, 'passato')));
+    container.appendChild(wrapper);
+    passatiVisible = true;
   }
 
-  const btn = document.getElementById('btn-load-more');
-  if (CONFIG.features.loadMoreButton && keySucc.length > 0) {
-    btn.style.display = 'block'; btn.disabled = false;
-    btn.textContent = `↓ Carica settimane successive (${keySucc.length} giorni)`;
-  } else { btn.style.display = 'none'; }
+  // ── SEZIONE PROSSIMO ──
+  if (keyProssimo) {
+    const bar = document.createElement('div');
+    bar.className = 'cal-section-bar prossimo';
+    bar.textContent = 'Prossima giornata';
+    container.appendChild(bar);
+    container.appendChild(renderDayBlock(keyProssimo, 'prossimo'));
+  } else {
+    const msg = document.createElement('div');
+    msg.className = 'cal-empty';
+    msg.textContent = 'Nessuna partita in programma.';
+    container.appendChild(msg);
+  }
+
+  // ── PULSANTE CARICA ALTRI ──
+  if (calFuturiKeys.length > 0) {
+    const bar = document.createElement('div');
+    bar.className = 'cal-section-bar futuri';
+    bar.id = 'cal-bar-futuri';
+    bar.textContent = `Giornate successive`;
+    bar.style.display = 'none';
+    container.appendChild(bar);
+
+    const btnCarica = document.createElement('button');
+    btnCarica.className = 'btn-cal-action';
+    btnCarica.id = 'btn-carica-altri';
+    btnCarica.textContent = `↓ Carica altre giornate (${calFuturiKeys.length})`;
+    btnCarica.onclick = loadAltri;
+    container.appendChild(btnCarica);
+  }
 
   applyFilters();
 
@@ -681,14 +760,37 @@ function buildCalendario() {
   document.getElementById('cal-sub').textContent = `${tot} partite · Girone ${gironiNames}`;
 }
 
-// ── LOAD SUCCESSIVI ───────────────────────────────────────────────────────────
-function loadSuccessivi() {
+// ── TOGGLE PASSATI ────────────────────────────────────────────────────────────
+function togglePassati() {
+  passatiVisible = !passatiVisible;
+  const wrapper = document.getElementById('cal-passati-wrapper');
+  const btn     = document.getElementById('btn-toggle-passati');
+  if (passatiVisible) {
+    wrapper.classList.add('open');
+    btn.classList.add('open');
+    btn.innerHTML = `<span class="arrow">▲</span> Nascondi partite passate`;
+  } else {
+    wrapper.classList.remove('open');
+    btn.classList.remove('open');
+    btn.innerHTML = `<span class="arrow">▼</span> Mostra partite passate`;
+  }
+}
+
+// ── CARICA ALTRI ──────────────────────────────────────────────────────────────
+function loadAltri() {
   const container = document.getElementById('calendario-container');
-  const oggi = new Date(); oggi.setHours(0,0,0,0);
-  const domSett = getDomenicaSettimana(oggi);
-  const keySucc = calSortedKeys.filter(k => k==='__nodate__' || keyToDate(k)>domSett);
-  keySucc.forEach(key => container.appendChild(renderDayBlock(key)));
-  document.getElementById('btn-load-more').style.display = 'none';
+  const btn       = document.getElementById('btn-carica-altri');
+  const bar       = document.getElementById('cal-bar-futuri');
+
+  // Mostra la barra "Giornate successive" se ancora nascosta
+  if (bar) bar.style.display = '';
+
+  // Inserisce i blocchi futuri prima del pulsante
+  calFuturiKeys.forEach(key => {
+    container.insertBefore(renderDayBlock(key, 'futuro'), btn);
+  });
+  calFuturiKeys = [];
+  btn.style.display = 'none';
   applyFilters();
 }
 
@@ -699,9 +801,8 @@ function setFiltroGirone(girone) {
     b.classList.remove('active');
     b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
   });
-  const idTutti = document.getElementById('f-tutti');
   if (girone === 'tutti') {
-    idTutti?.classList.add('active');
+    document.getElementById('f-tutti')?.classList.add('active');
   } else {
     const btn = document.getElementById(`f-${girone.toLowerCase()}`);
     if (btn) {
@@ -719,7 +820,7 @@ function applyFilters() {
   document.querySelectorAll('.day-block').forEach(block => {
     let blockVisible = false;
     block.querySelectorAll('.girone-group').forEach(grp => {
-      const gName = grp.dataset.girone;
+      const gName    = grp.dataset.girone;
       const gironeOk = calFiltroGirone === 'tutti' || gName === calFiltroGirone;
       if (!gironeOk) { grp.style.display = 'none'; return; }
       let grpVisible = false;
@@ -733,6 +834,7 @@ function applyFilters() {
     });
     block.style.display = blockVisible ? '' : 'none';
   });
+
   const container = document.getElementById('calendario-container');
   let existing = container.querySelector('.cal-filter-empty');
   const hasVisible = [...container.querySelectorAll('.day-block')].some(b => b.style.display !== 'none');
@@ -807,11 +909,11 @@ async function loadGironi() {
 function classifyColor(bg) {
   if (!bg) return 'white';
   const r = Math.round((bg.red||0)*255), g = Math.round((bg.green||0)*255), b = Math.round((bg.blue||0)*255);
-  if (r>230&&g>230&&b>230)                     return 'white';
-  if (r>200&&g>180&&b<100)                     return 'yellow';
-  if (g>150&&g>r+30&&g>b+30)                  return 'green';
-  if (r>200&&g>80&&g<180&&b<80)               return 'orange';
-  if (r>150&&r>g+50&&r>b+50)                  return 'red';
+  if (r>230&&g>230&&b>230)           return 'white';
+  if (r>200&&g>180&&b<100)           return 'yellow';
+  if (g>150&&g>r+30&&g>b+30)        return 'green';
+  if (r>200&&g>80&&g<180&&b<80)     return 'orange';
+  if (r>150&&r>g+50&&r>b+50)        return 'red';
   return 'white';
 }
 const levColor = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
@@ -935,7 +1037,7 @@ document.querySelectorAll('.fade-in').forEach(el =>
   new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { threshold: 0.1 }).observe(el)
 );
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+// ── START ─────────────────────────────────────────────────────────────────────
 initFromConfig();
 loadGironi();
 loadSquadre();
