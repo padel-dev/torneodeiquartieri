@@ -574,13 +574,18 @@ function parseGirone(rows) {
     if (/giornata/i.test(a)) { giornata = a; continue; }
     if (/^data$/i.test(val(cells, 2))) continue;
     const sq2 = val(cells, 1); if (!sq2) continue;
-    partite.push({
-      giornata, sq1: a, sq2,
-      data:  val(cells, 2),
-      campo: val(cells, 3).toUpperCase(),
-      p1:    val(cells, 10),
-      p2:    val(cells, 11),
-    });
+    const rawP1 = cells[10]?.userEnteredValue;
+const rawP2 = cells[11]?.userEnteredValue;
+const p1 = rawP1?.numberValue !== undefined ? String(Math.round(rawP1.numberValue)) : (rawP1?.stringValue || '').trim();
+const p2 = rawP2?.numberValue !== undefined ? String(Math.round(rawP2.numberValue)) : (rawP2?.stringValue || '').trim();
+
+partite.push({
+  giornata, sq1: a, sq2,
+  data:  val(cells, 2),
+  campo: val(cells, 3).toUpperCase(),
+  p1, p2,
+});
+   
   }
   const map = {};
   const ensure = n => { if (!map[n]) map[n] = { nome:n, pt:0, g:0, v:0, p:0, par:0 }; };
