@@ -25,14 +25,7 @@
   }
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
-
-  .court-bg {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
-    background-image: linear-gradient(90deg, var(--accent) 1px, transparent 1px), linear-gradient(0deg, var(--accent) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  /* ── HERO ── */
+  .court-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03; background-image: linear-gradient(90deg, var(--accent) 1px, transparent 1px), linear-gradient(0deg, var(--accent) 1px, transparent 1px); background-size: 48px 48px; }
   .hero { position: relative; z-index: 1; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 4rem; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(ellipse at 50% 30%, rgba(45,184,102,0.18) 0%, transparent 65%); pointer-events: none; }
   .hero-inner { max-width: 860px; margin: 0 auto; width: 100%; }
@@ -49,8 +42,6 @@
   .btn-social { display: inline-flex; align-items: center; gap: 7px; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 18px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
   .btn-social:hover { border-color: var(--accent); color: var(--accent-light); }
   .hero-ball { position: absolute; right: -80px; top: 50%; transform: translateY(-60%); font-size: 28rem; opacity: 0.03; pointer-events: none; user-select: none; line-height: 1; }
-
-  /* ── NAV ── */
   nav { position: sticky; top: 0; z-index: 200; background: rgba(8,12,9,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 0 2rem; }
   .nav-links { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
   .nav-links::-webkit-scrollbar { display: none; }
@@ -58,8 +49,6 @@
   .nav-links a.s1 { color: var(--accent); border-bottom-color: var(--accent); }
   .nav-links a.s2 { color: var(--accent-light); border-bottom-color: var(--accent-light); }
   .nav-links a:hover { opacity: 0.7; }
-
-  /* ── SECTIONS ── */
   .section { position: relative; z-index: 1; padding: 5rem 2rem; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
   .sec-head { margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
@@ -67,8 +56,6 @@
   .sec-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: 2px; color: #fff; line-height: 1; }
   .sec-sub { font-size: 13px; color: var(--muted); margin-top: 0.5rem; }
   .section:nth-child(even) { background: var(--bg2); }
-
-  /* ── FILTRI CALENDARIO ── */
   .cal-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; align-items: center; }
   .filter-group { display: flex; gap: 6px; align-items: center; }
   .filter-sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
@@ -79,84 +66,34 @@
   .fsearch::placeholder { color: var(--muted); }
   .fsearch:focus { border-color: var(--accent); }
   .cal-empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
-
-  /* ── SEPARATORI CALENDARIO ── */
-  .cal-section-bar {
-    display: flex; align-items: center; gap: 12px;
-    margin: 1.8rem 0 1rem;
-    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
-  }
-  .cal-section-bar::before, .cal-section-bar::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
+  .cal-section-bar { display: flex; align-items: center; gap: 12px; margin: 1.8rem 0 1rem; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; }
+  .cal-section-bar::before, .cal-section-bar::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .cal-section-bar.passati  { color: var(--muted); }
   .cal-section-bar.prossimo { color: var(--accent); }
   .cal-section-bar.futuri   { color: var(--muted); }
-
-  /* ── TOGGLE PASSATI ── */
-  .btn-toggle-passati {
-    display: flex; align-items: center; gap: 8px;
-    background: transparent; border: 1px solid var(--border);
-    color: var(--muted); font-size: 11px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 7px 18px; border-radius: 3px;
-    cursor: pointer; transition: all 0.2s; margin-bottom: 1rem;
-  }
+  .btn-toggle-passati { display: flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 7px 18px; border-radius: 3px; cursor: pointer; transition: all 0.2s; margin-bottom: 1rem; }
   .btn-toggle-passati:hover { border-color: var(--muted); color: var(--text); }
   .btn-toggle-passati .arrow { transition: transform 0.25s; display: inline-block; }
   .btn-toggle-passati.open .arrow { transform: rotate(180deg); }
-
-  /* ── PASSATI COLLASSABILI ── */
-  #cal-passati-wrapper {
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
+  #cal-passati-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
   #cal-passati-wrapper.open { max-height: 9999px; }
-
-  /* ── PROSSIMO EVIDENZIATO ── */
-  .day-block.prossimo > .day-header {
-    border-bottom-color: var(--accent);
-  }
-  .day-block.prossimo .day-date-box {
-    border-color: var(--accent);
-    background: var(--accent-dim);
-  }
-  .day-block.prossimo .day-num { color: var(--accent-light); }
+  .day-block.prossimo > .day-header { border-bottom-color: var(--accent); }
+  .day-block.prossimo .day-date-box { border-color: var(--accent); background: var(--accent-dim); }
+  .day-block.prossimo .day-num  { color: var(--accent-light); }
   .day-block.prossimo .day-month { color: var(--accent-light); }
-  .prossimo-badge {
-    display: inline-block; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--accent); background: var(--accent-dim);
-    border: 1px solid var(--accent-mid); border-radius: 3px;
-    padding: 2px 8px; margin-left: 4px; vertical-align: middle;
-  }
-
-  /* ── PASSATI OPACHI ── */
+  .prossimo-badge { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 3px; padding: 2px 8px; margin-left: 8px; vertical-align: middle; }
   .day-block.passato { opacity: 0.55; }
-  .day-block.passato .score-chip { color: var(--muted); }
-
-  /* ── PULSANTI CARICA ALTRI / NASCONDI ── */
-  .btn-cal-action {
-    display: block; margin: 2rem auto 0;
-    background: transparent; border: 1px solid var(--border);
-    color: var(--muted); font-size: 12px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 10px 28px; border-radius: 3px;
-    cursor: pointer; transition: all 0.2s;
-  }
+  .btn-cal-action { display: block; margin: 2rem auto 0; background: transparent; border: 1px solid var(--border); color: var(--muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 28px; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
   .btn-cal-action:hover { border-color: var(--accent); color: var(--accent-light); }
-  .btn-cal-action:disabled { opacity: 0.3; cursor: default; }
-
-  /* ── CALENDARIO ── */
   .day-block { margin-bottom: 2.5rem; }
   .day-header { display: flex; align-items: center; gap: 14px; padding-bottom: 12px; margin-bottom: 10px; border-bottom: 1px solid var(--border); }
   .day-date-box { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 6px 14px; display: flex; flex-direction: column; align-items: center; min-width: 58px; flex-shrink: 0; }
-  .day-num { font-family: var(--font-display); font-size: 2rem; line-height: 1; color: #fff; }
+  .day-num   { font-family: var(--font-display); font-size: 2rem; line-height: 1; color: #fff; }
   .day-month { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cal-month-color); margin-top: 1px; }
   .day-weekday { font-size: 12px; letter-spacing: 1px; color: var(--muted); font-weight: 500; text-transform: uppercase; }
-
   .girone-group { margin-bottom: 8px; }
-  .girone-group-header { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; border-bottom: none; }
-  .girone-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-
-  .match-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 0; background: var(--card); padding: 9px 14px; border: 1px solid var(--border); border-top: none; }
+  .girone-group-header { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 4px 4px 0 0; font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; }
+  .match-row { display: grid; grid-template-columns: 120px 1fr; align-items: center; background: var(--card); padding: 9px 14px; border: 1px solid var(--border); border-top: none; }
   .match-row:last-child { border-radius: 0 0 4px 4px; }
   .campo-pill { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; letter-spacing: 1px; border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
   .campo-r { background: rgba(232,64,138,0.1); color: #f06faa; border: 1px solid #4d1a32; }
@@ -167,13 +104,37 @@
   .team-name { font-size: 13px; font-weight: 500; color: #fff; flex: 1; }
   .team-name.right { text-align: right; }
   .vs-chip { font-size: 11px; color: var(--muted); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 8px; flex-shrink: 0; }
-  .score-chip { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--accent-light); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 10px; flex-shrink: 0; }
-
+  .score-chip { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 2px; color: var(--accent-light); background: var(--bg2); border: 1px solid var(--border); border-radius: 3px; padding: 2px 10px; flex-shrink: 0; cursor: pointer; transition: all 0.18s; }
+  .score-chip:hover { border-color: var(--accent); background: var(--accent-dim); }
   .loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
   .loading-dot { display: inline-block; animation: blink 1.2s infinite; }
   .loading-dot:nth-child(2) { animation-delay: 0.2s; }
   .loading-dot:nth-child(3) { animation-delay: 0.4s; }
   @keyframes blink { 0%,80%,100%{opacity:0} 40%{opacity:1} }
+
+  /* ── MODAL ── */
+  .modal-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box { background: var(--card); border: 1px solid var(--border); border-radius: 6px; width: 100%; max-width: 540px; transform: translateY(12px); transition: transform 0.2s; overflow: hidden; }
+  .modal-overlay.open .modal-box { transform: none; }
+  .modal-header { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .modal-girone-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-right: 8px; }
+  .modal-girone-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .modal-close { background: transparent; border: none; color: var(--muted); font-size: 20px; line-height: 1; cursor: pointer; padding: 2px 6px; transition: color 0.15s; }
+  .modal-close:hover { color: var(--text); }
+  .modal-teams { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; gap: 12px; background: var(--bg2); border-bottom: 2px solid var(--border); }
+  .modal-team { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: #fff; flex: 1; }
+  .modal-team.right { text-align: right; }
+  .modal-final-score { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 4px; color: var(--accent-light); background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 4px 14px; flex-shrink: 0; white-space: nowrap; }
+  .modal-matches { padding: 6px 0; }
+  .modal-match-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; padding: 10px 20px; border-bottom: 1px solid rgba(30,43,34,0.5); }
+  .modal-match-row:last-child { border-bottom: none; }
+  .modal-match-num { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .modal-match-players { color: var(--text); font-size: 12px; line-height: 1.5; }
+  .modal-match-players .sep { color: var(--muted); margin: 0 6px; }
+  .modal-match-result { font-family: var(--font-display); font-size: 1rem; letter-spacing: 2px; color: var(--accent-light); white-space: nowrap; flex-shrink: 0; }
+  .modal-match-result.empty { color: var(--muted); font-family: var(--font-body); font-size: 11px; letter-spacing: 1px; }
+  .modal-date-bar { padding: 10px 20px; font-size: 11px; letter-spacing: 1px; color: var(--muted); border-top: 1px solid var(--border); display: flex; gap: 18px; }
 
   /* ── CLASSIFICHE ── */
   .gironi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -195,8 +156,6 @@
   .pos-num.gold { color: var(--gold); }
   .sq-nm { font-weight: 500; color: #fff; }
   .pts-t { font-family: var(--font-display); font-size: 1.1rem; }
-
-  /* ── LEGENDA LIVELLI ── */
   .legenda { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; align-items: center; }
   .legenda-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
   .lev-badge { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 3px; letter-spacing: 1px; }
@@ -205,8 +164,6 @@
   .lev-green  { color: #111; background: #4fd988; }
   .lev-orange { color: #fff; background: #e8802a; }
   .lev-red    { color: #fff; background: #d94f4f; }
-
-  /* ── SQUADRE ── */
   .squadre-search { margin-bottom: 2rem; }
   .squadre-search input { background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 13px; padding: 10px 16px; border-radius: 3px; width: 100%; max-width: 360px; outline: none; transition: border-color 0.2s; }
   .squadre-search input::placeholder { color: var(--muted); }
@@ -222,14 +179,12 @@
   .cap-name { color: var(--text); font-weight: 500; }
   .squadra-players { padding: 4px 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .squadra-players.open { max-height: 1200px; }
-  .player-row { display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-bottom: 1px solid rgba(30,43,34,0.5); font-size: 12px; transition: background 0.15s; }
+  .player-row { display: flex; align-items: center; gap: 10px; padding: 7px 16px; border-bottom: 1px solid rgba(30,43,34,0.5); font-size: 12px; }
   .player-row:last-child { border-bottom: none; }
   .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
   .player-name { flex: 1; color: #fff; }
   .squadra-toggle { font-size: 11px; color: var(--muted); letter-spacing: 1px; padding: 7px 16px; cursor: pointer; text-align: center; border-top: 1px solid var(--border); transition: color 0.2s; }
   .squadra-toggle:hover { color: var(--accent-light); }
-
-  /* ── STORICO ── */
   .storia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
   .storia-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.2rem; text-align: center; transition: border-color 0.2s; }
   .storia-card:hover { border-color: var(--accent-mid); }
@@ -238,8 +193,6 @@
   .storia-trophy { font-size: 1.8rem; margin-bottom: 8px; }
   .storia-winner { font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 2px; color: var(--gold); }
   .storia-card.current .storia-winner { color: var(--accent-light); }
-
-  /* ── VENUE ── */
   .venue-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
   .venue-info { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; }
   @media (max-width: 600px) { .venue-info { grid-template-columns: 1fr; } }
@@ -247,13 +200,10 @@
   .venue-info p { font-size: 13px; color: var(--muted); line-height: 1.8; }
   .venue-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; background: var(--accent-dim); border: 1px solid var(--accent-mid); color: var(--accent-light); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 16px; border-radius: 3px; text-decoration: none; transition: all 0.2s; }
   .venue-link:hover { background: var(--accent-mid); }
-
   footer { position: relative; z-index: 1; background: var(--bg); border-top: 1px solid var(--border); text-align: center; padding: 3rem 2rem; color: var(--muted); font-size: 12px; letter-spacing: 1px; }
   footer .foot-logo { font-family: var(--font-display); font-size: 2rem; letter-spacing: 6px; color: #1a3d24; margin-bottom: 1rem; }
-
   .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
-
   @media (max-width: 640px) {
     .hero { min-height: 70vh; padding: 4rem 1.2rem 3rem; }
     .hero h1 { font-size: 4.5rem; }
@@ -263,16 +213,37 @@
     .squadre-grid { grid-template-columns: 1fr; }
     .match-row { grid-template-columns: 100px 1fr; }
     .teams-row { padding: 0 8px; }
+    .modal-teams { flex-direction: column; text-align: center; gap: 8px; }
+    .modal-team.right { text-align: center; }
+    .modal-match-row { grid-template-columns: 1fr; gap: 4px; }
   }
 </style>
 </head>
 <body>
-
 <div class="court-bg"></div>
-
 <svg id="svg-symbols" width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
   <defs id="svg-defs"></defs>
 </svg>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;">
+        <div class="modal-girone-dot" id="modal-girone-dot"></div>
+        <span class="modal-girone-label" id="modal-girone-label"></span>
+      </div>
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    </div>
+    <div class="modal-teams">
+      <div class="modal-team right" id="modal-sq1"></div>
+      <div class="modal-final-score" id="modal-final-score"></div>
+      <div class="modal-team" id="modal-sq2"></div>
+    </div>
+    <div class="modal-matches" id="modal-matches"></div>
+    <div class="modal-date-bar" id="modal-date-bar"></div>
+  </div>
+</div>
 
 <!-- HERO -->
 <div class="hero" id="home">
@@ -282,36 +253,35 @@
     <div class="hero-edition" id="hero-edition"></div>
     <p class="hero-tagline" id="hero-tagline"></p>
     <div class="hero-stats">
-      <div><div class="hstat-n" id="stat-squadre">—</div><div class="hstat-l">Squadre</div></div>
-      <div><div class="hstat-n" id="stat-giocatori">—</div><div class="hstat-l">Giocatori</div></div>
+      <div><div class="hstat-n" id="stat-squadre">--</div><div class="hstat-l">Squadre</div></div>
+      <div><div class="hstat-n" id="stat-giocatori">--</div><div class="hstat-l">Giocatori</div></div>
     </div>
     <div class="hero-social" id="hero-social"></div>
   </div>
-  <div class="hero-ball">🎾</div>
+  <div class="hero-ball">&#127934;</div>
 </div>
 
 <nav>
   <div class="nav-links">
     <a href="#calendario" class="s1" onclick="setActive(this)">Calendario</a>
     <a href="#classifiche" class="s2" onclick="setActive(this)">Classifiche</a>
-    <a href="#squadre"    class="s1" onclick="setActive(this)">Squadre</a>
-    <a href="#storia"     class="s2" onclick="setActive(this)">Storico</a>
-    <a href="#dove"       class="s1" onclick="setActive(this)">Dove giochiamo</a>
+    <a href="#squadre" class="s1" onclick="setActive(this)">Squadre</a>
+    <a href="#storia" class="s2" onclick="setActive(this)">Storico</a>
+    <a href="#dove" class="s1" onclick="setActive(this)">Dove giochiamo</a>
   </div>
 </nav>
 
-<!-- CALENDARIO -->
 <div class="section" id="calendario">
   <div class="section-inner">
     <div class="sec-head fade-in">
       <div class="sec-label" id="cal-label"></div>
       <div class="sec-title">CALENDARIO</div>
-      <div class="sec-sub" id="cal-sub">Caricamento partite…</div>
+      <div class="sec-sub" id="cal-sub">Caricamento partite...</div>
     </div>
     <div class="cal-filters" id="cal-filters" style="display:none">
       <div class="filter-group" id="filter-group"></div>
       <div class="filter-sep"></div>
-      <input class="fsearch" id="f-squadra" type="text" placeholder="🔍 Cerca squadra…" oninput="applyFilters()">
+      <input class="fsearch" id="f-squadra" type="text" placeholder="Cerca squadra..." oninput="applyFilters()">
     </div>
     <div id="calendario-container">
       <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
@@ -319,13 +289,12 @@
   </div>
 </div>
 
-<!-- CLASSIFICHE -->
 <div class="section" id="classifiche">
   <div class="section-inner">
     <div class="sec-head fade-in">
       <div class="sec-label" id="cl-label"></div>
       <div class="sec-title">CLASSIFICHE</div>
-      <div class="sec-sub" id="cl-sub">Caricamento…</div>
+      <div class="sec-sub" id="cl-sub">Caricamento...</div>
     </div>
     <div id="classifiche-container">
       <div class="loading-msg">Caricamento<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
@@ -333,17 +302,16 @@
   </div>
 </div>
 
-<!-- SQUADRE -->
 <div class="section" id="squadre">
   <div class="section-inner">
     <div class="sec-head fade-in">
       <div class="sec-label" id="squadre-label"></div>
       <div class="sec-title">SQUADRE</div>
-      <div class="sec-sub" id="squadre-sub">Caricamento in corso…</div>
+      <div class="sec-sub" id="squadre-sub">Caricamento in corso...</div>
     </div>
     <div class="legenda" id="legenda" style="display:none"></div>
     <div class="squadre-search">
-      <input type="text" id="search-input" placeholder="Cerca squadra o giocatore…" oninput="filterSquadre(this.value)">
+      <input type="text" id="search-input" placeholder="Cerca squadra o giocatore..." oninput="filterSquadre(this.value)">
     </div>
     <div id="squadre-container">
       <div class="loading-msg">Caricamento squadre<span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></div>
@@ -351,7 +319,6 @@
   </div>
 </div>
 
-<!-- STORICO -->
 <div class="section" id="storia">
   <div class="section-inner">
     <div class="sec-head fade-in">
@@ -363,7 +330,6 @@
   </div>
 </div>
 
-<!-- DOVE GIOCHIAMO -->
 <div class="section" id="dove">
   <div class="section-inner">
     <div class="sec-head fade-in">
@@ -382,139 +348,71 @@
 </footer>
 
 <script src="config.js"></script>
-
 <script>
-// ── COSTANTI GLOBALI ──────────────────────────────────────────────────────────
 const MESI     = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
 const GIORNI_W = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 const KRegex   = /\s*\(\s*[Kk]\s*\)/g;
 
-// ── STATO ──────────────────────────────────────────────────────────────────────
-let squadreData      = [];
-let gironiData       = {};
-let calGiorniMap     = new Map();
-let calSortedKeys    = [];
-let calFiltroGirone  = 'tutti';
-let calFuturiKeys    = [];   // chiavi future non ancora caricate
-let passatiVisible   = true; // stato toggle passati
+let squadreData     = [];
+let gironiData      = {};
+let calGiorniMap    = new Map();
+let calSortedKeys   = [];
+let calFiltroGirone = 'tutti';
+let calFuturiKeys   = [];
+let passatiVisible  = true;
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
 function initFromConfig() {
   const root = document.documentElement;
   Object.entries(CONFIG.palette).forEach(([k, v]) => root.style.setProperty(k, v));
-
-  document.getElementById('page-title').textContent = CONFIG.pageTitle;
+  document.getElementById('page-title').textContent   = CONFIG.pageTitle;
   document.getElementById('hero-eyebrow').textContent = CONFIG.eyebrow;
-
   const titleLines = CONFIG.title.split(CONFIG.titleAccent);
-  document.getElementById('hero-title').innerHTML =
-    titleLines[0] + '<span class="accent">' + CONFIG.titleAccent + '</span>' + (titleLines[1] || '');
+  document.getElementById('hero-title').innerHTML = titleLines[0] + '<span class="accent">' + CONFIG.titleAccent + '</span>' + (titleLines[1] || '');
   document.getElementById('hero-edition').textContent = CONFIG.edition;
   document.getElementById('hero-tagline').textContent = CONFIG.tagline;
-
   const social = document.getElementById('hero-social');
-  social.innerHTML = `
-    <a class="btn-social" href="${CONFIG.social.facebook}" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      Facebook
-    </a>
-    <a class="btn-social" href="${CONFIG.social.instagram}" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      Instagram
-    </a>`;
-
+  social.innerHTML = `<a class="btn-social" href="${CONFIG.social.facebook}" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a><a class="btn-social" href="${CONFIG.social.instagram}" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>`;
   document.getElementById('cal-label').textContent     = CONFIG.edition + ' ' + new Date().getFullYear();
-  document.getElementById('cl-label').textContent      = 'Fase a gironi · ' + CONFIG.edition + ' ' + new Date().getFullYear();
+  document.getElementById('cl-label').textContent      = 'Fase a gironi \u00b7 ' + CONFIG.edition + ' ' + new Date().getFullYear();
   document.getElementById('squadre-label').textContent = CONFIG.edition + ' ' + new Date().getFullYear();
   document.getElementById('storia-label').textContent  = 'Dal ' + CONFIG.storia[0].edition.match(/\d{4}/)[0];
   document.getElementById('storia-sub').textContent    = CONFIG.edition.charAt(0).toLowerCase() + CONFIG.edition.slice(1) + ' anni di quartieri, rioni e passione per il padel a Benevento';
-
   const defs = document.getElementById('svg-defs');
-  CONFIG.gironi.forEach(g => {
-    defs.innerHTML += `<symbol id="${g.svgId}" viewBox="${g.svgViewBox}">${g.svgPaths}</symbol>`;
-  });
-
+  CONFIG.gironi.forEach(g => { defs.innerHTML += '<symbol id="' + g.svgId + '" viewBox="' + g.svgViewBox + '">' + g.svgPaths + '</symbol>'; });
   if (CONFIG.features.calendarFilters) {
     document.getElementById('cal-filters').style.display = '';
     const fg = document.getElementById('filter-group');
-    fg.innerHTML = `<button class="fpill active" id="f-tutti" onclick="setFiltroGirone('tutti')">Tutti</button>`;
+    fg.innerHTML = '<button class="fpill active" id="f-tutti" onclick="setFiltroGirone(\'tutti\')">Tutti</button>';
     CONFIG.gironi.forEach(g => {
       const btn = document.createElement('button');
       btn.className = 'fpill';
-      btn.id = `f-${g.name.toLowerCase()}`;
+      btn.id = 'f-' + g.name.toLowerCase();
       btn.onclick = () => setFiltroGirone(g.name);
-      btn.innerHTML = `<span style="width:7px;height:7px;border-radius:50%;background:${g.color};display:inline-block;flex-shrink:0"></span> ${g.name}`;
-      btn.dataset.color    = g.color;
-      btn.dataset.colorDim = g.cssVars['--g-dim'];
-      btn.dataset.colorMid = g.cssVars['--g-mid'];
+      btn.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:' + g.color + ';display:inline-block;flex-shrink:0"></span> ' + g.name;
+      btn.dataset.color = g.color; btn.dataset.colorDim = g.cssVars['--g-dim']; btn.dataset.colorMid = g.cssVars['--g-mid'];
       fg.appendChild(btn);
     });
   }
-
   if (CONFIG.features.levelLegend) {
     const leg = document.getElementById('legenda');
     leg.style.display = '';
-    leg.innerHTML = `<span class="legenda-label">Livello →</span>` +
-      CONFIG.levelLegend.map(l => `<span class="lev-badge ${l.cls}">${l.label}</span>`).join('');
+    leg.innerHTML = '<span class="legenda-label">Livello \u2192</span>' + CONFIG.levelLegend.map(l => '<span class="lev-badge ' + l.cls + '">' + l.label + '</span>').join('');
   }
-
-  const grid = document.getElementById('storia-grid');
-  grid.innerHTML = CONFIG.storia.map(s => `
-    <div class="storia-card ${s.current ? 'current' : ''}">
-      <div class="storia-ed" ${s.current ? `style="color:var(--accent)"` : ''}>${s.edition}</div>
-      <div class="storia-trophy">${s.current ? '⚡' : '🥇'}</div>
-      <div class="storia-winner">${s.winner}</div>
-    </div>`).join('');
-
-  document.getElementById('venue-sub').textContent =
-    `Tutte le partite si svolgono al ${CONFIG.venue.name} · ${CONFIG.venue.address.split('\n')[1] || ''}`;
-
+  document.getElementById('storia-grid').innerHTML = CONFIG.storia.map(s => '<div class="storia-card ' + (s.current ? 'current' : '') + '"><div class="storia-ed" ' + (s.current ? 'style="color:var(--accent)"' : '') + '>' + s.edition + '</div><div class="storia-trophy">' + (s.current ? '\u26a1' : '\ud83e\udd47') + '</div><div class="storia-winner">' + s.winner + '</div></div>').join('');
+  document.getElementById('venue-sub').textContent = 'Tutte le partite si svolgono al ' + CONFIG.venue.name + ' \u00b7 ' + (CONFIG.venue.address.split('\n')[1] || '');
   const vc = document.getElementById('venue-card');
-  const addressHtml  = CONFIG.venue.address.split('\n').join('<br>');
+  const addressHtml = CONFIG.venue.address.split('\n').join('<br>');
   const servicesHtml = CONFIG.venue.services.split('\n').join('<br>');
-  vc.innerHTML = `
-    <div style="position:relative;height:260px;overflow:hidden;">
-      <img src="${CONFIG.venue.imageUrl}" alt="${CONFIG.venue.name}" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" />
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(8,12,9,0.95));">
-        <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:4px;color:#fff;">${CONFIG.venue.name}</div>
-        <div style="font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">${CONFIG.venue.subtitle}</div>
-      </div>
-    </div>
-    <div class="venue-info">
-      <div>
-        <h3>INDIRIZZO</h3>
-        <p>${addressHtml}</p>
-        <a class="venue-link" href="${CONFIG.venue.playtomicUrl}" target="_blank">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Prenota su Playtomic
-        </a>
-        <a class="venue-link" style="margin-left:8px;" href="${CONFIG.venue.mapsUrl}" target="_blank">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Apri in Maps
-        </a>
-      </div>
-      <div>
-        <h3>ORARI</h3>
-        <p>${CONFIG.venue.hours}</p>
-        <h3 style="margin-top:1.2rem;">SERVIZI</h3>
-        <p>${servicesHtml}</p>
-      </div>
-    </div>
-    <iframe src="${CONFIG.venue.embedUrl}" width="100%" height="280"
-      style="border:0;border-top:1px solid var(--border);display:block;filter:${CONFIG.palette['--map-filter']};"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-
+  vc.innerHTML = '<div style="position:relative;height:260px;overflow:hidden;"><img src="' + CONFIG.venue.imageUrl + '" alt="' + CONFIG.venue.name + '" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.75);" /><div style="position:absolute;bottom:0;left:0;right:0;padding:1.2rem 1.5rem;background:linear-gradient(transparent,rgba(8,12,9,0.95));"><div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:4px;color:#fff;">' + CONFIG.venue.name + '</div><div style="font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-top:2px;">' + CONFIG.venue.subtitle + '</div></div></div><div class="venue-info"><div><h3>INDIRIZZO</h3><p>' + addressHtml + '</p><a class="venue-link" href="' + CONFIG.venue.playtomicUrl + '" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Prenota su Playtomic</a><a class="venue-link" style="margin-left:8px;" href="' + CONFIG.venue.mapsUrl + '" target="_blank"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apri in Maps</a></div><div><h3>ORARI</h3><p>' + CONFIG.venue.hours + '</p><h3 style="margin-top:1.2rem;">SERVIZI</h3><p>' + servicesHtml + '</p></div></div><iframe src="' + CONFIG.venue.embedUrl + '" width="100%" height="280" style="border:0;border-top:1px solid var(--border);display:block;filter:' + CONFIG.palette['--map-filter'] + ';" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
   document.getElementById('footer-logo').textContent = CONFIG.title;
   document.getElementById('footer-sub').textContent  = CONFIG.footerSub;
-  document.getElementById('footer-credit').innerHTML =
-    `${CONFIG.footerCredit} · <a href="${CONFIG.social.facebook}" target="_blank" style="color:inherit;text-decoration:none;">Facebook</a> · <a href="${CONFIG.social.instagram}" target="_blank" style="color:inherit;text-decoration:none;">Instagram</a>`;
+  document.getElementById('footer-credit').innerHTML = CONFIG.footerCredit + ' \u00b7 <a href="' + CONFIG.social.facebook + '" target="_blank" style="color:inherit;text-decoration:none;">Facebook</a> \u00b7 <a href="' + CONFIG.social.instagram + '" target="_blank" style="color:inherit;text-decoration:none;">Instagram</a>';
 }
 
-// ── UTILS ──────────────────────────────────────────────────────────────────────
 function serialToDateStr(n) {
   const d = new Date(1899, 11, 30);
   d.setDate(d.getDate() + Math.floor(n));
-  return `${d.getDate()}/${d.getMonth() + 1}/${String(d.getFullYear()).slice(2)}`;
+  return d.getDate() + '/' + (d.getMonth() + 1) + '/' + String(d.getFullYear()).slice(2);
 }
 
 function parseData(raw) {
@@ -525,16 +423,14 @@ function parseData(raw) {
   if (isNaN(d) || isNaN(m) || m < 0 || m > 11) return null;
   const y = p[2] ? (parseInt(p[2]) < 100 ? 2000 + parseInt(p[2]) : parseInt(p[2])) : 2026;
   const date = new Date(y, m, d);
-  return { day: d, month: MESI[m], weekday: GIORNI_W[date.getDay()], sortKey: date,
-    uniqueKey: `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}` };
+  return { day: d, month: MESI[m], weekday: GIORNI_W[date.getDay()],
+    uniqueKey: y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0') };
 }
 
 function gironataShort(gStr) {
   if (!gStr) return '';
-  const labels = CONFIG.giornate.labels;
-  const roman  = CONFIG.giornate.roman;
-  const idx = labels.findIndex(l => l.toLowerCase() === gStr.toLowerCase());
-  return idx >= 0 ? (roman[idx] + ' Giornata') : gStr;
+  const idx = CONFIG.giornate.labels.findIndex(l => l.toLowerCase() === gStr.toLowerCase());
+  return idx >= 0 ? (CONFIG.giornate.roman[idx] + ' Giornata') : gStr;
 }
 
 function keyToDate(key) {
@@ -543,20 +439,18 @@ function keyToDate(key) {
   return new Date(y, m - 1, d);
 }
 
-// ── FETCH ──────────────────────────────────────────────────────────────────────
 async function fetchSheet(sheetName) {
   const fields = 'sheets.data.rowData.values(userEnteredValue,formattedValue,userEnteredFormat.backgroundColor)';
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}`
-    + `?ranges=${encodeURIComponent(sheetName)}`
-    + `&fields=${encodeURIComponent(fields)}`
-    + `&key=${CONFIG.apiKey}`;
+  const url = 'https://sheets.googleapis.com/v4/spreadsheets/' + CONFIG.spreadsheetId
+    + '?ranges=' + encodeURIComponent(sheetName)
+    + '&fields=' + encodeURIComponent(fields)
+    + '&key=' + CONFIG.apiKey;
   const res = await fetch(url);
-  if (!res.ok) throw new Error('HTTP ' + res.status + ' · ' + sheetName);
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' \u00b7 ' + sheetName);
   const json = await res.json();
   return json.sheets[0].data[0].rowData || [];
 }
 
-// ── PARSE GIRONE ──────────────────────────────────────────────────────────────
 function parseGirone(rows) {
   const partite = [];
   let giornata = '';
@@ -566,7 +460,20 @@ function parseGirone(rows) {
     const v = c.userEnteredValue;
     if (!v) return fmt;
     if (v.numberValue !== undefined && v.stringValue === undefined) return serialToDateStr(v.numberValue);
-    return (v.stringValue ?? v.numberValue?.toString() ?? '').trim() || fmt;
+    return (v.stringValue != null ? v.stringValue : (v.numberValue != null ? v.numberValue.toString() : '')).trim() || fmt;
+  };
+  const numVal = (cells, i) => {
+    const c = cells[i]; if (!c) return '';
+    const v = c.userEnteredValue;
+    if (!v) return (c.formattedValue || '').trim();
+    if (v.numberValue !== undefined) return String(Math.round(v.numberValue));
+    return (v.stringValue || '').trim();
+  };
+  const strVal = (cells, i) => {
+    const c = cells[i]; if (!c) return '';
+    const v = c.userEnteredValue;
+    if (!v) return (c.formattedValue || '').trim();
+    return (v.stringValue || c.formattedValue || '').trim();
   };
   for (let r = 0; r < rows.length; r++) {
     const cells = rows[r].values || [];
@@ -574,18 +481,16 @@ function parseGirone(rows) {
     if (/giornata/i.test(a)) { giornata = a; continue; }
     if (/^data$/i.test(val(cells, 2))) continue;
     const sq2 = val(cells, 1); if (!sq2) continue;
-    const rawP1 = cells[10]?.userEnteredValue;
-const rawP2 = cells[11]?.userEnteredValue;
-const p1 = rawP1?.numberValue !== undefined ? String(Math.round(rawP1.numberValue)) : (rawP1?.stringValue || '').trim();
-const p2 = rawP2?.numberValue !== undefined ? String(Math.round(rawP2.numberValue)) : (rawP2?.stringValue || '').trim();
-
-partite.push({
-  giornata, sq1: a, sq2,
-  data:  val(cells, 2),
-  campo: val(cells, 3).toUpperCase(),
-  p1, p2,
-});
-   
+    partite.push({
+      giornata, sq1: a, sq2,
+      data:  val(cells, 2),
+      campo: val(cells, 3).toUpperCase(),
+      match1: strVal(cells, 4), ris1: strVal(cells, 5),
+      match2: strVal(cells, 6), ris2: strVal(cells, 7),
+      match3: strVal(cells, 8), ris3: strVal(cells, 9),
+      p1: numVal(cells, 10),
+      p2: numVal(cells, 11),
+    });
   }
   const map = {};
   const ensure = n => { if (!map[n]) map[n] = { nome:n, pt:0, g:0, v:0, p:0, par:0 }; };
@@ -603,12 +508,60 @@ partite.push({
   return { partite, squadre: Object.values(map).sort((a,b) => b.pt - a.pt || b.v - a.v) };
 }
 
+// ── MODAL ─────────────────────────────────────────────────────────────────────
+function openModal(p, cfg) {
+  const hasResult = p.p1 !== '' && p.p2 !== '';
+  document.getElementById('modal-girone-dot').style.background = cfg.color;
+  document.getElementById('modal-girone-label').textContent = cfg.label + ' \u00b7 ' + gironataShort(p.giornata);
+  document.getElementById('modal-sq1').textContent = p.sq1;
+  document.getElementById('modal-sq2').textContent = p.sq2;
+  const scoreEl = document.getElementById('modal-final-score');
+  scoreEl.textContent = hasResult ? (p.p1 + ' \u2013 ' + p.p2) : 'vs';
+  scoreEl.style.color = hasResult ? 'var(--accent-light)' : 'var(--muted)';
+
+  const matches = [
+    { label: '1\u00b0 Match', players: p.match1, ris: p.ris1 },
+    { label: '2\u00b0 Match', players: p.match2, ris: p.ris2 },
+    { label: '3\u00b0 Match', players: p.match3, ris: p.ris3 },
+  ];
+  document.getElementById('modal-matches').innerHTML = matches.filter(m => m.players).map(m => {
+    const parts = m.players.split('/');
+    const c1 = (parts[0] || '').trim();
+    const c2 = (parts[1] || '').trim();
+    const playersHTML = c2 ? (c1 + '<span class="sep"> / </span>' + c2) : c1;
+    const risHTML = m.ris
+      ? '<div class="modal-match-result">' + m.ris + '</div>'
+      : '<div class="modal-match-result empty">\u2014</div>';
+    return '<div class="modal-match-row"><div><div class="modal-match-num">' + m.label + '</div><div class="modal-match-players">' + playersHTML + '</div></div>' + risHTML + '</div>';
+  }).join('');
+
+  let campoLabel = 'Campo Verde';
+  if (p.campo === 'ROSSO') campoLabel = 'Campo Rosso';
+  else if (p.campo === 'BLU' || p.campo === 'BLUE') campoLabel = 'Campo Blu';
+  document.getElementById('modal-date-bar').innerHTML =
+    '<span>\ud83d\udcc5 ' + (p.data || 'Data da definire') + '</span><span>\ud83c\udfbe ' + campoLabel + '</span>';
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 // ── BUILD GIORNIMAP ───────────────────────────────────────────────────────────
 function buildGiorniMap() {
   const allPartite = [];
   CONFIG.gironi.forEach(cfg => {
     const data = gironiData[cfg.name]; if (!data) return;
-    data.partite.forEach(p => allPartite.push({ ...p, cfg }));
+    data.partite.forEach(p => allPartite.push(Object.assign({}, p, { cfg })));
   });
   calGiorniMap = new Map();
   allPartite.forEach(p => {
@@ -616,9 +569,8 @@ function buildGiorniMap() {
     const key  = info ? info.uniqueKey : '__nodate__';
     if (!calGiorniMap.has(key)) calGiorniMap.set(key, { info, gironiByName: new Map() });
     const giorno = calGiorniMap.get(key);
-    const gName  = p.cfg.name;
-    if (!giorno.gironiByName.has(gName)) giorno.gironiByName.set(gName, { cfg: p.cfg, partite: [] });
-    giorno.gironiByName.get(gName).partite.push(p);
+    if (!giorno.gironiByName.has(p.cfg.name)) giorno.gironiByName.set(p.cfg.name, { cfg: p.cfg, partite: [] });
+    giorno.gironiByName.get(p.cfg.name).partite.push(p);
   });
   calSortedKeys = [...calGiorniMap.keys()].sort((a, b) => {
     if (a === '__nodate__') return 1; if (b === '__nodate__') return -1;
@@ -626,9 +578,7 @@ function buildGiorniMap() {
   });
 }
 
-// ── RENDER DAY BLOCK ──────────────────────────────────────────────────────────
 function renderDayBlock(key, tipo) {
-  // tipo: 'passato' | 'prossimo' | 'futuro'
   const giorno = calGiorniMap.get(key);
   const info   = giorno.info;
   const block  = document.createElement('div');
@@ -638,15 +588,10 @@ function renderDayBlock(key, tipo) {
   const header = document.createElement('div');
   header.className = 'day-header';
   if (info) {
-    const badge = tipo === 'prossimo' ? `<span class="prossimo-badge">Prossimo</span>` : '';
-    header.innerHTML = `
-      <div class="day-date-box">
-        <div class="day-num">${info.day}</div>
-        <div class="day-month">${info.month}</div>
-      </div>
-      <div class="day-weekday">${info.weekday}${badge}</div>`;
+    const badge = tipo === 'prossimo' ? '<span class="prossimo-badge">Prossimo</span>' : '';
+    header.innerHTML = '<div class="day-date-box"><div class="day-num">' + info.day + '</div><div class="day-month">' + info.month + '</div></div><div class="day-weekday">' + info.weekday + badge + '</div>';
   } else {
-    header.innerHTML = `<div class="day-weekday" style="color:var(--muted)">Data da definire</div>`;
+    header.innerHTML = '<div class="day-weekday" style="color:var(--muted)">Data da definire</div>';
   }
   block.appendChild(header);
 
@@ -658,32 +603,33 @@ function renderDayBlock(key, tipo) {
 
     const gHead = document.createElement('div');
     gHead.className = 'girone-group-header';
-    gHead.style.cssText = `background:${cfg.cssVars['--g-dim']};border:1px solid ${cfg.cssVars['--g-mid']};color:${cfg.color};`;
-    gHead.innerHTML = `<div class="girone-dot" style="background:${cfg.color}"></div>${cfg.label} · ${gironataShort(gruppo.partite[0]?.giornata)}`;
+    gHead.style.cssText = 'background:' + cfg.cssVars['--g-dim'] + ';border:1px solid ' + cfg.cssVars['--g-mid'] + ';color:' + cfg.color + ';';
+    gHead.innerHTML = '<div style="width:7px;height:7px;border-radius:50%;background:' + cfg.color + ';flex-shrink:0"></div>' + cfg.label + ' \u00b7 ' + gironataShort(gruppo.partite[0] && gruppo.partite[0].giornata);
     gGroup.appendChild(gHead);
 
     gruppo.partite.forEach(p => {
-      const campoKey = p.campo;
       let campoCls, dotStyle, campoLbl;
-      if (campoKey === 'ROSSO')                          { campoCls='campo-r'; dotStyle='background:#e8408a'; campoLbl='Campo Rosso'; }
-      else if (campoKey === 'BLU' || campoKey === 'BLUE'){ campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
-      else                                               { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
+      if (p.campo === 'ROSSO')                          { campoCls='campo-r'; dotStyle='background:#e8408a'; campoLbl='Campo Rosso'; }
+      else if (p.campo === 'BLU' || p.campo === 'BLUE'){ campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
+      else                                              { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
 
-      const midHTML = (p.p1 !== '' && p.p2 !== '')
-        ? `<span class="score-chip">${p.p1} – ${p.p2}</span>`
-        : `<span class="vs-chip">vs</span>`;
-
+      const hasResult = p.p1 !== '' && p.p2 !== '';
       const row = document.createElement('div');
       row.className = 'match-row';
       row.dataset.sq1 = p.sq1.toLowerCase();
       row.dataset.sq2 = p.sq2.toLowerCase();
-      row.innerHTML = `
-        <div><span class="campo-pill ${campoCls}"><span class="campo-dot" style="${dotStyle}"></span>${campoLbl}</span></div>
-        <div class="teams-row">
-          <span class="team-name right">${p.sq1}</span>
-          ${midHTML}
-          <span class="team-name">${p.sq2}</span>
-        </div>`;
+      row.innerHTML = '<div><span class="campo-pill ' + campoCls + '"><span class="campo-dot" style="' + dotStyle + '"></span>' + campoLbl + '</span></div>'
+        + '<div class="teams-row"><span class="team-name right">' + p.sq1 + '</span>'
+        + (hasResult ? '<span class="score-chip">' + p.p1 + ' \u2013 ' + p.p2 + '</span>' : '<span class="vs-chip">vs</span>')
+        + '<span class="team-name">' + p.sq2 + '</span></div>';
+
+      if (hasResult) {
+        const chip = row.querySelector('.score-chip');
+        // capture p and cfg in closure
+        (function(pp, cc) {
+          chip.addEventListener('click', function(e) { e.stopPropagation(); openModal(pp, cc); });
+        })(p, cfg);
+      }
       gGroup.appendChild(row);
     });
     block.appendChild(gGroup);
@@ -691,34 +637,27 @@ function renderDayBlock(key, tipo) {
   return block;
 }
 
-// ── BUILD CALENDARIO ──────────────────────────────────────────────────────────
 function buildCalendario() {
   buildGiorniMap();
   const container = document.getElementById('calendario-container');
   container.innerHTML = '';
-
   const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
-
-  // Classifica chiavi per tipo
   const keyPassati  = calSortedKeys.filter(k => k !== '__nodate__' && keyToDate(k) < oggi);
   const keyFuturi   = calSortedKeys.filter(k => k === '__nodate__' || keyToDate(k) >= oggi);
   const keyProssimo = keyFuturi.length > 0 ? keyFuturi[0] : null;
-  calFuturiKeys     = keyFuturi.slice(1); // tutto tranne il prossimo
+  calFuturiKeys     = keyFuturi.slice(1);
 
-  // ── SEZIONE PASSATI ──
   if (keyPassati.length > 0) {
     const bar = document.createElement('div');
     bar.className = 'cal-section-bar passati';
-    bar.textContent = `Partite disputate (${keyPassati.length})`;
+    bar.textContent = 'Partite disputate (' + keyPassati.length + ')';
     container.appendChild(bar);
-
     const btnToggle = document.createElement('button');
     btnToggle.className = 'btn-toggle-passati open';
     btnToggle.id = 'btn-toggle-passati';
-    btnToggle.innerHTML = `<span class="arrow">▲</span> Nascondi partite passate`;
+    btnToggle.innerHTML = '<span class="arrow">\u25b2</span> Nascondi partite passate';
     btnToggle.onclick = togglePassati;
     container.appendChild(btnToggle);
-
     const wrapper = document.createElement('div');
     wrapper.id = 'cal-passati-wrapper';
     wrapper.className = 'open';
@@ -727,7 +666,6 @@ function buildCalendario() {
     passatiVisible = true;
   }
 
-  // ── SEZIONE PROSSIMO ──
   if (keyProssimo) {
     const bar = document.createElement('div');
     bar.className = 'cal-section-bar prossimo';
@@ -741,96 +679,73 @@ function buildCalendario() {
     container.appendChild(msg);
   }
 
-  // ── PULSANTE CARICA ALTRI ──
   if (calFuturiKeys.length > 0) {
     const bar = document.createElement('div');
     bar.className = 'cal-section-bar futuri';
     bar.id = 'cal-bar-futuri';
-    bar.textContent = `Giornate successive`;
+    bar.textContent = 'Giornate successive';
     bar.style.display = 'none';
     container.appendChild(bar);
-
     const btnCarica = document.createElement('button');
     btnCarica.className = 'btn-cal-action';
     btnCarica.id = 'btn-carica-altri';
-    btnCarica.textContent = `↓ Carica altre giornate (${calFuturiKeys.length})`;
+    btnCarica.textContent = '\u2193 Carica altre giornate (' + calFuturiKeys.length + ')';
     btnCarica.onclick = loadAltri;
     container.appendChild(btnCarica);
   }
 
   applyFilters();
-
-  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name]?.partite.length||0), 0);
-  const gironiNames = CONFIG.gironi.map(g => g.name).join(', ');
-  document.getElementById('cal-sub').textContent = `${tot} partite · Girone ${gironiNames}`;
+  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name] ? gironiData[c.name].partite.length : 0), 0);
+  document.getElementById('cal-sub').textContent = tot + ' partite \u00b7 Gironi ' + CONFIG.gironi.map(g => g.name).join(', ');
 }
 
-// ── TOGGLE PASSATI ────────────────────────────────────────────────────────────
 function togglePassati() {
   passatiVisible = !passatiVisible;
   const wrapper = document.getElementById('cal-passati-wrapper');
   const btn     = document.getElementById('btn-toggle-passati');
   if (passatiVisible) {
-    wrapper.classList.add('open');
-    btn.classList.add('open');
-    btn.innerHTML = `<span class="arrow">▲</span> Nascondi partite passate`;
+    wrapper.classList.add('open'); btn.classList.add('open');
+    btn.innerHTML = '<span class="arrow">\u25b2</span> Nascondi partite passate';
   } else {
-    wrapper.classList.remove('open');
-    btn.classList.remove('open');
-    btn.innerHTML = `<span class="arrow">▼</span> Mostra partite passate`;
+    wrapper.classList.remove('open'); btn.classList.remove('open');
+    btn.innerHTML = '<span class="arrow">\u25bc</span> Mostra partite passate';
   }
 }
 
-// ── CARICA ALTRI ──────────────────────────────────────────────────────────────
 function loadAltri() {
   const container = document.getElementById('calendario-container');
-  const btn       = document.getElementById('btn-carica-altri');
-  const bar       = document.getElementById('cal-bar-futuri');
-
-  // Mostra la barra "Giornate successive" se ancora nascosta
+  const btn = document.getElementById('btn-carica-altri');
+  const bar = document.getElementById('cal-bar-futuri');
   if (bar) bar.style.display = '';
-
-  // Inserisce i blocchi futuri prima del pulsante
-  calFuturiKeys.forEach(key => {
-    container.insertBefore(renderDayBlock(key, 'futuro'), btn);
-  });
+  calFuturiKeys.forEach(key => container.insertBefore(renderDayBlock(key, 'futuro'), btn));
   calFuturiKeys = [];
   btn.style.display = 'none';
   applyFilters();
 }
 
-// ── FILTRI ────────────────────────────────────────────────────────────────────
 function setFiltroGirone(girone) {
   calFiltroGirone = girone;
-  document.querySelectorAll('.fpill').forEach(b => {
-    b.classList.remove('active');
-    b.style.borderColor = ''; b.style.color = ''; b.style.background = '';
-  });
+  document.querySelectorAll('.fpill').forEach(b => { b.classList.remove('active'); b.style.borderColor = ''; b.style.color = ''; b.style.background = ''; });
   if (girone === 'tutti') {
-    document.getElementById('f-tutti')?.classList.add('active');
+    var el = document.getElementById('f-tutti'); if (el) el.classList.add('active');
   } else {
-    const btn = document.getElementById(`f-${girone.toLowerCase()}`);
-    if (btn) {
-      btn.classList.add('active');
-      btn.style.borderColor = btn.dataset.colorMid;
-      btn.style.color       = btn.dataset.color;
-      btn.style.background  = btn.dataset.colorDim;
-    }
+    var btn = document.getElementById('f-' + girone.toLowerCase());
+    if (btn) { btn.classList.add('active'); btn.style.borderColor = btn.dataset.colorMid; btn.style.color = btn.dataset.color; btn.style.background = btn.dataset.colorDim; }
   }
   applyFilters();
 }
 
 function applyFilters() {
-  const sq = (document.getElementById('f-squadra')?.value || '').toLowerCase().trim();
-  document.querySelectorAll('.day-block').forEach(block => {
-    let blockVisible = false;
-    block.querySelectorAll('.girone-group').forEach(grp => {
-      const gName    = grp.dataset.girone;
-      const gironeOk = calFiltroGirone === 'tutti' || gName === calFiltroGirone;
+  const sq = (document.getElementById('f-squadra') ? document.getElementById('f-squadra').value : '').toLowerCase().trim();
+  document.querySelectorAll('.day-block').forEach(function(block) {
+    var blockVisible = false;
+    block.querySelectorAll('.girone-group').forEach(function(grp) {
+      var gName = grp.dataset.girone;
+      var gironeOk = calFiltroGirone === 'tutti' || gName === calFiltroGirone;
       if (!gironeOk) { grp.style.display = 'none'; return; }
-      let grpVisible = false;
-      grp.querySelectorAll('.match-row').forEach(row => {
-        const matchSq = !sq || row.dataset.sq1.includes(sq) || row.dataset.sq2.includes(sq);
+      var grpVisible = false;
+      grp.querySelectorAll('.match-row').forEach(function(row) {
+        var matchSq = !sq || row.dataset.sq1.includes(sq) || row.dataset.sq2.includes(sq);
         row.style.display = matchSq ? '' : 'none';
         if (matchSq) grpVisible = true;
       });
@@ -839,62 +754,37 @@ function applyFilters() {
     });
     block.style.display = blockVisible ? '' : 'none';
   });
-
   const container = document.getElementById('calendario-container');
-  let existing = container.querySelector('.cal-filter-empty');
-  const hasVisible = [...container.querySelectorAll('.day-block')].some(b => b.style.display !== 'none');
+  var existing = container.querySelector('.cal-filter-empty');
+  var hasVisible = Array.from(container.querySelectorAll('.day-block')).some(function(b) { return b.style.display !== 'none'; });
   if (!hasVisible) {
     if (!existing) { existing = document.createElement('div'); existing.className = 'cal-empty cal-filter-empty'; container.appendChild(existing); }
-    existing.textContent = sq ? `Nessuna partita trovata per "${sq}".` : 'Nessuna partita per il girone selezionato.';
+    existing.textContent = sq ? 'Nessuna partita trovata per "' + sq + '".' : 'Nessuna partita per il girone selezionato.';
     existing.style.display = '';
   } else if (existing) { existing.style.display = 'none'; }
 }
 
-// ── BUILD CLASSIFICHE ─────────────────────────────────────────────────────────
 function buildClassifiche() {
   const container = document.getElementById('classifiche-container');
   container.innerHTML = '';
   const grid = document.createElement('div');
   grid.className = 'gironi-grid';
   container.appendChild(grid);
-
   CONFIG.gironi.forEach(cfg => {
     const data = gironiData[cfg.name]; if (!data) return;
-    const tbody = data.squadre.map((sq, i) => `
-      <tr>
-        <td><span class="pos-num ${i===0?'gold':''}">${i+1}</span></td>
-        <td class="sq-nm">${sq.nome}</td>
-        <td class="c">${sq.g}</td><td class="c">${sq.v}</td><td class="c">${sq.p}</td>
-        <td class="c"><span class="pts-t" style="color:${cfg.color}">${sq.pt}</span></td>
-      </tr>`).join('');
-
+    const tbody = data.squadre.map((sq, i) =>
+      '<tr><td><span class="pos-num ' + (i===0?'gold':'') + '">' + (i+1) + '</span></td><td class="sq-nm">' + sq.nome + '</td><td class="c">' + sq.g + '</td><td class="c">' + sq.v + '</td><td class="c">' + sq.p + '</td><td class="c"><span class="pts-t" style="color:' + cfg.color + '">' + sq.pt + '</span></td></tr>'
+    ).join('');
     const card = document.createElement('div');
     card.className = 'girone-card';
-    card.style.cssText = `border:1px solid ${cfg.cssVars['--g-mid']}`;
-    card.innerHTML = `
-      <div class="girone-head" style="background:${cfg.cssVars['--g-dim']}20;border-bottom-color:${cfg.color}">
-        <svg class="girone-head-symbol" style="color:${cfg.color}" aria-hidden="true"><use href="#${cfg.svgId}"/></svg>
-        <div>
-          <div class="girone-label" style="color:${cfg.color}">${cfg.label}</div>
-          <div class="girone-sub">${data.squadre.length} squadre</div>
-        </div>
-      </div>
-      <table class="cl-table">
-        <thead><tr>
-          <th style="width:28px">#</th><th>Squadra</th>
-          <th class="c">G</th><th class="c">V</th><th class="c">P</th><th class="c">Pt</th>
-        </tr></thead>
-        <tbody>${tbody}</tbody>
-      </table>`;
+    card.style.cssText = 'border:1px solid ' + cfg.cssVars['--g-mid'];
+    card.innerHTML = '<div class="girone-head" style="background:' + cfg.cssVars['--g-dim'] + '20;border-bottom-color:' + cfg.color + '"><svg class="girone-head-symbol" style="color:' + cfg.color + '" aria-hidden="true"><use href="#' + cfg.svgId + '"/></svg><div><div class="girone-label" style="color:' + cfg.color + '">' + cfg.label + '</div><div class="girone-sub">' + data.squadre.length + ' squadre</div></div></div><table class="cl-table"><thead><tr><th style="width:28px">#</th><th>Squadra</th><th class="c">G</th><th class="c">V</th><th class="c">P</th><th class="c">Pt</th></tr></thead><tbody>' + tbody + '</tbody></table>';
     grid.appendChild(card);
   });
-
-  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name]?.squadre.length||0), 0);
-  const gironiNames = CONFIG.gironi.map(g => g.label).join(' & ');
-  document.getElementById('cl-sub').textContent = `${tot} squadre · ${gironiNames}`;
+  const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name] ? gironiData[c.name].squadre.length : 0), 0);
+  document.getElementById('cl-sub').textContent = tot + ' squadre \u00b7 ' + CONFIG.gironi.map(g => g.label).join(' & ');
 }
 
-// ── LOAD GIRONI ───────────────────────────────────────────────────────────────
 async function loadGironi() {
   try {
     await Promise.all(CONFIG.gironi.map(async cfg => {
@@ -904,21 +794,19 @@ async function loadGironi() {
     buildCalendario();
     buildClassifiche();
   } catch(err) {
-    document.getElementById('calendario-container').innerHTML =
-      `<div class="loading-msg" style="color:#d94f4f;">Errore caricamento.<br><span style="font-size:11px;">${err.message}</span></div>`;
+    document.getElementById('calendario-container').innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento.<br><span style="font-size:11px;">' + err.message + '</span></div>';
     console.error(err);
   }
 }
 
-// ── PARSE ROSE ────────────────────────────────────────────────────────────────
 function classifyColor(bg) {
   if (!bg) return 'white';
   const r = Math.round((bg.red||0)*255), g = Math.round((bg.green||0)*255), b = Math.round((bg.blue||0)*255);
-  if (r>230&&g>230&&b>230)           return 'white';
-  if (r>200&&g>180&&b<100)           return 'yellow';
-  if (g>150&&g>r+30&&g>b+30)        return 'green';
-  if (r>200&&g>80&&g<180&&b<80)     return 'orange';
-  if (r>150&&r>g+50&&r>b+50)        return 'red';
+  if (r>230&&g>230&&b>230)       return 'white';
+  if (r>200&&g>180&&b<100)       return 'yellow';
+  if (g>150&&g>r+30&&g>b+30)    return 'green';
+  if (r>200&&g>80&&g<180&&b<80) return 'orange';
+  if (r>150&&r>g+50&&r>b+50)    return 'red';
   return 'white';
 }
 const levColor = { white:'#e8f0ea', yellow:'#f5c842', green:'#4fd988', orange:'#e8802a', red:'#d94f4f' };
@@ -928,15 +816,15 @@ function parseRose(rows) {
   const headerRow = rows[0].values || [];
   const squadre = [], colIndices = [];
   headerRow.forEach((cell, i) => {
-    const nome = (cell.userEnteredValue?.stringValue || cell.formattedValue || '').trim();
+    const nome = ((cell.userEnteredValue && cell.userEnteredValue.stringValue) || cell.formattedValue || '').trim();
     if (nome) { squadre.push({ nome, capitano:'', capitanoLev:'white', giocatori:[] }); colIndices.push(i); }
   });
   for (let r = 1; r < rows.length; r++) {
     const cells = rows[r].values || [];
     colIndices.forEach((ci, si) => {
       const cell = cells[ci]; if (!cell) return;
-      const raw = (cell.userEnteredValue?.stringValue || cell.formattedValue || '').trim(); if (!raw) return;
-      const bg = cell.userEnteredFormat?.backgroundColor;
+      const raw = ((cell.userEnteredValue && cell.userEnteredValue.stringValue) || cell.formattedValue || '').trim(); if (!raw) return;
+      const bg = cell.userEnteredFormat && cell.userEnteredFormat.backgroundColor;
       const level = classifyColor(bg);
       const isCap = KRegex.test(raw); KRegex.lastIndex = 0;
       const nome = raw.replace(/\s*\(\s*[Kk]\s*\)/g,'').trim(); if (!nome) return;
@@ -947,7 +835,6 @@ function parseRose(rows) {
   return squadre;
 }
 
-// ── BUILD SQUADRE ─────────────────────────────────────────────────────────────
 function buildSquadre(squadre) {
   const container = document.getElementById('squadre-container');
   const grid = document.createElement('div');
@@ -956,80 +843,57 @@ function buildSquadre(squadre) {
   container.appendChild(grid);
   let tot = 0;
   const colori = CONFIG.squadreColori;
-
   squadre.forEach((s, idx) => {
     const c = colori[idx % colori.length];
-    const totCard = (s.capitano?1:0) + s.giocatori.length;
+    const totCard = (s.capitano ? 1 : 0) + s.giocatori.length;
     tot += totCard;
-    const playersHTML = s.giocatori.map(({ nome, level }) => {
-      const col = levColor[level] || levColor.white;
-      return `<div class="player-row">
-        <div class="dot" style="background:${c.t};opacity:0.5"></div>
-        <span class="player-name" style="color:${col};">${nome}</span>
-      </div>`;
+    const playersHTML = s.giocatori.map(function(pl) {
+      const col = levColor[pl.level] || levColor.white;
+      return '<div class="player-row"><div class="dot" style="background:' + c.t + ';opacity:0.5"></div><span class="player-name" style="color:' + col + ';">' + pl.nome + '</span></div>';
     }).join('');
     const capTextColor = levColor[s.capitanoLev] || levColor.white;
-    const capHTML = s.capitano ? `
-      <div class="squadra-cap" style="background:${c.dim};">
-        <span class="cap-icon">CAP</span>
-        <span class="cap-name" style="color:${capTextColor};">${s.capitano}</span>
-      </div>` : '';
+    const capHTML = s.capitano ? '<div class="squadra-cap" style="background:' + c.dim + ';"><span class="cap-icon">CAP</span><span class="cap-name" style="color:' + capTextColor + ';">' + s.capitano + '</span></div>' : '';
     const card = document.createElement('div');
     card.className = 'squadra-card';
     card.dataset.idx = idx;
     card.style.borderColor = c.h;
-    card.innerHTML = `
-      <div class="squadra-head" onclick="togglePlayers(${idx})" style="background:${c.b};border-bottom:1px solid ${c.h};">
-        <h3 style="color:${c.t};">${s.nome}</h3>
-        <span class="squadra-badge" style="color:${c.t};background:${c.dim};">${totCard} gioc.</span>
-      </div>
-      ${capHTML}
-      <div class="squadra-players" id="players-${idx}">${playersHTML}</div>
-      <div class="squadra-toggle" onclick="togglePlayers(${idx})" id="toggle-${idx}" style="border-top-color:${c.h};color:${c.t};opacity:0.6;">▼ Vedi tutti i giocatori</div>`;
+    card.innerHTML = '<div class="squadra-head" onclick="togglePlayers(' + idx + ')" style="background:' + c.b + ';border-bottom:1px solid ' + c.h + ';"><h3 style="color:' + c.t + ';">' + s.nome + '</h3><span class="squadra-badge" style="color:' + c.t + ';background:' + c.dim + ';">' + totCard + ' gioc.</span></div>' + capHTML + '<div class="squadra-players" id="players-' + idx + '">' + playersHTML + '</div><div class="squadra-toggle" onclick="togglePlayers(' + idx + ')" id="toggle-' + idx + '" style="border-top-color:' + c.h + ';color:' + c.t + ';opacity:0.6;">\u25bc Vedi tutti i giocatori</div>';
     grid.appendChild(card);
   });
   document.getElementById('stat-squadre').textContent   = squadre.length;
   document.getElementById('stat-giocatori').textContent = tot + '+';
-  const gironiNames = CONFIG.gironi.map(g => g.label).join(', ');
-  document.getElementById('squadre-sub').textContent    = `${squadre.length} squadre iscritte · ${gironiNames}`;
+  document.getElementById('squadre-sub').textContent    = squadre.length + ' squadre iscritte \u00b7 ' + CONFIG.gironi.map(g => g.label).join(', ');
 }
 
-// ── LOAD SQUADRE ──────────────────────────────────────────────────────────────
 async function loadSquadre() {
   try {
     const rows = await fetchSheet('Rose');
     squadreData = parseRose(rows);
     buildSquadre(squadreData);
   } catch(err) {
-    document.getElementById('squadre-container').innerHTML =
-      `<div class="loading-msg" style="color:#d94f4f;">Errore caricamento squadre.<br><span style="font-size:11px;">${err.message}</span></div>`;
+    document.getElementById('squadre-container').innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento squadre.<br><span style="font-size:11px;">' + err.message + '</span></div>';
   }
 }
 
-// ── RICERCA / TOGGLE ──────────────────────────────────────────────────────────
 function filterSquadre(q) {
   q = q.toLowerCase().trim();
   document.querySelectorAll('.squadra-card').forEach((card, i) => {
     const s = squadreData[i]; if (!s) return;
-    const matchTeam   = s.nome.toLowerCase().includes(q);
-    const matchCap    = s.capitano.toLowerCase().includes(q);
-    const matchPlayer = s.giocatori.some(p => p.nome.toLowerCase().includes(q));
-    const match = !q || matchTeam || matchCap || matchPlayer;
+    const match = !q || s.nome.toLowerCase().includes(q) || s.capitano.toLowerCase().includes(q) || s.giocatori.some(p => p.nome.toLowerCase().includes(q));
     card.classList.toggle('hidden', !match);
-    if (q && (matchPlayer || matchCap) && !matchTeam) {
-      document.getElementById(`players-${i}`)?.classList.add('open');
-      const tog = document.getElementById(`toggle-${i}`);
-      if (tog) tog.textContent = '▲ Chiudi';
+    if (q && !s.nome.toLowerCase().includes(q)) {
+      var el = document.getElementById('players-' + i); if (el) el.classList.add('open');
+      var tog = document.getElementById('toggle-' + i); if (tog) tog.textContent = '\u25b2 Chiudi';
     }
   });
 }
 
 function togglePlayers(idx) {
-  const el  = document.getElementById(`players-${idx}`);
-  const tog = document.getElementById(`toggle-${idx}`);
+  const el  = document.getElementById('players-' + idx);
+  const tog = document.getElementById('toggle-' + idx);
   const isOpen = el.classList.contains('open');
   el.classList.toggle('open', !isOpen);
-  tog.textContent = isOpen ? '▼ Vedi tutti i giocatori' : '▲ Chiudi';
+  tog.textContent = isOpen ? '\u25bc Vedi tutti i giocatori' : '\u25b2 Chiudi';
 }
 
 function setActive(el) {
@@ -1037,16 +901,14 @@ function setActive(el) {
   el.classList.add('active');
 }
 
-// ── FADE IN ───────────────────────────────────────────────────────────────────
 document.querySelectorAll('.fade-in').forEach(el =>
   new IntersectionObserver(([e]) => { if (e.isIntersecting) el.classList.add('visible'); }, { threshold: 0.1 }).observe(el)
 );
 
-// ── START ─────────────────────────────────────────────────────────────────────
 initFromConfig();
 loadGironi();
 loadSquadre();
-setInterval(() => { loadGironi(); loadSquadre(); }, 5 * 60 * 1000);
+setInterval(function() { loadGironi(); loadSquadre(); }, 5 * 60 * 1000);
 </script>
 </body>
 </html>
