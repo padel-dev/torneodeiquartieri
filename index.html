@@ -543,7 +543,7 @@ function parseGirone(rows) {
     if (/^data$/i.test(val(cells, 2))) continue;
     const sq2 = val(cells, 1); if (!sq2) continue;
     partite.push({ giornata, sq1: a, sq2, data: val(cells,2), campo: val(cells,3).toUpperCase(),
-      orario: val(cells,4), result: val(cells,5), p1: val(cells,6), p2: val(cells,7) });
+      orario: val(cells,4), result: val(cells,5), p1: val(cells, 10),p2: val(cells, 11) });
   }
   const map = {};
   const ensure = n => { if (!map[n]) map[n] = { nome:n, pt:0, g:0, v:0, p:0, par:0 }; };
@@ -625,9 +625,9 @@ function renderDayBlock(key) {
       else if (campoKey === 'BLU' || campoKey === 'BLUE') { campoCls='campo-b'; dotStyle='background:#6f90e8'; campoLbl='Campo Blu'; }
       else                                          { campoCls='campo-g'; dotStyle='background:var(--accent)'; campoLbl='Campo Verde'; }
 
-      const midHTML = p.result
-        ? `<span class="score-chip">${p.result}</span>`
-        : `<span class="vs-chip">vs</span>`;
+      const midHTML = (p.p1 !== '' && p.p2 !== '')
+  ? `<span class="score-chip">${p.p1} – ${p.p2}</span>`
+  : `<span class="vs-chip">vs</span>`;
 
       const row = document.createElement('div');
       row.className = 'match-row';
