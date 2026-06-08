@@ -12,7 +12,7 @@ const CONFIG = {
   // ── IDENTITÀ ──────────────────────────────────────────────────────────────
   title:       'TORNEO DEI QUARTIERI',
   titleAccent: 'QUARTIERI',
-  edition:     'V EDIZIONE',
+  edition:     'V EDIZIONE - A DATA DA DESTINARSI',
   tagline:     'Il torneo amatoriale di padel che accende la passione sportiva nei rioni della città di Benevento.',
   eyebrow:     'Benevento · Padel Amatoriale · 2026',
   footerSub:   'V Edizione · Benevento 2026 · Padel Amatoriale',
@@ -152,7 +152,7 @@ const CONFIG = {
     { edition: 'II Edizione · 2023', winner: 'CENTRO STORICO',  current: false },
     { edition: 'III Edizione · 2024',winner: 'VALLE CAUDINA',   current: false },
     { edition: 'IV Edizione · 2025', winner: 'COCCHIA',         current: false },
-    { edition: 'V Edizione · 2026',  winner: 'In corso',        current: true  },
+    { edition: 'V Edizione · 2026',  winner: 'a data da destinarsi',        current: true  },
   ],
 
   // ── VENUE ─────────────────────────────────────────────────────────────────
