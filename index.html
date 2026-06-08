@@ -349,6 +349,11 @@
 
 <script src="config.js"></script>
 <script>
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+ 
 const MESI     = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
 const GIORNI_W = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 const KRegex   = /\s*\(\s*[Kk]\s*\)/g;
