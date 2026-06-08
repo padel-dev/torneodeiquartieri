@@ -770,6 +770,7 @@ function applyFilters() {
     block.style.display = blockVisible ? '' : 'none';
   });
   const container = document.getElementById('calendario-container');
+  if (!container) return;
   var existing = container.querySelector('.cal-filter-empty');
   var hasVisible = Array.from(container.querySelectorAll('.day-block')).some(function(b) { return b.style.display !== 'none'; });
   if (!hasVisible) {
