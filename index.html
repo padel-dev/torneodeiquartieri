@@ -388,8 +388,10 @@ function initFromConfig() {
   const defs = document.getElementById('svg-defs');
   CONFIG.gironi.forEach(g => { defs.innerHTML += '<symbol id="' + g.svgId + '" viewBox="' + g.svgViewBox + '">' + g.svgPaths + '</symbol>'; });
   if (CONFIG.features.calendarFilters) {
-    document.getElementById('cal-filters').style.display = '';
-    const fg = document.getElementById('filter-group');
+  const calFilters = document.getElementById('cal-filters');
+  const fg = document.getElementById('filter-group');
+  if (calFilters && fg) {
+    calFilters.style.display = '';
     fg.innerHTML = '<button class="fpill active" id="f-tutti" onclick="setFiltroGirone(\'tutti\')">Tutti</button>';
     CONFIG.gironi.forEach(g => {
       const btn = document.createElement('button');
@@ -401,11 +403,14 @@ function initFromConfig() {
       fg.appendChild(btn);
     });
   }
+}
   if (CONFIG.features.levelLegend) {
-    const leg = document.getElementById('legenda');
+  const leg = document.getElementById('legenda');
+  if (leg) {
     leg.style.display = '';
     leg.innerHTML = '<span class="legenda-label">Livello \u2192</span>' + CONFIG.levelLegend.map(l => '<span class="lev-badge ' + l.cls + '">' + l.label + '</span>').join('');
   }
+}
   document.getElementById('storia-grid').innerHTML = CONFIG.storia.map(s => '<div class="storia-card ' + (s.current ? 'current' : '') + '"><div class="storia-ed" ' + (s.current ? 'style="color:var(--accent)"' : '') + '>' + s.edition + '</div><div class="storia-trophy">' + (s.current ? '\u26a1' : '\ud83e\udd47') + '</div><div class="storia-winner">' + s.winner + '</div></div>').join('');
   document.getElementById('venue-sub').textContent = 'Tutte le partite si svolgono al ' + CONFIG.venue.name + ' \u00b7 ' + (CONFIG.venue.address.split('\n')[1] || '');
   const vc = document.getElementById('venue-card');
