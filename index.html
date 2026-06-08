@@ -850,6 +850,7 @@ function parseRose(rows) {
 
 function buildSquadre(squadre) {
   const container = document.getElementById('squadre-container');
+  if (!container) return;
   const grid = document.createElement('div');
   grid.className = 'squadre-grid';
   container.innerHTML = '';
@@ -886,8 +887,9 @@ async function loadSquadre() {
     squadreData = parseRose(rows);
     buildSquadre(squadreData);
   } catch(err) {
-    document.getElementById('squadre-container').innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento squadre.<br><span style="font-size:11px;">' + err.message + '</span></div>';
-  }
+  const sc = document.getElementById('squadre-container');
+  if (sc) sc.innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento squadre.<br><span style="font-size:11px;">' + err.message + '</span></div>';
+ }
 }
 
 function filterSquadre(q) {
