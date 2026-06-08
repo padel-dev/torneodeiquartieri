@@ -377,9 +377,12 @@ function initFromConfig() {
   document.getElementById('hero-tagline').textContent = CONFIG.tagline;
   const social = document.getElementById('hero-social');
   social.innerHTML = `<a class="btn-social" href="${CONFIG.social.facebook}" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a><a class="btn-social" href="${CONFIG.social.instagram}" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>`;
-  document.getElementById('cal-label').textContent     = CONFIG.edition + ' ' + new Date().getFullYear();
-  document.getElementById('cl-label').textContent      = 'Fase a gironi \u00b7 ' + CONFIG.edition + ' ' + new Date().getFullYear();
-  document.getElementById('squadre-label').textContent = CONFIG.edition + ' ' + new Date().getFullYear();
+  //document.getElementById('cal-label').textContent     = CONFIG.edition + ' ' + new Date().getFullYear();
+  //document.getElementById('cl-label').textContent      = 'Fase a gironi \u00b7 ' + CONFIG.edition + ' ' + new Date().getFullYear();
+  //document.getElementById('squadre-label').textContent = CONFIG.edition + ' ' + new Date().getFullYear();
+ setText('cal-label',     CONFIG.edition + ' ' + new Date().getFullYear());
+ setText('cl-label',      'Fase a gironi · ' + CONFIG.edition + ' ' + new Date().getFullYear());
+ setText('squadre-label', CONFIG.edition + ' ' + new Date().getFullYear());
   document.getElementById('storia-label').textContent  = 'Dal ' + CONFIG.storia[0].edition.match(/\d{4}/)[0];
   document.getElementById('storia-sub').textContent    = CONFIG.edition.charAt(0).toLowerCase() + CONFIG.edition.slice(1) + ' anni di quartieri, rioni e passione per il padel a Benevento';
   const defs = document.getElementById('svg-defs');
@@ -645,6 +648,7 @@ function renderDayBlock(key, tipo) {
 function buildCalendario() {
   buildGiorniMap();
   const container = document.getElementById('calendario-container');
+  if (!container) return;
   container.innerHTML = '';
   const oggi = new Date(); oggi.setHours(0, 0, 0, 0);
   const keyPassati  = calSortedKeys.filter(k => k !== '__nodate__' && keyToDate(k) < oggi);
@@ -701,7 +705,8 @@ function buildCalendario() {
 
   applyFilters();
   const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name] ? gironiData[c.name].partite.length : 0), 0);
-  document.getElementById('cal-sub').textContent = tot + ' partite \u00b7 Gironi ' + CONFIG.gironi.map(g => g.name).join(', ');
+  //document.getElementById('cal-sub').textContent = tot + ' partite \u00b7 Gironi ' + CONFIG.gironi.map(g => g.name).join(', ');
+ setText('cal-sub', tot + ' partite · Gironi ' + CONFIG.gironi.map(g => g.name).join(', '));
 }
 
 function togglePassati() {
@@ -771,6 +776,7 @@ function applyFilters() {
 
 function buildClassifiche() {
   const container = document.getElementById('classifiche-container');
+  if (!container) return;
   container.innerHTML = '';
   const grid = document.createElement('div');
   grid.className = 'gironi-grid';
@@ -787,7 +793,8 @@ function buildClassifiche() {
     grid.appendChild(card);
   });
   const tot = CONFIG.gironi.reduce((s,c) => s + (gironiData[c.name] ? gironiData[c.name].squadre.length : 0), 0);
-  document.getElementById('cl-sub').textContent = tot + ' squadre \u00b7 ' + CONFIG.gironi.map(g => g.label).join(' & ');
+  //document.getElementById('cl-sub').textContent = tot + ' squadre \u00b7 ' + CONFIG.gironi.map(g => g.label).join(' & ');
+ setText('cl-sub', tot + ' squadre · ' + CONFIG.gironi.map(g => g.label).join(' & '));
 }
 
 async function loadGironi() {
@@ -799,9 +806,10 @@ async function loadGironi() {
     buildCalendario();
     buildClassifiche();
   } catch(err) {
-    document.getElementById('calendario-container').innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento.<br><span style="font-size:11px;">' + err.message + '</span></div>';
-    console.error(err);
-  }
+  const cc = document.getElementById('calendario-container');
+  if (cc) cc.innerHTML = '<div class="loading-msg" style="color:#d94f4f;">Errore caricamento.<br><span style="font-size:11px;">' + err.message + '</span></div>';
+  console.error(err);
+ }
 }
 
 function classifyColor(bg) {
@@ -867,7 +875,9 @@ function buildSquadre(squadre) {
   });
   document.getElementById('stat-squadre').textContent   = squadre.length;
   document.getElementById('stat-giocatori').textContent = tot + '+';
-  document.getElementById('squadre-sub').textContent    = squadre.length + ' squadre iscritte \u00b7 ' + CONFIG.gironi.map(g => g.label).join(', ');
+  
+ //document.getElementById('squadre-sub').textContent    = squadre.length + ' squadre iscritte \u00b7 ' + CONFIG.gironi.map(g => g.label).join(', ');
+ setText('squadre-sub',   squadre.length + ' squadre iscritte \u00b7 ' + CONFIG.gironi.map(g => g.label).join(', '));  // lascia il valore che c'era
 }
 
 async function loadSquadre() {
